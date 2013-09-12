@@ -1,0 +1,49 @@
+@(postForm: Form[BlogPost])
+@import helper._
+@import views.html.blogPosts._
+
+@formCode() = {
+  <div class="gcmtIoMain">
+    @inputText(
+      postForm("title"),
+      '_label -> "Title",
+      '_error -> "Your post needs a title!",
+      'placeholder -> "Click here to add a headline",
+      '_class -> "gcmtIoField gcmtIoTitle",
+      '_showConstraints -> false
+    )
+    @textarea(
+      postForm("content"),
+      '_label -> "Content",
+      '_error -> "We can't publish a post with no content, can we?",
+      '_class -> "gcmtIoField gcmtIoContent",
+      '_showConstraints -> false
+    )
+  </div>
+  <div class="gcmtIoSidebar">
+    @textarea(
+      postForm("teaser"),
+      '_label -> "Teaser (Optional)",
+      '_error -> "We can't publish a post with no content, can we?",
+      '_class -> "gcmtIoField gcmtIoTeaser"
+    )
+    @inputText(
+      postForm("published"),
+      '_label -> "Date",
+      '_error -> "When do you want to publish this post?",
+      '_class -> "gcmtIoField gcmtIoText",
+      '_showConstraints -> false
+    )
+
+    @inputText(
+      postForm("slug"),
+      '_label -> "Slug",
+      '_class -> "gcmtIoField gcmtIoText",
+      '_showConstraints -> false
+    )
+    <input type="submit" value="Save" />
+  </div>
+}
+  @helper.form(action = routes.BlogPosts.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
+    @formCode()
+  }

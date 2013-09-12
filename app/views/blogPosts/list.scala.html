@@ -1,0 +1,6 @@
+@(posts: Seq[BlogPost])
+  @posts.map { post =>
+    <li data-post-id="@post.id">@post.title
+      <span class="gt2mtMainSidebarPublished">Published @post.published.format("MM/dd/yyyy")</span>
+    </li>
+  }

@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.BlogPosts.home(page: Int = 0)
+
+GET     /manage                     controllers.Application.dashboard
+GET     /manage/blogPosts/list/:page     controllers.BlogPosts.list(page: Int)
+# GET     /manage/blogPosts/json/:page    controllers.BlogPosts.listAsJson(page: Int)
+GET     /manage/login               controllers.Application.login
+POST    /manage/login               controllers.Application.authenticate
+GET     /manage/setup               controllers.Application.setup
+POST    /manage/setup               controllers.Application.saveFirstUser
+GET     /manage/blogPosts/new       controllers.BlogPosts.create
+POST    /manage/blogPosts/new       controllers.BlogPosts.saveNew
+GET     /manage/blogPosts/:id  controllers.BlogPosts.edit(id: Long)
+POST    /manage/blogPosts/:id  controllers.BlogPosts.saveUpdate(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
