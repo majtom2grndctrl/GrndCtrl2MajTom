@@ -5,7 +5,8 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
-import play.api.libs.json.Json
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
 import java.util.{Date}
 
@@ -53,20 +54,7 @@ object BlogPosts extends Controller with Secured {
       )
     }.getOrElse(NotFound)
   }
-  
-/*
-  // This just isn't happening right now.
-  def listAsJson(page: Int) = AuthenticatedUser { user => implicit request =>
-    Option(BlogPost.findPageOfPosts(page).items).map { posts =>
-      Ok(
-        Json.toJson(posts.map { post =>
-          (post.id.toString, post.title.toString, post.published.toString)
-        } toMap)
 
-      )
-    }.getOrElse(NotFound)
-  }
-*/
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
       html.blogPosts.editor(
