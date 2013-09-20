@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.BlogPosts.home(page: Int = 0)
+GET     /                           controllers.BlogPosts.index(page: Int = 0)
 
 GET     /manage                     controllers.Application.dashboard
 GET     /manage/blogPosts/list/:page     controllers.BlogPosts.list(page: Int)

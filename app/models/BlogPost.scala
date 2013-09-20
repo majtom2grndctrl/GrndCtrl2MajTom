@@ -26,7 +26,7 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 }
 
 object BlogPost {
-  var simple = {
+  val simple = {
     get[Pk[Long]]("blogPost.id") ~
     get[String]("blogPost.title") ~
     get[String]("blogPost.status") ~
@@ -39,6 +39,10 @@ object BlogPost {
         id, title, status, author, published, slug, content, teaser
       )
     }
+  }
+
+  val withAuthor = BlogPost.simple ~ (User.simple) map {
+    case post~user => (post, user)
   }
 
 // Save a new post or edited post
@@ -65,7 +69,7 @@ object BlogPost {
 
   def update(post: BlogPost, id: Long) = {
 //Update an existing blog post
-//    val post.id = id
+    
     DB.withConnection { implicit connection =>
       SQL(
         """
@@ -96,25 +100,27 @@ object BlogPost {
   }
 
   // Retrieve a page of posts
-  def findPageOfPosts(page: Int = 0, pageSize: Int = 10): Page[(BlogPost)] = {
+  def findPageOfPosts(page: Int = 0, pageSize: Int = 10): Page[(BlogPost, User)] = {
     val offset = pageSize * page
     DB.withConnection { implicit connection =>
       val blogPosts = SQL(
         """
-          select * from blogpost order by published desc
+          select * from blogpost
+          left join user on blogpost.author = user.id
+          order by published desc
           limit {pageSize} offset {offset}
         """
       ).on(
         'pageSize -> pageSize,
         'offset -> offset
-      ).as(BlogPost.simple *)
+      ).as(BlogPost.withAuthor *)
 
-      val totalRows = SQL(
+    val totalRows = SQL(
         """
           select count(*) from blogpost
         """
       ).as(scalar[Long].single)
-
+      
       Page(blogPosts, page, offset, totalRows)
     }
   }

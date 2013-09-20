@@ -37,21 +37,21 @@ object BlogPosts extends Controller with Secured {
   val dateStringHelper = new java.text.SimpleDateFormat("MM/dd/yyyy")
   val todayString: String = dateStringHelper.format(dateToday)
 
-  def home ( page: Int ) = Action { //implicit request =>
+  def index ( page: Int ) = Action {
     Option(BlogPost.findPageOfPosts(page).items).map { posts =>
       Ok(
         html.index(posts)
       )
-    }.getOrElse(Redirect(routes.Application.setup))
+    }.getOrElse(NotFound)
   }
 
   def list(page: Int) = AuthenticatedUser { user => implicit request =>    
-    Option(BlogPost.findPageOfPosts(page).items).map { posts =>
-      Ok(
-        html.blogPosts.list(
-          posts
+    Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
+        Ok(
+          html.blogPosts.list(
+            blogPosts
+          )
         )
-      )
     }.getOrElse(NotFound)
   }
 
