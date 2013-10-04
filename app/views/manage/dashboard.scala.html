@@ -1,6 +1,6 @@
 @(user: User, blogPostForm: Form[BlogPost])
-@import views.html.blogPosts._
+@import views.html.manage.blogPosts._
 @main("Dashboard for " + SitePrefs.name, user) {
 @* Load new blog post editor by default *@
-  @editor(blogPostForm)
+  @editor(blogPostForm, 0)
 }

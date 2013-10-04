@@ -1,7 +1,7 @@
 @(posts: Seq[(BlogPost, User)])
   @posts.map { case (post, author) =>
-      <li data-post-id="@post.id">@post.title
+      <button data-post-id="@post.id">@post.title
         <div class="gt2mtMainSidebarPublished">@post.published.format("MM/dd/yyyy")</div>
         <div>@author.firstName @author.lastName</div>
-      </li>
+      </button>
   }

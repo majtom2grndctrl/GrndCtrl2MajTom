@@ -45,7 +45,7 @@ object BlogPosts extends Controller with Secured {
     }.getOrElse(NotFound)
   }
 
-  def list(page: Int) = AuthenticatedUser { user => implicit request =>    
+  def list(page: Int) = AuthenticatedUser { user => implicit request =>
     Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
         Ok(
           html.blogPosts.list(
@@ -57,17 +57,17 @@ object BlogPosts extends Controller with Secured {
 
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
-      html.blogPosts.editor(
-        newBlogPostForm(user)
+      html.manage.blogPosts.editor(
+        newBlogPostForm(user), 0
       )
     )
   }
 
-  def edit(id:Long) = AuthenticatedUser { user => implicit request =>
+  def edit(id: Long) = AuthenticatedUser { user => implicit request =>
     BlogPost.findById(id).map { post =>
       Ok(
-        html.blogPosts.editor(
-          newBlogPostForm(user).fill(post)
+        html.manage.blogPosts.editor(
+          newBlogPostForm(user).fill(post), id
         )
       )
     }.getOrElse(NotFound)

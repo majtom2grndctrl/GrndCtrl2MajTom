@@ -1,4 +1,4 @@
-@(postForm: Form[BlogPost])
+@(postForm: Form[BlogPost], id: Long)
 @import helper._
 @import views.html.blogPosts._
 
@@ -44,6 +44,13 @@
     <input type="submit" value="Save" />
   </div>
 }
-  @helper.form(action = routes.BlogPosts.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
-    @formCode()
+
+  @if(id == 0) {
+    @helper.form(action = routes.BlogPosts.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
+      @formCode()
+    }
+  } else {
+    @helper.form(action = routes.BlogPosts.saveUpdate(id), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
+      @formCode()
+    }
   }
