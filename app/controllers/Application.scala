@@ -78,7 +78,7 @@ object Application extends Controller with Secured {
         "published", //status
         Id(1), //author
         dateHelper("01/13/2013"), //published
-        Some("hello-world"), //slug
+        "hello-world", //slug
         """
 <p>This is just a test entry. Please delete it by logging in to the backend.</p>
         """, //content
@@ -99,7 +99,7 @@ object Application extends Controller with Secured {
     }
   }
 
-  def dashboard = AuthenticatedUser { user => implicit request =>
+  def dashboard() = AuthenticatedUser { user => implicit request =>
     val dateHelper =  new java.text.SimpleDateFormat("mm/dd/yyyy")
     Ok(
       html.manage.dashboard(

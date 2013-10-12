@@ -24,7 +24,7 @@ object BlogPosts extends Controller with Secured {
       "status" -> ignored("published"),
       "author" -> ignored(user.id),
       "published" -> date("MM/dd/yyyy"),
-      "slug" -> optional(text), //optional, controller will need to handle for if no slug is specified
+      "slug" -> nonEmptyText,
       "content" -> nonEmptyText,
       "teaser" -> optional(text) // optional, controller will need to handle for if no excerpt is specified
     )(BlogPost.apply)(BlogPost.unapply)

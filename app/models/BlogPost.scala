@@ -15,14 +15,14 @@ case class BlogPost (
   status: String,
   author: Pk[Long],
   published: Date,
-  slug: Option[String],
+  slug: String,
   content: String,
   excerpt: Option[String]
 )
 
-case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
-  lazy val prev = Option(page -1).filter(_ >= 0 )
-  lazy val next = Option(page +1).filter(_ => (offset + items.size) < total)
+case class BlogPostsPage[A](items: Seq[A], BlogPostsPage: Int, offset: Long, total: Long) {
+  lazy val prev = Option(BlogPostsPage -1).filter(_ >= 0 )
+  lazy val next = Option(BlogPostsPage +1).filter(_ => (offset + items.size) < total)
 }
 
 object BlogPost {
@@ -32,7 +32,7 @@ object BlogPost {
     get[String]("blogPost.status") ~
     get[Pk[Long]]("blogPost.author") ~
     get[Date]("blogPost.published") ~
-    get[Option[String]]("blogPost.slug") ~
+    get[String]("blogPost.slug") ~
     get[String]("blogPost.content") ~
     get[Option[String]]("blogPost.excerpt") map {
       case id~title~status~author~published~slug~content~teaser => BlogPost(
@@ -99,8 +99,8 @@ object BlogPost {
     }
   }
 
-  // Retrieve a page of posts
-  def findPageOfPosts(page: Int = 0, pageSize: Int = 10): Page[(BlogPost, User)] = {
+  // Retrieve a BlogPostsPage of posts
+  def findPageOfPosts(page: Int = 0, pageSize: Int = 10): BlogPostsPage[(BlogPost, User)] = {
     val offset = pageSize * page
     DB.withConnection { implicit connection =>
       val blogPosts = SQL(
@@ -121,7 +121,7 @@ object BlogPost {
         """
       ).as(scalar[Long].single)
       
-      Page(blogPosts, page, offset, totalRows)
+      BlogPostsPage(blogPosts, page, offset, totalRows)
     }
   }
 
