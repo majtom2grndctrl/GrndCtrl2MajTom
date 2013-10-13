@@ -14,22 +14,22 @@ create table page (
 
 insert into page values (
   null,
-  "Home",
-  "published",
-  "/",
-  "<p>Welcome to your new website. You can edit this content by logging into the content manager.</p>",
-  "Write a summary of what your website is about",
-  "metadata keywords"
+  'Home',
+  'published',
+  '/',
+  '<p>Welcome to your new website. You can edit this content by logging into the content manager.</p>',
+  'Write a summary of what your website is about',
+  'metadata keywords'
 );
 
 insert into page values (
   null,
-  "Contact",
-  "published",
-  "contact",
-  "<p>Use this page to let visitors know how to contact you.</p>",
-  "Write a summary of what this page is about",
-  "contact"
+  'Contact',
+  'published',
+  'contact',
+  '<p>Use this page to let visitors know how to contact you.</p>',
+  'Write a summary of what this page is about',
+  'contact'
 );
 
 

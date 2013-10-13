@@ -121,7 +121,7 @@ class ModelSpec extends Specification {
         )
 
         val Some(post) = Page.findBySlug("hello-world")
-        post.id must equalTo(Id(1))
+        post.id must equalTo(Id(3))
         post.title must equalTo("Hello World")
         post.status must equalTo("published")
         post.slug must equalTo("hello-world")
