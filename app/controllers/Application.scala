@@ -43,10 +43,6 @@ object Application extends Controller with Secured {
   val dateStringHelper = new java.text.SimpleDateFormat("MM/dd/yyyy")
   val todayString: String = dateStringHelper.format(dateToday)
 
-  def home = Action {
-    Ok(html.index())
-  }
-
   def login = Action { implicit request =>
     if(User.findAll.length == 0) {
       Results.Redirect(routes.Application.setup())
