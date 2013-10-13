@@ -40,7 +40,7 @@ object BlogPosts extends Controller with Secured {
   def index ( page: Int ) = Action {
     Option(BlogPost.findPageOfPosts(page).items).map { posts =>
       Ok(
-        html.index(posts)
+        html.blog(posts)
       )
     }.getOrElse(NotFound)
   }

@@ -77,7 +77,7 @@ object Page {
     }
   }
   
-// Retrieve a single post by ID
+// Retrieve a single page by its slug
   def findBySlug(slug: String): Option[Page] = {
     DB.withConnection { implicit connection =>
       SQL("select * from page where page.slug = {slug}").on(
