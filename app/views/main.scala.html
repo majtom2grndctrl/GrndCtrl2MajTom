@@ -8,6 +8,11 @@
     </head>
     <body>
         <h1 class="topTitle">@SitePrefs.name</h1>
+        <nav>
+          <a href="@routes.Pages.display("/")">Home</a>
+          <a href="@routes.BlogPosts.index(0)">Blog</a>
+          <a href="@routes.Pages.display("contact")">Contact</a>
+        </nav>
         @content
     </body>
 </html>

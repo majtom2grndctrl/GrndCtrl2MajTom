@@ -6,6 +6,7 @@
 GET     /                           controllers.Pages.display(path: String = "/")
 GET     /contact                    controllers.Pages.display(path: String = "contact")
 GET     /blog                       controllers.BlogPosts.index(page: Int = 0)
+GET     /blog/:page                       controllers.BlogPosts.index(page: Int)
 
 
 GET     /manage                     controllers.Application.dashboard
@@ -22,5 +23,3 @@ POST    /manage/blogPosts/:id  controllers.BlogPosts.saveUpdate(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-#GET     /:pageName                    controllers.Pages.display(pageName)
