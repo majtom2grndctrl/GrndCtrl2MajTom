@@ -99,6 +99,21 @@ object BlogPost {
     }
   }
 
+// Retrieve a single post by its slug
+  def findBySlug(slug: String): Option[(BlogPost, User)] = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          select * from blogpost
+          left join user on blogpost.author = user.id
+          where blogpost.slug = {slug}
+        """
+      ).on(
+        'slug -> slug
+      ).as(BlogPost.withAuthor.singleOpt)
+    }
+  }
+
   // Retrieve a BlogPostsPage of posts
   def findPageOfPosts(page: Int = 0, pageSize: Int = 10): BlogPostsPage[(BlogPost, User)] = {
     val offset = pageSize * page

@@ -40,7 +40,17 @@ object ApplicationSpec extends PlaySpecification {
       }
     }
 
-    "Deny access to edit page" in {
+    "Retrieve single blog post" in {
+      running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+        populateDb()
+        val post = controllers.BlogPosts.single("hello-world")(FakeRequest())
+        status(post) must equalTo(OK)
+        contentType(post) must beSome("text/html")
+        contentAsString(post) must contain("Hello World")
+      }
+    }
+
+      "Deny access to edit page" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
         populateDb()
         val dashboard = route(FakeRequest(GET, "/manage")).get

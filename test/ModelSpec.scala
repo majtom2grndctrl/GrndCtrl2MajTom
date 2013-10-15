@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat
 class ModelSpec extends Specification {
 
   import models._
+  import models.BlogPost._
 
   // -- Date helper
   def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
@@ -51,14 +52,23 @@ class ModelSpec extends Specification {
           )
         )
 
-        val Some(post) = BlogPost.findById(1)
-        post.author must equalTo(Id(1))
-        post.id must equalTo(Id(1))
-        post.title must equalTo("Hello World")
-        post.status must equalTo("published")
-        post.slug must equalTo("hello-world")
-        post.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
-        post.excerpt must equalTo(Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""))
+        val result = BlogPost.findBySlug("hello-world")
+
+        result.map { case(post, user) =>
+          user.id must equalTo(Id(1))
+          post.id must equalTo(Id(1))
+          post.title must equalTo("Hello World")
+          post.status must equalTo("published")
+          post.slug must equalTo("hello-world")
+          post.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
+          post.excerpt must equalTo(Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""))
+          
+        }
+
+
+        val foo: String = "foo"
+        foo must equalTo("foo")
+          
       }
     }
     "save and update a new BlogPost" in{
@@ -120,14 +130,14 @@ class ModelSpec extends Specification {
           )
         )
 
-        val Some(post) = Page.findBySlug("hello-world")
-        post.id must equalTo(Id(3))
-        post.title must equalTo("Hello World")
-        post.status must equalTo("published")
-        post.slug must equalTo("hello-world")
-        post.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
-        post.description must equalTo(Some("""This is just a test entry. Please delete it by logging in to the backend."""))
-        post.keywords must equalTo(Some("meta keywords"))
+        val Some(page) = Page.findBySlug("hello-world")
+        page.id must equalTo(Id(3))
+        page.title must equalTo("Hello World")
+        page.status must equalTo("published")
+        page.slug must equalTo("hello-world")
+        page.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
+        page.description must equalTo(Some("""This is just a test entry. Please delete it by logging in to the backend."""))
+        page.keywords must equalTo(Some("meta keywords"))
       }
     }
 

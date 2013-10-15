@@ -1,0 +1,7 @@
+@(post: BlogPost, author: User)
+@main(post.title) {
+  <article>
+    <h1>@post.title</h1>
+@Html(post.content)
+  </article>
+}

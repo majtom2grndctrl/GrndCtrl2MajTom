@@ -6,8 +6,8 @@
 GET     /                           controllers.Pages.display(path: String = "/")
 GET     /contact                    controllers.Pages.display(path: String = "contact")
 GET     /blog                       controllers.BlogPosts.index(page: Int = 0)
-GET     /blog/:page                       controllers.BlogPosts.index(page: Int)
-
+GET     /blog/archive/:page         controllers.BlogPosts.index(page: Int)
+GET     /blog/:slug                 controllers.BlogPosts.single(slug: String)
 
 GET     /manage                     controllers.Application.dashboard
 GET     /manage/blogPosts/list/:page     controllers.BlogPosts.list(page: Int)

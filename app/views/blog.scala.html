@@ -1,10 +1,10 @@
 @(blogPosts: Seq[(BlogPost, User)])
 @main("Blog - " + SitePrefs.name) {
-  <h2>Blog</h2>
+  <h1>Blog</h1>
   @blogPosts.map { case (post, author) =>
     <article>
       <header>
-        <h3>@post.title</h3>
+        <h2><a href="@routes.BlogPosts.single(post.slug)">@post.title</a></h2>
         <div>by @author.firstName @author.lastName</div>
       </header>
       @Html(post.content)
