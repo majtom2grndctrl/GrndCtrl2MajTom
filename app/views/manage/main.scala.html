@@ -37,9 +37,10 @@
     <script src="@routes.Assets.at("javascripts/gcmt.js")" type="text/javascript"></script>
     <script type="text/javascript">
       // Initialize the page
+      $('#gcmt-JsRequired').remove();
       $(function() {
         gcmt.loadNavBar(0);
-        gcmt.enableBlogpostSubmit(0);
+        gcmt.enableBlogpostSubmit("new");
         $("#gcmtMainWorkspace").queue(function(){
           $(this).delay(500);
           $(this).addClass("gcmtUiInit");
