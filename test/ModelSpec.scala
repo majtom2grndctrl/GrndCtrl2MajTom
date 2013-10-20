@@ -22,10 +22,13 @@ class ModelSpec extends Specification {
   def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
   def dbDateHelper(date: Date, str: String) = new SimpleDateFormat("MM/dd/yyy").format(date) == str
 
+  def createUser() = User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+
+
   "Models" should {
     "save and retrieve a new User" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-        User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+        createUser()
         val Some(user) = User.findById(1)
         user.id must equalTo(Id(1))
         user.email must equalTo("f@ke.com")
@@ -37,7 +40,7 @@ class ModelSpec extends Specification {
     "save and retrieve a new BlogPost" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
-        User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+        createUser()
         BlogPost.create(
           BlogPost(
             NotAssigned, //id
@@ -52,10 +55,8 @@ class ModelSpec extends Specification {
           )
         )
 
-        val result = BlogPost.findBySlug("hello-world")
+        val Some(post) = BlogPost.findNewestSaved(1, "hello-world")
 
-        result.map { case(post, user) =>
-          user.id must equalTo(Id(1))
           post.id must equalTo(Id(1))
           post.title must equalTo("Hello World")
           post.status must equalTo("published")
@@ -63,7 +64,6 @@ class ModelSpec extends Specification {
           post.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
           post.excerpt must equalTo(Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""))
           
-        }
 
 
         val foo: String = "foo"
@@ -74,7 +74,7 @@ class ModelSpec extends Specification {
     "save and update a new BlogPost" in{
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
-        User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+        createUser()
         BlogPost.create(
           BlogPost(
             NotAssigned, //id
@@ -117,7 +117,7 @@ class ModelSpec extends Specification {
     "save and retrieve a new Page" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
-        User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+        createUser()
         Page.create(
           Page(
             NotAssigned, //id

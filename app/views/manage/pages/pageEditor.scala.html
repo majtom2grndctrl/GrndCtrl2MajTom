@@ -1,9 +1,9 @@
-@(postForm: Form[BlogPost])
+@(pageForm: Form[Page])
 @import helper._
 
   <div class="gcmtIoMain">
     @inputText(
-      postForm("title"),
+      pageForm("title"),
       '_label -> "Title",
       '_error -> "Your post needs a title!",
       'placeholder -> "Click here to add a headline",
@@ -11,7 +11,7 @@
       '_showConstraints -> false
     )
     @textarea(
-      postForm("content"),
+      pageForm("content"),
       '_label -> "Content",
       '_error -> "We can't publish a post with no content, can we?",
       '_class -> "gcmtIoField gcmtIoContent",
@@ -21,21 +21,20 @@
   <div class="gcmtIoSidebar">
 
     @textarea(
-      postForm("teaser"),
-      '_label -> "Teaser (Optional)",
+      pageForm("description"),
+      '_label -> "Description (Optional)",
       '_error -> "We can't publish a post with no content, can we?",
       '_class -> "gcmtIoField gcmtIoTeaser"
     )
     @inputText(
-      postForm("published"),
-      '_label -> "Date",
+      pageForm("keywords"),
+      '_label -> "Keywords (Optional)",
       '_error -> "When do you want to publish this post?",
-      '_class -> "gcmtIoField gcmtIoText",
-      '_showConstraints -> false
+      '_class -> "gcmtIoField gcmtIoText"
     )
 
     @inputText(
-      postForm("slug"),
+      pageForm("slug"),
       '_label -> "Slug",
       '_class -> "gcmtIoField gcmtIoText",
       '_showConstraints -> false

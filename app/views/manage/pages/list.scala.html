@@ -1,0 +1,5 @@
+@(pages: Seq[Page])
+
+@pages.map { page =>
+  <button data-content-id="@page.id">@page.title</button>
+}

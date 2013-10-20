@@ -1,0 +1,7 @@
+@(pageForm: Form[Page], page: Page)
+@import helper._
+@import views.html.manage.pages._
+
+    @helper.form(action = routes.Pages.saveUpdate(page.id.get), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
+      @pageEditor(pageForm)
+    }

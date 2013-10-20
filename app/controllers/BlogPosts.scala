@@ -63,8 +63,8 @@ object BlogPosts extends Controller with Secured {
 
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
-      html.manage.blogPosts.editor(
-        newBlogPostForm(user), 0
+      html.manage.blogPosts.newForm(
+        newBlogPostForm(user)
       )
     )
   }
@@ -72,8 +72,8 @@ object BlogPosts extends Controller with Secured {
   def edit(id: Long) = AuthenticatedUser { user => implicit request =>
     BlogPost.findById(id).map { post =>
       Ok(
-        html.manage.blogPosts.editor(
-          newBlogPostForm(user).fill(post), id
+        html.manage.blogPosts.editForm(
+          newBlogPostForm(user).fill(post), post
         )
       )
     }.getOrElse(NotFound)
@@ -84,7 +84,12 @@ object BlogPosts extends Controller with Secured {
       formWithErrors => BadRequest,
       post => {
         BlogPost.create(post)
-        Ok(html.manage.dashboard(user, newBlogPostForm(user)))
+        val savedPost = BlogPost.findNewestSaved(post.author, post.slug).get
+        Ok(
+          html.manage.blogPosts.editForm(
+            newBlogPostForm(user).fill(savedPost), savedPost
+          )
+        )
       }
     )
   }

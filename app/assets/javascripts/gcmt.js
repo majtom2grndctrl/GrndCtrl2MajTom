@@ -1,6 +1,7 @@
   var gcmt = {};
 
   gcmt.enableBlogpostSubmit = function( postId ) {
+
     $("#gcmtMainWorkspace").submit( function( event ) {
       event.preventDefault();
       var dataObject = new FormData(document.getElementById("gcmtMainWorkspace"));
@@ -10,15 +11,45 @@
         data: dataObject,
         processData: false,
         contentType: false,
-        beforeSend: gcmt.preSubmitPost(),
-        success: gcmt.postSuccess(0)
+        beforeSend: gcmt.preSubmitPost()
       })
-      .fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
-      });
-      return false;
+      .done(function(html) {
+        gcmt.postSuccess(0, html)
+      })
+      .fail(function( jqXHR, textStatus, error ) {
+        alert( "Request failed: " + textStatus + ": " + error );
+      })
     });
+
   };
+
+// Submit the blog post
+  gcmt.preSubmitPost = function(){
+    $("#gcmtMainWorkspace, #gcmtMainSidebarNav").queue(function() {
+      $(this).addClass("gcmtMainWorkspaceWait")
+      $(this).delay(250);
+      $(this).dequeue();
+    });
+  }
+
+  gcmt.postSuccess = function(navPage, html) {
+    console.log(html);
+    $(".gcmtMainWorkspaceContainer").queue( function() {
+      $(".gcmtMainWorkspace").addClass("gcmtUiDestroy");
+      $(this).delay(500);
+      $(this).empty();
+      $(this).append(html);
+      $(".gcmtMainWorkspace").addClass("gcmtUiInit");
+      $(this).dequeue
+      gcmt.enableBlogpostSubmit(postId);
+    });
+
+    $("#gcmtMainSidebarNav").queue(function(){
+      $(this).unload();
+      gcmt.loadNavBar(navPage);
+      $(this).dequeue();
+    });
+  }
 
 // Load Nav Bar
   gcmt.loadNavBar = function(page) {
@@ -27,21 +58,21 @@
         var msg = "Oops, there was an error: ";
         alert(msg + xhr.status + " " + xhr.statusText)
       } else {
-        gcmt.enableLeftNav();
+        gcmt.enableLeftNav("blogPosts");
       }
     });
   };
 
 // Make post listings clickable
-  gcmt.enableLeftNav = function() {
+  gcmt.enableLeftNav = function(mode) {
     $('#gcmtMainSidebarNav').children().click(function() {
-      var postId = $(this).attr('data-post-id');
+      var contentId = $(this).attr('data-content-id');
 
       $(".gcmtMainWorkspaceContainer").queue( function() {
         $(".gcmtMainWorkspace").addClass("gcmtUiDestroy");
         $(this).delay(500);
         $(this).empty();
-        $(this).delay(1400).load('/manage/blogPosts/' + postId, function(response, status, xhr) {
+        $(this).delay(1400).load('/manage/' + mode + '/edit/' + contentId, function(response, status, xhr) {
           if (status == "success") {
             $(".gcmtMainWorkspace").addClass("gcmtUiInit");
           };
@@ -52,19 +83,19 @@
     });
   };
 
-// Submit the blog post
-  gcmt.preSubmitPost = function(){
-    $("#gcmtMainWorkspace, #gcmtMainSidebarNav").queue(function() {
-      $(this).addClass("gcmtMainWorkspaceWait")
-      $(this).delay(1000)
-      $(this).dequeue();
-    });
-  }
 
-  gcmt.postSuccess = function(page) {
-    $("#gcmtMainSidebarNav").queue(function(){
-      $(this).unload();
-      $(this).load("/manage/blogPosts/list/" + page);
-      $(this).dequeue();
+
+
+// Load Pages into Nav Bar
+  gcmt.loadPagesNav = function(page) {
+    $("#gcmtMainSidebarNav").load("/manage/pages/list", function(response, status, xhr) {
+      if (status == "error") {
+        var msg = "Oops, there was an error: ";
+        alert(msg + xhr.status + " " + xhr.statusText)
+      } else {
+        gcmt.enableLeftNav("pages");
+      }
     });
   };
+
+

@@ -65,7 +65,7 @@ object BlogPost {
         'excerpt -> post.excerpt
       ).executeUpdate()
     }
- }
+  }
 
   def update(post: BlogPost, id: Long) = {
 //Update an existing blog post
@@ -89,7 +89,7 @@ object BlogPost {
       ).executeUpdate()
     }
   }
-  
+
 // Retrieve a single post by ID
   def findById(postId: Long): Option[BlogPost] = {
     DB.withConnection { implicit connection =>
@@ -111,6 +111,20 @@ object BlogPost {
       ).on(
         'slug -> slug
       ).as(BlogPost.withAuthor.singleOpt)
+    }
+  }
+
+// Retrieve a new post immediately after a user has saved it
+  def findNewestSaved(authorId: Pk[Long], slug: String): Option[BlogPost] = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          select * from blogpost
+          where blogpost.slug = {slug}
+        """
+      ).on(
+        'slug -> slug
+      ).as(BlogPost.simple.singleOpt)
     }
   }
 

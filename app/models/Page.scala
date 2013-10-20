@@ -34,6 +34,13 @@ object Page {
     }
   }
 
+//List pages
+  def list(): Seq[Page] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from page").as(Page.simple *)
+    }
+  }
+
 // Save a new page or edited page
   def create(page: Page) = {
  // Save a new page
@@ -81,6 +88,28 @@ object Page {
   def findBySlug(slug: String): Option[Page] = {
     DB.withConnection { implicit connection =>
       SQL("select * from page where page.slug = {slug}").on(
+        'slug -> slug
+      ).as(Page.simple.singleOpt)
+    }
+  }
+
+// Retrieve a single page by its DB ID
+  def findById(id: Long): Option[Page] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from page where page.id = {id}").on(
+        'id -> id
+      ).as(Page.simple.singleOpt)
+    }
+  }
+
+  def findNewestSaved(slug: String): Option[Page] = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          select * from page
+          where blogpost.slug = {slug}
+        """
+      ).on(
         'slug -> slug
       ).as(Page.simple.singleOpt)
     }
