@@ -77,7 +77,7 @@
             $(".gcmtMainWorkspace").addClass("gcmtUiInit");
           };
         });
-        gcmt.enableBlogpostSubmit(postId);
+        gcmt.enableBlogpostSubmit(contentId);
         $(this).dequeue();
       });
     });
