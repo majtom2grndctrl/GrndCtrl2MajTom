@@ -24,6 +24,20 @@ class ModelSpec extends Specification {
 
   def createUser() = User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
 
+  def populatePage() = {
+    User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+    Page.create(
+      Page(
+        NotAssigned, //id
+        "Hello World", //title
+        "published", //status
+        "hello-world", //slug
+        """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
+        Some("""This is just a test entry. Please delete it by logging in to the backend."""),//description
+        Some("meta keywords")// keywords
+      )
+    )
+  }
 
   "Models" should {
     "save and retrieve a new User" in {
@@ -55,7 +69,7 @@ class ModelSpec extends Specification {
           )
         )
 
-        val Some(post) = BlogPost.findNewestSaved(1, "hello-world")
+        val Some(post) = BlogPost.findNewestSaved(Id(1), "hello-world")
 
           post.id must equalTo(Id(1))
           post.title must equalTo("Hello World")
@@ -63,12 +77,6 @@ class ModelSpec extends Specification {
           post.slug must equalTo("hello-world")
           post.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
           post.excerpt must equalTo(Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""))
-          
-
-
-        val foo: String = "foo"
-        foo must equalTo("foo")
-          
       }
     }
     "save and update a new BlogPost" in{
@@ -117,18 +125,7 @@ class ModelSpec extends Specification {
     "save and retrieve a new Page" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
-        createUser()
-        Page.create(
-          Page(
-            NotAssigned, //id
-            "Hello World", //title
-            "published", //status
-            "hello-world", //slug
-            """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
-            Some("""This is just a test entry. Please delete it by logging in to the backend."""), //excerpt
-            Some("meta keywords")
-          )
-        )
+        populatePage()
 
         val Some(page) = Page.findBySlug("hello-world")
         page.id must equalTo(Id(3))
@@ -144,18 +141,7 @@ class ModelSpec extends Specification {
     "save and update a new Page" in{
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
-        User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
-        Page.create(
-          Page(
-            NotAssigned, //id
-            "Hello World", //title
-            "published", //status
-            "hello-world", //slug
-            """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
-            Some("""This is just a test entry. Please delete it by logging in to the backend."""),//description
-            Some("meta keywords")// keywords
-          )
-        )
+        populatePage()
 
         Page.update(
           Page(
