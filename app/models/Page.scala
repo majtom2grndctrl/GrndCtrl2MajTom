@@ -107,7 +107,8 @@ object Page {
       SQL(
         """
           select * from page
-          where blogpost.slug = {slug}
+          where page.slug = {slug}
+          limit 1
         """
       ).on(
         'slug -> slug

@@ -138,31 +138,35 @@ class ModelSpec extends Specification {
       }
     }
 
-    "save and update a new Page" in{
+    "save and retrieve a new Page" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
         populatePage()
 
-        Page.update(
-          Page(
-            NotAssigned, //id
-            "Hello World Updated", //title
-            "published", //status
-            "hello-world-updated", //slug
-            """<p>This is just an updated test entry. Please delete it by logging in to the backend.</p>""", //content
-            Some("""This is just an updated test entry. Please delete it by logging in to the backend."""),//description
-            Some("more meta keywords")// keywords
-          ),
-          1: Long
-        )
-        val Some(page) = Page.findBySlug("hello-world-updated")
-        page.id must equalTo(Id(1))
-        page.title must equalTo("Hello World Updated")
+        val Some(page) = Page.findBySlug("hello-world")
+        page.id must equalTo(Id(3))
+        page.title must equalTo("Hello World")
         page.status must equalTo("published")
-        page.slug must equalTo("hello-world-updated")
-        page.content must equalTo("""<p>This is just an updated test entry. Please delete it by logging in to the backend.</p>""")
-        page.description must equalTo(Some("""This is just an updated test entry. Please delete it by logging in to the backend."""))
-        page.keywords must equalTo(Some("more meta keywords"))
+        page.slug must equalTo("hello-world")
+        page.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
+        page.description must equalTo(Some("""This is just a test entry. Please delete it by logging in to the backend."""))
+        page.keywords must equalTo(Some("meta keywords"))
+      }
+    }
+
+    "save and retrieve the newest Page" in{
+      running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+
+        populatePage()
+
+        val Some(page) = Page.findNewestSaved("hello-world")
+        page.id must equalTo(Id(3))
+        page.title must equalTo("Hello World")
+        page.status must equalTo("published")
+        page.slug must equalTo("hello-world")
+        page.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
+        page.description must equalTo(Some("""This is just a test entry. Please delete it by logging in to the backend."""))
+        page.keywords must equalTo(Some("meta keywords"))
       }      
     }
 
