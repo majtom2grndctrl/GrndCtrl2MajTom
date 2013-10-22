@@ -103,4 +103,10 @@ object BlogPosts extends Controller with Secured {
       }
     )
   }
+
+  def delete(id: Long) = AuthenticatedUser { user => implicit request =>
+    BlogPost.delete(id)
+    Ok
+  }
+
 }
