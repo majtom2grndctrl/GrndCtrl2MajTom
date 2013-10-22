@@ -24,8 +24,25 @@ class ModelSpec extends Specification {
 
   def createUser() = User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
 
+  def populateBlogPost() = {
+    createUser()
+    BlogPost.create(
+      BlogPost(
+        NotAssigned, //id
+        "Hello World", //title
+        "published", //status
+         Id(1), //author
+        dateHelper("01/13/2013"), //published
+        "hello-world", //slug
+        """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
+        Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""
+        ) //excerpt
+      )
+    )
+  }
+
   def populatePage() = {
-    User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+    createUser()
     Page.create(
       Page(
         NotAssigned, //id
@@ -53,21 +70,7 @@ class ModelSpec extends Specification {
     }
     "save and retrieve a new BlogPost" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-
-        createUser()
-        BlogPost.create(
-          BlogPost(
-            NotAssigned, //id
-            "Hello World", //title
-            "published", //status
-             Id(1), //author
-            dateHelper("01/13/2013"), //published
-            "hello-world", //slug
-            """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
-            Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""
-            ) //excerpt
-          )
-        )
+        populateBlogPost()
 
         val Some(post) = BlogPost.findNewestSaved(Id(1), "hello-world")
 
@@ -82,20 +85,7 @@ class ModelSpec extends Specification {
     "save and update a new BlogPost" in{
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
 
-        createUser()
-        BlogPost.create(
-          BlogPost(
-            NotAssigned, //id
-            "Hello World", //title
-            "published", //status
-             Id(1), //author
-            dateHelper("01/13/2013"), //published
-            "hello-world", //slug
-            """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
-            Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""
-            )//excerpt
-          )
-        )
+        populateBlogPost()
 
         BlogPost.update(
           BlogPost(
@@ -120,6 +110,38 @@ class ModelSpec extends Specification {
         post.content must equalTo("""<p>This is just an updated test entry. Please delete it by logging in to the backend.</p>""")
         post.excerpt must equalTo(Some("""<p>This is just an updated test entry. Please delete it by logging in to the backend.</p>"""))
       }      
+    }
+
+    "save two Blog Posts and delete one" in {
+      running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+        populateBlogPost()
+
+        BlogPost.create(
+          BlogPost(
+            NotAssigned, //id
+            "Hello Again", //title
+            "published", //status
+            Id(1), //author
+            dateHelper("01/14/2013"), //published
+            "hello-again", //slug
+            """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
+            Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""
+            ) //excerpt
+          )
+        )
+
+        BlogPost.delete(2)
+
+        val Some(post) = BlogPost.findById(1)
+
+          post.id must equalTo(Id(1))
+          post.title must equalTo("Hello World")
+          post.status must equalTo("published")
+          post.slug must equalTo("hello-world")
+          post.content must equalTo("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>""")
+          post.excerpt must equalTo(Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""))
+
+      }
     }
 
     "save and retrieve a new Page" in {
