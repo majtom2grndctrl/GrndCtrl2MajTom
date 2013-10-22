@@ -121,6 +121,7 @@ object BlogPost {
         """
           select * from blogpost
           where blogpost.slug = {slug}
+          limit 1
         """
       ).on(
         'slug -> slug
@@ -144,7 +145,7 @@ object BlogPost {
         'offset -> offset
       ).as(BlogPost.withAuthor *)
 
-    val totalRows = SQL(
+      val totalRows = SQL(
         """
           select count(*) from blogpost
         """
@@ -153,5 +154,8 @@ object BlogPost {
       BlogPostsPage(blogPosts, page, offset, totalRows)
     }
   }
-
-}
+  def delete(id: Long) = {
+    DB.withConnection { implicit connection =>
+      SQL("delete from blogPost where id = {id}").on('id -> id).executeUpdate()
+    }
+  }}
