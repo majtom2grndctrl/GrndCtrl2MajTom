@@ -12,8 +12,9 @@ object ApplicationSpec extends PlaySpecification {
 
   def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
 
-  def populateDb() = {
-    User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+  def populateUser() = User.create(User(NotAssigned, "f@ke.com", "Test", "User", "secret"))
+  def populateBlogPost() = {
+    populateUser()
     BlogPost.create(
       BlogPost(
         NotAssigned, //id
@@ -23,7 +24,7 @@ object ApplicationSpec extends PlaySpecification {
         dateHelper("01/13/2013"), //published
         "hello-world", //slug
         """<p>This is just a test entry. Please delete it by logging in to the backend.</p>""", //content
-        Some("""<p>This is just a test entry. Please delete it by logging in to the backend.</p>"""
+        Some("""This is just a test entry. Please delete it by logging in to the backend."""
         )//excerpt
       )
     )
@@ -32,7 +33,7 @@ object ApplicationSpec extends PlaySpecification {
   "Application" should {
     "Retrieve blog index" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-        populateDb()
+        populateBlogPost()
         val blogIndex = controllers.BlogPosts.index(0)(FakeRequest())
         status(blogIndex) must equalTo(OK)
         contentType(blogIndex) must beSome("text/html")
@@ -42,7 +43,7 @@ object ApplicationSpec extends PlaySpecification {
 
     "Retrieve single blog post" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-        populateDb()
+        populateBlogPost()
         val post = controllers.BlogPosts.single("hello-world")(FakeRequest())
         status(post) must equalTo(OK)
         contentType(post) must beSome("text/html")
@@ -50,9 +51,19 @@ object ApplicationSpec extends PlaySpecification {
       }
     }
 
+    "Retrieve single page" in {
+      running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
+//        populateBlogPost()
+        val page = controllers.Pages.display("/")(FakeRequest())
+        status(page) must equalTo(OK)
+        contentType(page) must beSome("text/html")
+        contentAsString(page) must contain("Welcome to")
+      }
+    }
+
       "Deny access to edit page" in {
       running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-        populateDb()
+        populateBlogPost()
         val dashboard = route(FakeRequest(GET, "/manage")).get
         status(dashboard) must equalTo(303)
       }
