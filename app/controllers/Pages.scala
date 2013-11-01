@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
 import play.api.libs.functional.syntax._
+import play.api.libs.json._
 
 import anorm._
 
@@ -35,6 +36,11 @@ object Pages extends Controller with Secured {
   def list() = AuthenticatedUser { user => implicit request =>
       Ok(html.manage.pages.list(Page.list()))
   }
+
+  def listJson() = AuthenticatedUser { user => implicit request =>
+    Ok(Json.toJson(Page.list()))
+  }
+
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
       html.manage.pages.newPage(

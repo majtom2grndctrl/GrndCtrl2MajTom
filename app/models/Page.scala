@@ -34,7 +34,23 @@ object Page {
     }
   }
 
-//List pages
+  implicit val pageWrites = new Writes[Page] {
+    def writes(page: Page): JsValue = {
+      Json.obj(
+        "id" -> page.id.get,
+        "title" -> page.title,
+        "status" -> page.status,
+        "slug" -> page.slug,
+        "content" -> page.content,
+        "description" -> page.description,
+        "keywords" -> page.keywords
+      )
+    }
+  }
+
+//  implicit val pageReads = Json.reads[Page]
+
+  //List pages
   def list(): Seq[Page] = {
     DB.withConnection { implicit connection =>
       SQL("select * from page").as(Page.simple *)
