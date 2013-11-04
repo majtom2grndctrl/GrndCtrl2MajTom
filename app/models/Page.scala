@@ -37,17 +37,17 @@ object Page {
   implicit val pageWrites = new Writes[Seq[Page]] {
     def writes(pages: Seq[Page]) = {
       Json.obj(
-        "pages" -> 
-          pages.map { page => Json.obj(
-        "id" -> page.id.get,
-        "title" -> page.title,
-        "status" -> page.status,
-        "slug" -> page.slug,
-        "content" -> page.content,
-        "description" -> page.description,
-        "keywords" -> page.keywords
+        "pages" -> pages.map { page =>
+          Json.obj(
+            "id" -> page.id.get,
+            "title" -> page.title,
+            "status" -> page.status,
+            "slug" -> page.slug,
+            "content" -> page.content,
+            "description" -> page.description,
+            "keywords" -> page.keywords
           )
-          }
+        }
       )
     }
   }
