@@ -34,9 +34,11 @@ object Page {
     }
   }
 
-  implicit val pageWrites = new Writes[Page] {
-    def writes(page: Page): JsValue = {
+  implicit val pageWrites = new Writes[Seq[Page]] {
+    def writes(pages: Seq[Page]) = {
       Json.obj(
+        "pages" -> 
+          pages.map { page => Json.obj(
         "id" -> page.id.get,
         "title" -> page.title,
         "status" -> page.status,
@@ -44,6 +46,8 @@ object Page {
         "content" -> page.content,
         "description" -> page.description,
         "keywords" -> page.keywords
+          )
+          }
       )
     }
   }
