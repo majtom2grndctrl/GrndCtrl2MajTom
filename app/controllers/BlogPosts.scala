@@ -61,6 +61,12 @@ object BlogPosts extends Controller with Secured {
     }.getOrElse(NotFound)
   }
 
+  def listJson(page: Int) = AuthenticatedUser { user => implicit request =>
+    Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
+      Ok(Json.toJson(blogPosts))
+    }.getOrElse(NotFound)
+  }
+
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
       html.manage.blogPosts.newForm(

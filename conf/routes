@@ -11,7 +11,7 @@ GET     /blog/:slug                 controllers.BlogPosts.single(slug: String)
 
 GET     /manage                     controllers.Application.dashboard
 GET     /manage/blogPosts/list/:page     controllers.BlogPosts.list(page: Int)
-# GET   /manage/blogPosts/json/:page     controllers.BlogPosts.listAsJson(page: Int)
+GET   /manage/blogPosts/json/:page     controllers.BlogPosts.listJson(page: Int)
 GET     /manage/login               controllers.Application.login
 POST    /manage/login               controllers.Application.authenticate
 GET     /manage/setup               controllers.Application.setup
@@ -28,7 +28,7 @@ POST    /manage/pages/new           controllers.Pages.saveNew
 GET     /manage/pages/edit/:id      controllers.Pages.edit(id: Long)
 POST    /manage/pages/edit/:id      controllers.Pages.saveUpdate(id: Long)
 GET     /manage/pages/list          controllers.Pages.list()
-GET     /manage/pages/listJson      controllers.Pages.listJson()
+GET     /manage/pages/json          controllers.Pages.listJson()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -45,6 +45,30 @@ object BlogPost {
     case post~user => (post, user)
   }
 
+  implicit val blogPostWrites = new Writes[Seq[(BlogPost, User)]] {
+    def writes(posts: Seq[(BlogPost, User)]): JsValue = {
+      Json.obj(
+        "blogposts" -> posts.map { case (post, user) =>
+          Json.obj(
+            "post"-> Json.obj(
+              "id" -> post.id.get,
+              "title" -> post.title,
+              "status" -> post.status,
+              "published" -> post.published,
+              "slug" -> post.slug,
+              "content" -> post.content,
+              "teaser" -> post.excerpt
+            ),
+            "author" -> Json.obj(
+              "first name" -> user.firstName,
+              "last name" -> user.lastName
+            )
+          )
+        }
+      )
+    }
+  }
+
 // Save a new post or edited post
   def create(post: BlogPost) = {
  // Save a new blog post
@@ -158,4 +182,6 @@ object BlogPost {
     DB.withConnection { implicit connection =>
       SQL("delete from blogPost where id = {id}").on('id -> id).executeUpdate()
     }
-  }}
+  }
+}
+
