@@ -10,4 +10,4 @@ dist
 .cache
 .settings
 bin
-public/javascripts
+public/javascripts/lib

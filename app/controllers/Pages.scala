@@ -34,13 +34,17 @@ object Pages extends Controller with Secured {
   }
 
   def list() = AuthenticatedUser { user => implicit request =>
-      Ok(html.manage.pages.list(Page.list()))
+    Ok(html.manage.pages.list(Page.list()))
   }
 
   def listJson() = AuthenticatedUser { user => implicit request =>
     Ok(Json.toJson(Page.list()))
   }
-
+/*
+  def singleJson(id: Long) = AuthenticatedUser { User => implicit request =>
+    Ok(Json.toJson(Seq(Page.findById(id))))
+  }
+*/
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
       html.manage.pages.newPage(

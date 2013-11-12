@@ -11,7 +11,7 @@
       $('#gcmt-JsRequired').remove();
       $(function() {
         gcmt.loadNavBar(0);
-        gcmt.enableBlogpostSubmit("new");
+        gcmt.enableBlogpostSubmit("new", $("#gcmtMainWorkspace"));
         $("#gcmtMainWorkspace").queue(function(){
           $(this).delay(500);
           $(this).addClass("gcmtUiInit");

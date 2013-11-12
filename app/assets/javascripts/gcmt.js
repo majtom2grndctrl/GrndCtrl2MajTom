@@ -1,10 +1,11 @@
   var gcmt = {};
 
-  gcmt.enableBlogpostSubmit = function( postId ) {
-
-    $("#gcmtMainWorkspace").submit( function( event ) {
+  gcmt.enableBlogpostSubmit = function(postId, editor) {
+//    alert("enableBlogpostSubmit("+postId+")");
+    console.log(editor);
+    editor.submit(function(event) {
       event.preventDefault();
-      var dataObject = new FormData(document.getElementById("gcmtMainWorkspace"));
+      var dataObject = new FormData(editor);
       $.ajax({
         url: "/manage/blogPosts/" + postId,
         type: "POST",
@@ -12,13 +13,23 @@
         processData: false,
         contentType: false,
         beforeSend: gcmt.preSubmitPost()
-      })
-      .done(function(html) {
+      }).done(function(html) {
         gcmt.postSuccess(0, html)
-      })
-      .fail(function( jqXHR, textStatus, error ) {
+      }).fail(function( jqXHR, textStatus, error ) {
         alert( "Request failed: " + textStatus + ": " + error );
-      })
+      });
+    });
+    $("#gcmtMainDelete").click(function(postId) {
+      alert("Clicked Delete");
+      event.preventDefault();
+      $.ajax({
+        url:"/manage/blogPosts/delete/" + postId,
+        type: "POST",
+        processData: false,
+        contentType: false
+      }).fail(function(jqXHR, textStatus, error) {
+        alert("Request failed: " + textStatus + error);
+      });
     });
 
   };
@@ -33,7 +44,7 @@
   }
 
   gcmt.postSuccess = function(navPage, html) {
-    console.log(html);
+//    console.log(html);
     $(".gcmtMainWorkspaceContainer").queue( function() {
       $(".gcmtMainWorkspace").addClass("gcmtUiDestroy");
       $(this).delay(500);
@@ -41,7 +52,8 @@
       $(this).append(html);
       $(".gcmtMainWorkspace").addClass("gcmtUiInit");
       $(this).dequeue
-      gcmt.enableBlogpostSubmit(postId);
+      var enableNewEditor = new gcmt.enableBlogpostSubmit;
+      enableNewEditor(postId);
     });
 
     $("#gcmtMainSidebarNav").queue(function(){
@@ -74,10 +86,12 @@
         $(this).empty();
         $(this).delay(1400).load('/manage/' + mode + '/edit/' + contentId, function(response, status, xhr) {
           if (status == "success") {
-            $(".gcmtMainWorkspace").addClass("gcmtUiInit");
+            $("#gcmtMainWorkspace").addClass("gcmtUiInit");
+            editor = $.parseHTML(response);
+            console.log(editor);
+            gcmt.enableBlogpostSubmit(contentId, editor);
           };
         });
-        gcmt.enableBlogpostSubmit(contentId);
         $(this).dequeue();
       });
     });
@@ -96,6 +110,34 @@
         gcmt.enableLeftNav("pages");
       }
     });
+  };
+
+
+
+
+
+
+  gcmt.enablePageSubmit = function(pageId) {
+
+    $("#gcmtMainWorkspace").submit( function( event ) {
+      event.preventDefault();
+      var dataObject = new FormData(document.getElementById("gcmtMainWorkspace"));
+      $.ajax({
+        url: "/manage/blogPosts/" + pageId,
+        type: "POST",
+        data: dataObject,
+        processData: false,
+        contentType: false,
+        beforeSend: gcmt.preSubmitPost()
+      })
+      .done(function(html) {
+        gcmt.postSuccess(0, html)
+      })
+      .fail(function( jqXHR, textStatus, error ) {
+        alert( "Request failed: " + textStatus + ": " + error );
+      })
+    });
+
   };
 
 
