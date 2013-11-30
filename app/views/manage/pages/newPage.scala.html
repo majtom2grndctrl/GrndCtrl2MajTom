@@ -1,24 +1,16 @@
-@(pageForm: Form[Page], user: User)
+@(user: User, pageForm: Form[Page], pagesList: Seq[Page])
 @import helper._
 @import views.html.manage._
 @import views.html.manage.pages._
 @main("Manage Pages for " + SitePrefs.name, user) {
-    @helper.form(action = routes.Pages.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
+@list(pagesList)
+} {
+    @helper.form(action = routes.Pages.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace gcmtUiInit") {
       @pageEditor(pageForm)
     }
+      <div class="gcmtIoActions">
+        <input type="submit" value="Save" />
+      </div>
 } {
-    <script type="text/javascript">
-      // Initialize the page
-      $('#gcmt-JsRequired').remove();
-      $(function() {
-        gcmt.loadPagesNav();
-        gcmt.enablePageSubmit("new");
-        $("#gcmtMainWorkspace").queue(function(){
-          $(this).delay(500);
-          $(this).addClass("gcmtUiInit");
-          $(this).dequeue();
-        });
-      });
-    </script>
+@* Scripts *@
 }
-

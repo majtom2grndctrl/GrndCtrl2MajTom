@@ -21,8 +21,8 @@
   <div class="gcmtIoSidebar">
 
     @textarea(
-      postForm("teaser"),
-      '_label -> "Teaser (Optional)",
+      postForm("description"),
+      '_label -> "Description (Optional)",
       '_error -> "We can't publish a post with no content, can we?",
       '_class -> "gcmtIoField gcmtIoTeaser"
     )
@@ -33,13 +33,10 @@
       '_class -> "gcmtIoField gcmtIoText",
       '_showConstraints -> false
     )
-
     @inputText(
       postForm("slug"),
       '_label -> "Slug",
       '_class -> "gcmtIoField gcmtIoText",
       '_showConstraints -> false
     )
-    <input type="submit" value="Save" />
-    <button class="gcmtMainDelete" id="gcmtMainDelete">Delete</button>
   </div>

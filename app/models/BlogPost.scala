@@ -9,15 +9,19 @@ import play.api.libs.json._
 import anorm._
 import anorm.SqlParser._
 
+import scala.language.postfixOps
+
 case class BlogPost (
   id: Pk[Long],
   title: String,
   status: String,
+  style: String,
   author: Pk[Long],
   published: Date,
   slug: String,
   content: String,
-  excerpt: Option[String]
+  description: Option[String],
+  keywords: Option[String]
 )
 
 case class BlogPostsPage[A](items: Seq[A], BlogPostsPage: Int, offset: Long, total: Long) {
@@ -30,13 +34,15 @@ object BlogPost {
     get[Pk[Long]]("blogPost.id") ~
     get[String]("blogPost.title") ~
     get[String]("blogPost.status") ~
+    get[String]("blogPost.style") ~
     get[Pk[Long]]("blogPost.author") ~
     get[Date]("blogPost.published") ~
     get[String]("blogPost.slug") ~
     get[String]("blogPost.content") ~
-    get[Option[String]]("blogPost.excerpt") map {
-      case id~title~status~author~published~slug~content~teaser => BlogPost(
-        id, title, status, author, published, slug, content, teaser
+    get[Option[String]]("blogPost.description") ~
+    get[Option[String]]("blogPost.keywords") map {
+      case id~title~status~style~author~published~slug~content~description~keywords => BlogPost(
+        id, title, status, style, author, published, slug, content, description, keywords
       )
     }
   }
@@ -54,10 +60,12 @@ object BlogPost {
               "id" -> post.id.get,
               "title" -> post.title,
               "status" -> post.status,
+              "style" -> post.style,
               "published" -> post.published,
               "slug" -> post.slug,
               "content" -> post.content,
-              "teaser" -> post.excerpt
+              "description" -> post.description,
+              "keywords" -> post.keywords
             ),
             "author" -> Json.obj(
               "first name" -> user.firstName,
@@ -76,17 +84,19 @@ object BlogPost {
       SQL(
         """
           insert into blogpost values(
-            null, {title}, {status}, {author}, {published}, {slug}, {content}, {excerpt}
+            null, {title}, {status}, {style}, {author}, {published}, {slug}, {content}, {description}, {keywords}
           )
         """
       ).on(
         'title -> post.title,
         'status -> post.status,
+        'style -> post.style,
         'author -> post.author,
         'published -> post.published,
         'slug -> post.slug,
         'content -> post.content,
-        'excerpt -> post.excerpt
+        'description -> post.description,
+        'keywords -> post.keywords
       ).executeUpdate()
     }
   }
@@ -98,18 +108,20 @@ object BlogPost {
       SQL(
         """
           update blogpost
-          set title = {title}, status = {status}, author = {author}, published = {published}, slug = {slug}, content = {content}, excerpt = {excerpt}
+          set title = {title}, status = {status}, style = {style}, author = {author}, published = {published}, slug = {slug}, content = {content}, description = {description}, keywords = {keywords}
           where blogpost.id = {id}
         """
       ).on(
         'id -> id,
         'title -> post.title,
         'status -> post.status,
+        'style -> post.style,
         'author -> post.author,
         'published -> post.published,
         'slug -> post.slug,
         'content -> post.content,
-        'excerpt -> post.excerpt
+        'description -> post.description,
+        'keywords -> post.keywords
       ).executeUpdate()
     }
   }
@@ -180,7 +192,7 @@ object BlogPost {
   }
   def delete(id: Long) = {
     DB.withConnection { implicit connection =>
-      SQL("delete from blogPost where id = {id}").on('id -> id).executeUpdate()
+      SQL("delete from blogpost where id = {id}").on('id -> id).executeUpdate()
     }
   }
 }

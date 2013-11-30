@@ -1,22 +1,15 @@
-@(user: User, blogPostForm: Form[BlogPost])
+@(user: User, blogPostForm: Form[BlogPost], posts: Seq[(BlogPost, User)])
+@import helper._
 @import views.html.manage.blogPosts._
 @main("Dashboard for " + SitePrefs.name, user) {
-@* Load new blog post editor by default *@
-  @helper.form(action = routes.BlogPosts.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
-    @editor(blogPostForm)
-  }
+@list(posts)
 } {
-    <script type="text/javascript">
-      // Initialize the page
-      $('#gcmt-JsRequired').remove();
-      $(function() {
-        gcmt.loadNavBar(0);
-        gcmt.enableBlogpostSubmit("new", $("#gcmtMainWorkspace"));
-        $("#gcmtMainWorkspace").queue(function(){
-          $(this).delay(500);
-          $(this).addClass("gcmtUiInit");
-          $(this).dequeue();
-        });
-      });
-    </script>
+    @helper.form(action = routes.BlogPosts.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace gcmtUiInit") {
+      @editor(blogPostForm)
+      <div class="gcmtIoActions">
+        <input type="submit" value="Save" />
+      </div>
+    }
+} {
+@* Scripts *@
 }

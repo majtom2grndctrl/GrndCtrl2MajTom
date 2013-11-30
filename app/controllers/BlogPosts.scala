@@ -21,12 +21,14 @@ object BlogPosts extends Controller with Secured {
     mapping(
       "id" -> ignored(NotAssigned: Pk[Long]),
       "title" -> nonEmptyText,
-      "status" -> ignored("published"),
+      "status" -> ignored("public"),
+      "style" -> ignored("blogpost"),
       "author" -> ignored(user.id),
       "published" -> date("MM/dd/yyyy"),
       "slug" -> nonEmptyText,
       "content" -> nonEmptyText,
-      "teaser" -> optional(text) // optional, controller will need to handle for if no excerpt is specified
+      "description" -> optional(text),
+      "keywords" -> optional(text)
     )(BlogPost.apply)(BlogPost.unapply)
   )
 
@@ -37,24 +39,24 @@ object BlogPosts extends Controller with Secured {
   val dateStringHelper = new java.text.SimpleDateFormat("MM/dd/yyyy")
   val todayString: String = dateStringHelper.format(dateToday)
 
-  def index(page: Int) = Action {
+  def index(page: Int) = Action { implicit request =>
     Option(BlogPost.findPageOfPosts(page).items).map { posts =>
       Ok(
-        html.blog(posts)
+        html.blogPosts.index(request.domain + request.uri, posts)
       )
     }.getOrElse(NotFound)
   }
 
-  def single(slug: String) = Action {
+  def single(slug: String) = Action { implicit request =>
     Option(BlogPost.findBySlug(slug).get).map { case(post, user) =>
-      Ok(html.blogPosts.single(post, user))
+      Ok(html.blogPosts.single(request.domain + request.uri, post, user))
     }.getOrElse(NotFound)
   }
 
   def list(page: Int) = AuthenticatedUser { user => implicit request =>
     Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
         Ok(
-          html.blogPosts.list(
+          html.manage.blogPosts.list(
             blogPosts
           )
         )
@@ -66,7 +68,7 @@ object BlogPosts extends Controller with Secured {
       Ok(Json.toJson(blogPosts))
     }.getOrElse(NotFound)
   }
-
+/* Deprecated async method
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
       html.manage.blogPosts.newForm(
@@ -74,12 +76,15 @@ object BlogPosts extends Controller with Secured {
       )
     )
   }
-
+*/
   def edit(id: Long) = AuthenticatedUser { user => implicit request =>
     BlogPost.findById(id).map { post =>
       Ok(
-        html.manage.blogPosts.editForm(
-          newBlogPostForm(user).fill(post), post
+        html.manage.blogPosts.editBlogPost(
+          user,
+          newBlogPostForm(user).fill(post),
+          BlogPost.findPageOfPosts(0).items,
+          post
         )
       )
     }.getOrElse(NotFound)
@@ -92,8 +97,10 @@ object BlogPosts extends Controller with Secured {
         BlogPost.create(post)
         val savedPost = BlogPost.findNewestSaved(post.author, post.slug).get
         Ok(
-          html.manage.blogPosts.editForm(
-            newBlogPostForm(user).fill(savedPost), savedPost
+          html.manage.dashboard(
+            user,
+            newBlogPostForm(user).fill(savedPost),
+            BlogPost.findPageOfPosts(0).items
           )
         )
       }
@@ -105,14 +112,21 @@ object BlogPosts extends Controller with Secured {
       errors => BadRequest,
       post => {
         BlogPost.update(post, id)
-        Ok
+        Ok(
+          html.manage.blogPosts.editBlogPost(
+            user,
+            newBlogPostForm(user).fill(post),
+            BlogPost.findPageOfPosts(0).items,
+            BlogPost.findById(id).get
+          )
+        )
       }
     )
   }
 
   def delete(id: Long) = AuthenticatedUser { user => implicit request =>
     BlogPost.delete(id)
-    Ok
+    Redirect(routes.Application.dashboard())
   }
 
 }

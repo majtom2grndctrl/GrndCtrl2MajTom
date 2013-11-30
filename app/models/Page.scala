@@ -9,6 +9,9 @@ import play.api.libs.json._
 import anorm._
 import anorm.SqlParser._
 
+import scala.language.postfixOps
+
+
 case class Page (
   id: Pk[Long],
   title: String,
@@ -150,6 +153,11 @@ object Page {
       ).on(
         'slug -> slug
       ).as(Page.simple.singleOpt)
+    }
+  }
+  def delete(id: Long) = {
+    DB.withConnection { implicit connection =>
+      SQL("delete from page where id = {id}").on('id -> id).executeUpdate()
     }
   }
 }

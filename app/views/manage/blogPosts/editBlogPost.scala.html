@@ -1,0 +1,16 @@
+@(user: User, blogPostForm: Form[BlogPost], posts: Seq[(BlogPost, User)], post: BlogPost)
+@import helper._
+@import views.html.manage.blogPosts._
+@manage.main("Dashboard for " + SitePrefs.name, user) {
+@list(posts)
+} {
+    @helper.form(action = routes.BlogPosts.saveUpdate(post.id.get), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace gcmtUiInit") {
+      @editor(blogPostForm)
+      <div class="gcmtIoActions">
+        <input type="submit" value="Save" />
+        <a href="@routes.BlogPosts.delete(post.id.get)" class="gcmtMainDelete" id="gcmtMainDelete">Delete</a>
+      </div>
+    }
+} {
+@* Scripts *@
+}

@@ -1,5 +1,5 @@
-@(post: BlogPost, author: User)
-@main(post.title) {
+@(url: String, post: BlogPost, author: User)
+@main(url, post.title, post.description, post.keywords) {
   <article>
     <h1>@post.title</h1>
 @Html(post.content)

@@ -27,9 +27,9 @@ object Pages extends Controller with Secured {
     )(Page.apply)(Page.unapply)
   )
 
-  def display(path: String) = Action {
+  def display(path: String) = Action { implicit request =>
     Page.findBySlug(path).map { page =>
-      Ok(html.page(page))
+      Ok(html.page(request.domain + request.uri, page))
     }.getOrElse(NotFound)
   }
 
@@ -48,7 +48,9 @@ object Pages extends Controller with Secured {
   def create = AuthenticatedUser { user => implicit request =>
     Ok(
       html.manage.pages.newPage(
-        newPageForm(), user
+        user,
+        newPageForm(),
+        Page.list()
       )
     )
   }
@@ -57,7 +59,10 @@ object Pages extends Controller with Secured {
     Page.findById(id).map { page =>
       Ok(
         html.manage.pages.editPage(
-          newPageForm().fill(page), page
+          user,
+          newPageForm().fill(page),
+          Page.list(),
+          page
         )
       )
     }.getOrElse(NotFound)
@@ -70,8 +75,10 @@ object Pages extends Controller with Secured {
         Page.create(page)
         val savedPage = Page.findNewestSaved(page.slug).get
         Ok(
-          html.manage.pages.editPage(
-            newPageForm().fill(savedPage), savedPage
+          html.manage.pages.newPage(
+            user,
+            newPageForm().fill(savedPage),
+            Page.list()
           )
         )
       }
@@ -83,8 +90,20 @@ object Pages extends Controller with Secured {
       errors => BadRequest,
       page => {
         Page.update(page, id)
-        Ok
+        Ok(
+          html.manage.pages.editPage(
+            user,
+            newPageForm().fill(page),
+            Page.list(),
+            Page.findById(id).get
+          )
+        )
       }
     )
+  }
+
+  def delete(id: Long) = AuthenticatedUser { user => implicit request =>
+    Page.delete(id)
+    Redirect(routes.Pages.create())
   }
 }

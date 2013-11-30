@@ -1,5 +1,5 @@
-@(page: Page)
-@main(page.title) {
+@(url: String, page: Page)
+@main(url, page.title, page.description, page.keywords) {
   <h2>@page.title</h2>
   @Html(page.content)
 }

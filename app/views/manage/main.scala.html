@@ -1,4 +1,4 @@
-@(title: String, user: User)(content: Html)(scripts: Html)<!DOCTYPE html>
+@(title: String, user: User)(sidebar:Html)(content: Html)(scripts: Html)<!DOCTYPE html>
 <html>
   <head>
     <title>@title</title>
@@ -9,7 +9,7 @@
   </head>
   <body>
 
-	<div id="gcmt-JsRequired">Javascript is required. Please enable Javascript</div>
+@*	<div id="gcmt-JsRequired">Javascript is required. Please enable Javascript</div>*@
 
     <header class="gcmtHeader">
       <h1 class="gcmtHeaderTitle"><a href="@routes.Application.dashboard()">GrndCtrl2MajTom</a></h1>
@@ -27,6 +27,7 @@
 
     <div class="gcmtMainSidebar">
       <nav class="gcmtMainSidebarList" id="gcmtMainSidebarNav">
+@sidebar
       </nav>
     </div>
 
@@ -34,7 +35,7 @@
 @content
     </section>
     <script src="@routes.Assets.at("javascripts/jquery-2.0.3.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("javascripts/gcmt.js")" type="text/javascript"></script>
+@*    <script src="@routes.Assets.at("javascripts/gcmt.js")" type="text/javascript"></script>*@
 @scripts
   </body>
 </html>

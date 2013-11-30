@@ -13,12 +13,14 @@ create table user (
 create table blogpost (
   id		  				bigint not null primary key auto_increment,
   title						varchar(255) not null,
-  status					varchar(15),
+  status					varchar(32) default 'public',
+  style                     varchar(32),
   author					bigint not null,
   published					date,
   slug                      text,
   content                   longtext,
-  excerpt                   text,
+  description               text,
+  keywords                  text,
   foreign key(author)	references user(id) on delete cascade
 );
 
@@ -26,4 +28,3 @@ create table blogpost (
 
 drop table if exists blogpost;
 drop table if exists user;
-drop table if exists site

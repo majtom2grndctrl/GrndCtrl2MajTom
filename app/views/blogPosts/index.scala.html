@@ -1,5 +1,5 @@
-@(blogPosts: Seq[(BlogPost, User)])
-@main("Blog - " + SitePrefs.name) {
+@(url: String, blogPosts: Seq[(BlogPost, User)])
+@main(url, "Blog - " + SitePrefs.name, SitePrefs.description, SitePrefs.keywords) {
   <h1>Blog</h1>
   @blogPosts.map { case (post, author) =>
     <article>

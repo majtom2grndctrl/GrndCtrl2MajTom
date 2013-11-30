@@ -76,6 +76,7 @@ object Application extends Controller with Secured {
         NotAssigned, //id
         "Hello World", //title
         "published", //status
+        "blogpost",//style
         Id(1), //author
         dateHelper("01/13/2013"), //published
         "hello-world", //slug
@@ -83,8 +84,9 @@ object Application extends Controller with Secured {
 <p>This is just a test entry. Please delete it by logging in to the backend.</p>
         """, //content
         Some("""
-<p>This is just a test entry. Please delete it by logging in to the backend.</p>
-        """)//excerpt
+This is just a test entry. Please delete it by logging in to the backend.
+        """),//excerpt
+        Some("""Keywords""")//keywords
       )
       accountForm.bindFromRequest.fold(
         formWithErrors => BadRequest(html.manage.setup(formWithErrors)),
@@ -100,11 +102,11 @@ object Application extends Controller with Secured {
   }
 
   def dashboard() = AuthenticatedUser { user => implicit request =>
-    val dateHelper =  new java.text.SimpleDateFormat("mm/dd/yyyy")
     Ok(
       html.manage.dashboard(
         user,
-        controllers.BlogPosts.newBlogPostForm(user)
+        controllers.BlogPosts.newBlogPostForm(user),
+        BlogPost.findPageOfPosts(0).items
       )
     )
   }

@@ -1,5 +1,5 @@
 @(pages: Seq[Page])
 
 @pages.map { page =>
-  <button data-content-id="@page.id">@page.title</button>
+  <a href="@routes.Pages.edit(page.id.get)" data-content-id="@page.id">@page.title</a>
 }

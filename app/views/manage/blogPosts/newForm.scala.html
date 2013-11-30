@@ -1,7 +1,0 @@
-@(postForm: Form[BlogPost])
-@import helper._
-@import views.html.blogPosts._
-
-    @helper.form(action = routes.BlogPosts.saveNew(), 'id -> "gcmtMainWorkspace", 'class -> "gcmtMainWorkspace") {
-      @editor(postForm)
-    }
