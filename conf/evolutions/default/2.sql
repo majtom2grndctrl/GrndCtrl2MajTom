@@ -10,9 +10,10 @@ create table portfolio (
   author					bigint not null,
   published					date,
   slug                      text,
-  content                   longtext,
   description               text,
+  roles                     text,
   keywords                  text,
+  url                       text,
   foreign key(author) references user(id) on delete cascade
 );
 

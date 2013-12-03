@@ -2,26 +2,31 @@
 <html>
     <head>
         <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")" />
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")" />
         <script src="@routes.Assets.at("javascripts/jquery-1.10.2.min.js")" type="text/javascript"></script>
         <meta name="description" content="@description.getOrElse(SitePrefs.description)" />
         <meta name="keywords" content="@keywords.getOrElse(SitePrefs.keywords)" />
 
         <meta property="og:title" content="@title" />
-        <meta property="og:type" content="general:website"/>
-        <meta property="og:url" content="http://@url"/>@*
-        <meta property="og:image" content=""/>  *@
-        <meta property="og:site_name" content="@SitePrefs.name"/>
-        <meta property="og:description" content="@description.getOrElse(SitePrefs.description)"/>
+        <meta property="og:type" content="general:website" />
+        <meta property="og:url" content="http://@url" />@*
+        <meta property="og:image" content="" />  *@
+        <meta property="og:site_name" content="@SitePrefs.name" />
+        <meta property="og:description" content="@description.getOrElse(SitePrefs.description)" />
     </head>
     <body>
-        <h1 class="topTitle">@SitePrefs.name</h1>
-        <nav>
-          <a href="@routes.Pages.display("/")">Home</a>
-          <a href="@routes.BlogPosts.index(0)">Blog</a>
-          <a href="@routes.Pages.display("contact")">Contact</a>
-        </nav>
-        @content
+        <header>
+            <h1 class="topTitle">@SitePrefs.name</h1>
+            <nav>
+                <a href="@routes.Pages.display("/")">Home</a>
+                <a href="@routes.BlogPosts.index(0)">Blog</a>
+                <a href="@routes.Pages.display("contact")">Contact</a>
+            </nav>
+        </header>
+@content
+        <footer>
+            Copyright &copy;@(new java.util.Date().format("yyyy")) @SitePrefs.name
+        </footer>
     </body>
 </html>
