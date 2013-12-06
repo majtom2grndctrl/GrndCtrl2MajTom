@@ -4,7 +4,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import java.util.Date
+//import java.util.Date
 
 import anorm._
 
@@ -36,12 +36,14 @@ object Application extends Controller with Secured {
 	)
   )
 
-  def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
 
+  def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
+/*
   //Helpers for getting today's date as a string
-  val dateToday = new Date()
+  val dateToday = new java.util.Date()
   val dateStringHelper = new java.text.SimpleDateFormat("MM/dd/yyyy")
   val todayString: String = dateStringHelper.format(dateToday)
+*/
 
   def login = Action { implicit request =>
     if(User.findAll.length == 0) {

@@ -2,7 +2,7 @@
 
 # --- !Ups
 
-create table portfolio (
+create table project (
   id		  				bigint not null primary key auto_increment,
   title						varchar(255) not null,
   status					varchar(32) default 'public',
@@ -11,12 +11,12 @@ create table portfolio (
   published					date,
   slug                      text,
   description               text,
-  roles                     text,
   keywords                  text,
   url                       text,
+  roles                     text,
   foreign key(author) references user(id) on delete cascade
 );
 
 # --- !Downs
 
-drop table if exists portfolio;
+drop table if exists project;
