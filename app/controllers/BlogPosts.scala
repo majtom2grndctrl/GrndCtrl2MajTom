@@ -55,6 +55,10 @@ object BlogPosts extends Controller with Secured {
     }.getOrElse(NotFound)
   }
 
+  def singleJson(slug: String) = AuthenticatedUser { user => implicit request =>
+    Ok(Json.toJson(Option(BlogPost.findBySlug(slug)).get))
+  }
+
   def list(page: Int) = AuthenticatedUser { user => implicit request =>
     Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
         Ok(

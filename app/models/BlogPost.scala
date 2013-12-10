@@ -77,6 +77,32 @@ object BlogPost {
     }
   }
 
+  implicit val singleWrites = new Writes[Option[(BlogPost, User)]] {
+    def writes(p: Option[(BlogPost, User)]): JsValue = {
+      Json.obj(
+        "blogpost" -> p.map { case (post, user) =>
+          Json.obj(
+            "post" -> Json.obj(
+              "id" -> post.id.get,
+              "title" -> post.title,
+              "status" -> post.status,
+              "style" -> post.style,
+              "published" -> post.published,
+              "slug" -> post.slug,
+              "content" -> post.content,
+              "description" -> post.description,
+              "keywords" -> post.keywords
+            ),
+            "author" -> Json.obj(
+              "first name" -> user.firstName,
+              "last name" -> user.lastName
+            )
+          )
+        }
+      )
+    }
+  }
+
 // Save a new post or edited post
   def create(post: BlogPost) = {
  // Save a new blog post

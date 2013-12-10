@@ -10,8 +10,6 @@ GET     /blog/archive/:page         controllers.BlogPosts.index(page: Int)
 GET     /blog/:slug                 controllers.BlogPosts.single(slug: String)
 
 GET     /manage                     controllers.Application.dashboard
-GET     /manage/blogPosts/list/:page     controllers.BlogPosts.list(page: Int)
-GET     /manage/blogPosts/json/:page     controllers.BlogPosts.listJson(page: Int)
 GET     /manage/login               controllers.Application.login
 POST    /manage/login               controllers.Application.authenticate
 GET     /manage/setup               controllers.Application.setup
@@ -22,6 +20,9 @@ POST    /manage/blogPosts/new       controllers.BlogPosts.saveNew
 GET     /manage/blogPosts/edit/:id  controllers.BlogPosts.edit(id: Long)
 POST    /manage/blogPosts/edit/:id  controllers.BlogPosts.saveUpdate(id: Long)
 GET     /manage/blogPosts/delete/:id      controllers.BlogPosts.delete(id: Long)
+GET     /manage/blogPosts/list/:page     controllers.BlogPosts.list(page: Int)
+GET     /manage/blogPosts/json/:page     controllers.BlogPosts.listJson(page: Int)
+GET     /manage/blogPosts/jsonSingle/:slug  controllers.BlogPosts.singleJson(slug: String)
 
 GET     /manage/pages/new           controllers.Pages.create
 POST    /manage/pages/new           controllers.Pages.saveNew
