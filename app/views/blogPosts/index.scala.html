@@ -7,7 +7,7 @@
         <h2><a href="@routes.BlogPosts.single(post.slug)">@post.title</a></h2>
         <div>by @author.firstName @author.lastName</div>
       </header>
-      @Html(post.content)
+      @Html(post.description.getOrElse(post.content))
     </article>
   }
 }
