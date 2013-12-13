@@ -50,7 +50,7 @@ object BlogPosts extends Controller with Secured {
   }
 
   def single(slug: String) = Action { implicit request =>
-    Option(BlogPost.findBySlug(slug).get).map { case(post, user) =>
+    BlogPost.findBySlug(slug).map { case(post, user) =>
       Ok(html.blogPosts.single(request.domain + request.uri, post, user))
     }.getOrElse(NotFound)
   }
@@ -61,11 +61,11 @@ object BlogPosts extends Controller with Secured {
 
   def list(page: Int) = AuthenticatedUser { user => implicit request =>
     Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
-        Ok(
-          html.manage.blogPosts.list(
-            blogPosts
-          )
+      Ok(
+        html.manage.blogPosts.list(
+          blogPosts
         )
+      )
     }.getOrElse(NotFound)
   }
 
