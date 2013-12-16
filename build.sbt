@@ -14,4 +14,6 @@ libraryDependencies ++= Seq(
   "org.webjars" % "modernizr" % "2.6.2-1"
 )
 
+scalacOptions ++= Seq("-feature")
+
 play.Project.playScalaSettings ++ SassPlugin.sassSettings

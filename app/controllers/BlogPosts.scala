@@ -46,13 +46,17 @@ object BlogPosts extends Controller with Secured {
       Ok(
         html.blogPosts.index(request.domain + request.uri, posts)
       )
-    }.getOrElse(NotFound)
+    }.getOrElse(
+      NotFound(html.NotFound(request.domain + request.uri))
+    )
   }
 
   def single(slug: String) = Action { implicit request =>
     BlogPost.findBySlug(slug).map { case(post, user) =>
       Ok(html.blogPosts.single(request.domain + request.uri, post, user))
-    }.getOrElse(NotFound)
+    }.getOrElse(
+      NotFound(html.NotFound(request.domain + request.uri))
+    )
   }
 
   def singleJson(slug: String) = AuthenticatedUser { user => implicit request =>

@@ -30,7 +30,7 @@ object Pages extends Controller with Secured {
   def display(path: String) = Action { implicit request =>
     Page.findBySlug(path).map { page =>
       Ok(html.page(request.domain + request.uri, page))
-    }.getOrElse(NotFound)
+    }.getOrElse(NotFound("Four-Oh-Four!"))
   }
 
   def list() = AuthenticatedUser { user => implicit request =>
