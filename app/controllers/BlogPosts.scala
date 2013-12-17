@@ -42,7 +42,7 @@ object BlogPosts extends Controller with Secured {
 */
 
   def index(page: Int) = Action { implicit request =>
-    Option(BlogPost.findPageOfPosts(page).items).map { posts =>
+    Some(BlogPost.findPageOfPosts(page).items).map { posts =>
       Ok(
         html.blogPosts.index(request.domain + request.uri, posts)
       )
@@ -64,7 +64,7 @@ object BlogPosts extends Controller with Secured {
   }
 
   def list(page: Int) = AuthenticatedUser { user => implicit request =>
-    Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
+    Some(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
       Ok(
         html.manage.blogPosts.list(
           blogPosts
