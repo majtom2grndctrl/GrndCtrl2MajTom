@@ -1,3 +1,3 @@
 h1. GrndCtrl2MajTom
 
-A blog editor for people who can create graphic design and write code, written in Scala with the Play Framework.
+The codebase for version 7 of "distantlyyours.com":http://www.distantlyyours.com.
