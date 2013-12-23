@@ -1,0 +1,33 @@
+@import 'color';
+html {
+  font-size: 1em;
+}
+body {
+  background: #fff;
+  border-top: 10px solid #1f3746;
+  font-family: Roboto, sans-serif;
+  margin: 0;
+  color: $gray;
+}
+a {
+  color: $electricBlue;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+/*nav*/.dy7-nav1 {
+  background: #2d5269;
+  display: block;
+  height: 50px;
+  vertical-align: middle;
+}
+/*nav*/.dy7-nav1 > a {
+  color: #fff;
+  text-decoration: none;
+  vertical-align: middle;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: Abel;
+  color: $electricBlue;
+}
