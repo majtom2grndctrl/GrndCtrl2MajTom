@@ -1,0 +1,49 @@
+/* Default HTML Elements ------------------ */
+
+body, html {
+  height: 100%;
+}
+/*header*/.dy7-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+/*div*/.dy7-nav1-wrap {
+  width: 550px;
+  margin: 0 auto;
+}
+/*main*/.dy7-main {
+  min-height: 100%;
+  margin: 0 0 -40px 0;
+}
+/*div*/.dy7-main-container {
+  margin: 0 auto;
+  padding: 160px 0 0 0;
+  width: 550px;
+}
+
+/* Blog post --------------------------------- */
+/*div*/.dy7-main-container.dy7-blog {
+  width: auto;
+  margin: inherit 0;
+}
+/*header*/.dy7-blog-header {
+}
+/*h1*/.dy7-blog-title {
+  font-size: 30px;
+}
+
+/*div*/.dy7-main-container.dy7-blog > article > h1,
+/*div*/.dy7-main-container.dy7-blog > article > time,
+/*div*/.dy7-main-container.dy7-blog > article > p {
+  display: block;
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*footer*/.dy7-footer {
+  margin: 0 auto;
+  width: 550px;
+}

@@ -3,7 +3,6 @@ html {
 }
 body {
   background: #fff;
-  border-top: 10px solid #1f3746;
   font-family: Roboto, sans-serif;
   margin: 0;
   color: $gray;
@@ -15,18 +14,50 @@ a {
 a:hover {
   text-decoration: underline;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-family: Abel;
+  color: $electricBlue;
+}
+
+/*header*/.dy7-header {
+  display: block;
+  border-top: 10px solid #1f3746;
+}
+/*div*/.dy7-header-wrap {
+  height: 80px;
+}
+/*a*/.dy7-top-logo {
+  width: 314px;
+  height: 53px;
+  background: url('/assets/images/dy7-logo.png') no-repeat 0 0;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  text-indent: -500px;
+}
+
+
 /*nav*/.dy7-nav1 {
   background: #2d5269;
   display: block;
   height: 50px;
   vertical-align: middle;
 }
-/*nav*/.dy7-nav1 > a {
+/*nav*/.dy7-nav1-wrap > a {
   color: #fff;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 28px;
+  margin: 0 45px 0 0;
+  padding: 11px;
   text-decoration: none;
   vertical-align: middle;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-family: Abel;
-  color: $electricBlue;
+/*nav*/.dy7-nav1-wrap > a:hover {
+  background: #1b7c97;
+}
+/*main*/.dy7-main {
+  display: block;
+}
+/*div*/.dy7-main-container {
 }

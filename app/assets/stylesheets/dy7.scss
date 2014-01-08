@@ -1,4 +1,12 @@
-@import 'dy7/color.scss';
+@import 'dy7/color';
+@import 'dy7/layout';
 
+@import 'dy7/phone';
 
-@import 'dy7/layout.scss';
+@media screen and (max-width: 756px) {
+@import 'dy7/tablet';
+}
+
+@media screen and (min-width: 1000px) {
+@import 'dy7/desktop';
+}

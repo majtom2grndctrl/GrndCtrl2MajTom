@@ -1,0 +1,10 @@
+@(url: String, title: String, description: Option[String], keywords: Option[String])(content: Html)
+@main(url, title, description, keywords){
+  <body>
+@header_standard()
+    <main class="dy7-main">
+@content
+    </main>
+@footer_standard()
+  </body>
+}
