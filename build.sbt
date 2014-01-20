@@ -14,6 +14,9 @@ libraryDependencies ++= Seq(
   "org.webjars" % "modernizr" % "2.6.2-1"
 )
 
+// enable improved (experimental) incremental compilation algorithm called "name hashing"
+//incOptions := incOptions.value.withNameHashing(true)
+
 scalacOptions ++= Seq("-feature")
 
 play.Project.playScalaSettings ++ SassPlugin.sassSettings

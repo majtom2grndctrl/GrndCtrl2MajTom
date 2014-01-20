@@ -216,9 +216,9 @@ object BlogPost {
       BlogPostsPage(blogPosts, page, offset, totalRows)
     }
   }
-  def delete(id: Long) = {
+  def delete(value: Long) = {
     DB.withConnection { implicit connection =>
-      SQL("delete from blogpost where id = {id}").on('id -> id).executeUpdate()
+      SQL("delete from blogpost where id = {value}").on('value -> value).executeUpdate()
     }
   }
 }
