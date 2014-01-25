@@ -1,5 +1,6 @@
 /* Default HTML Elements ------------------ */
 
+html { overflow-x: hidden; }
 body, html {
   height: 100%;
 }
@@ -25,7 +26,7 @@ body, html {
 }
 
 /* Blog body --------------------------------- */
-/*body*/.dy7-blog-body > .dy7-header:before {
+/*body*/.dy7-blog-body:before {
   content: "";
   position: fixed;
   top: 0;
@@ -50,7 +51,7 @@ body, html {
   font-size: 30px;
   margin: 0;
 }
-/*h1*/.dy7-blog-title:before {
+/*h1*/.dy7-blog-header:before {
   background: url('/assets/images/dy7-heading-stripes.png');
   content: "";
   display: block;
@@ -69,7 +70,33 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
-
+/*div*/.dy7-main-container.dy7-blog > article > h2 {
+  position: relative;
+}
+/*div*/.dy7-main-container.dy7-blog > article > h2:before {
+  background-color: rgba(0,186,219,0.5);
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  margin-left: 15px;
+  width: 500%;
+}
+/*div*/.dy7-main-container.dy7-blog > article > h2:after {
+  background-color: rgba(0,186,219,0.5);
+  border-right: 30px solid #c0c0c0;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  right: 100%;
+  margin-right: 15px;
+  width: 500%;
+}
 /*footer*/.dy7-footer {
   margin: 0 auto;
   width: 550px;
