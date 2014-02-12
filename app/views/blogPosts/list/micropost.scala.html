@@ -1,0 +1,6 @@
+@(post: BlogPost, author: User)
+    <article>
+      <blockquote class="dy7-blog-micropost">
+        @Html(post.description.getOrElse(post.content))
+      </blockquote>
+    </article>

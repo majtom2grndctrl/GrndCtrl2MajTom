@@ -1,0 +1,8 @@
+@(post: BlogPost, author: User)
+    <article>
+      <header>
+        <h2><a href="@routes.BlogPosts.single(post.slug)">@post.title</a></h2>
+        <time datetime="@post.published.format("yyyy-MM-dd")">@post.published.format("MM/dd/yyy")</time>
+      </header>
+      @Html(post.description.getOrElse(post.content))
+    </article>

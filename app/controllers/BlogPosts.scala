@@ -22,7 +22,7 @@ object BlogPosts extends Controller with Secured {
       "id" -> ignored(NotAssigned: Pk[Long]),
       "title" -> nonEmptyText,
       "status" -> ignored("public"),
-      "style" -> ignored("blogpost"),
+      "style" -> nonEmptyText,
       "author" -> ignored(user.id),
       "published" -> date("MM/dd/yyyy"),
       "slug" -> nonEmptyText,

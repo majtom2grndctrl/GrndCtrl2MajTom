@@ -51,6 +51,8 @@ object BlogPost {
     case post~user => (post, user)
   }
 
+  val styles = List("blogpost", "micropost", "link")
+
   implicit val blogPostWrites = new Writes[Seq[(BlogPost, User)]] {
     def writes(posts: Seq[(BlogPost, User)]): JsValue = {
       Json.obj(

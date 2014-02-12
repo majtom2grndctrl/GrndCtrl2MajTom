@@ -26,6 +26,10 @@
       '_error -> "We can't publish a post with no content, can we?",
       '_class -> "gcmtIoField gcmtIoTeaser"
     )
+    @select(
+      postForm("style"),
+      options = options(BlogPost.styles)
+    )
     @inputText(
       postForm("published"),
       '_label -> "Date",
