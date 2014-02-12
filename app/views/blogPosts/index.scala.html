@@ -3,11 +3,13 @@
 <div class="dy7-main-container dy7-blog">
   <h1>Blog</h1>
   @blogPosts.map { case (post, author) =>
-  	@if(post.style == "blogpost") {
-      @list.blogpost(post, author)
-    }
-    @if(post.style == "quote") {
-      @list.quote(post, author)
+  	@post.style match {
+      case "blogpost" => {
+        @list.blogpost(post, author)
+      }
+      case "micropost" => {
+        @list.micropost(post, author)
+      }
     }
   }
 </div>
