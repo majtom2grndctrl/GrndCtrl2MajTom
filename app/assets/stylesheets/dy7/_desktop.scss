@@ -61,16 +61,17 @@ body, html {
   bottom: 0;
   width: 30px;
 }
-/*div*/.dy7-main-container.dy7-blog > article > header,
-/*div*/.dy7-main-container.dy7-blog > article > h2,
-/*div*/.dy7-main-container.dy7-blog > article > time,
-/*div*/.dy7-main-container.dy7-blog > article > p {
+.dy7-blog-class {
   display: block;
   width: 550px;
   margin-left: auto;
   margin-right: auto;
 }
+/*div*/.dy7-main-container.dy7-blog > article > header {
+  @extend .dy7-blog-class;
+}
 /*div*/.dy7-main-container.dy7-blog > article > h2 {
+  @extend .dy7-blog-class;
   position: relative;
 }
 /*div*/.dy7-main-container.dy7-blog > article > h2:before {
@@ -96,6 +97,12 @@ body, html {
   right: 100%;
   margin-right: 15px;
   width: 500%;
+}
+/*div*/.dy7-main-container.dy7-blog > article > time {
+  @extend .dy7-blog-class;
+}
+/*div*/.dy7-main-container.dy7-blog > article > p {
+  @extend .dy7-blog-class;
 }
 /*footer*/.dy7-footer {
   margin: 0 auto;

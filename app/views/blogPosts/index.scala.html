@@ -10,6 +10,9 @@
       case "micropost" => {
         @list.micropost(post, author)
       }
+      case _ => {
+        @list.blogpost(post, author)
+      }
     }
   }
 </div>
