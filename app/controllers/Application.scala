@@ -1,15 +1,13 @@
 package controllers
 
-import play.api._
+//import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-//import java.util.Date
 
 import anorm._
 
 import models._
-import views._
 
 object Application extends Controller with Secured {
 
@@ -38,19 +36,13 @@ object Application extends Controller with Secured {
 
 
   def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
-/*
-  //Helpers for getting today's date as a string
-  val dateToday = new java.util.Date()
-  val dateStringHelper = new java.text.SimpleDateFormat("MM/dd/yyyy")
-  val todayString: String = dateStringHelper.format(dateToday)
-*/
 
   def login = Action { implicit request =>
     if(User.findAll.length == 0) {
       Results.Redirect(routes.Application.setup())
     } else {
       Ok(
-        html.manage.login(
+        views.html.manage.login(
           loginForm,
           User.findAll.length
         )
@@ -61,14 +53,14 @@ object Application extends Controller with Secured {
   def authenticate = Action { implicit request =>
     val users = User.findAll.length
     loginForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.manage.login(formWithErrors, users)),
+      formWithErrors => BadRequest(views.html.manage.login(formWithErrors, users)),
       user => Redirect(routes.Application.dashboard).withSession("email" -> user._1)
     )
   }
 
   def setup = Action { implicit request =>
     Ok(
-      html.manage.setup(accountForm)
+      views.html.manage.setup(accountForm)
     )
   }
 
@@ -91,7 +83,7 @@ This is just a test entry. Please delete it by logging in to the backend.
         Some("""Keywords""")//keywords
       )
       accountForm.bindFromRequest.fold(
-        formWithErrors => BadRequest(html.manage.setup(formWithErrors)),
+        formWithErrors => BadRequest(views.html.manage.setup(formWithErrors)),
         {case(newEmail, newFirstName, newLastName, (password1, password2)) =>
           User.create(User(NotAssigned, newEmail, newFirstName, newLastName, password1))
           BlogPost.create(post)
@@ -105,7 +97,7 @@ This is just a test entry. Please delete it by logging in to the backend.
 
   def dashboard() = AuthenticatedUser { user => implicit request =>
     Ok(
-      html.manage.dashboard(
+      views.html.manage.dashboard(
         user,
         controllers.BlogPosts.newBlogPostForm(user),
         BlogPost.findPageOfPosts(0).items
@@ -124,8 +116,8 @@ trait Secured {
     Action(request => f(userEmail)(request))
   }
 
-  def AuthenticatedUser(f: User => Request[AnyContent] => Result) = IsAuthenticated { username => implicit request =>
-    User.findByEmail(username).map { user =>
+  def AuthenticatedUser(f: User => Request[AnyContent] => Result) = IsAuthenticated { userEmail => implicit request =>
+    User.findByEmail(userEmail).map { user =>
       f(user)(request)
     }.getOrElse(onUnauthorized(request))
   }

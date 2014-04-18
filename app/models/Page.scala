@@ -1,144 +1,53 @@
 package models
 
-import java.util.{Date}
-
-import play.api.db._
-import play.api.Play.current
-import play.api.libs.json._
-
-import anorm._
-import anorm.SqlParser._
-
-import scala.language.postfixOps
-
+import play.api.db.slick.Config.driver.simple._
 
 case class Page (
-  id: Pk[Long],
+  id: Option[Long],
   title: String,
   status: String,
   slug: String,
   content: String,
-  description: Option[String],
-  keywords: Option[String]
+  description: Option[String] = None,
+  keywords: Option[String] = None
 )
 
-object Page {
-  val simple = {
-    get[Pk[Long]]("page.id") ~
-    get[String]("page.title") ~
-    get[String]("page.status") ~
-    get[String]("page.slug") ~
-    get[String]("page.content") ~
-    get[Option[String]]("page.description") ~
-    get[Option[String]]("page.keywords") map {
-      case id~title~status~slug~content~description~keywords => Page(
-        id, title, status, slug, content, description, keywords
-      )
-    }
+class PagesTable(tag: Tag) extends Table[Page](tag, "page") {
+  def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+  def title = column[String]("title", O.NotNull)
+  def status = column[String]("status", O.NotNull)
+  def slug = column[String]("slug", O.NotNull)
+  def content = column[String]("content", O.NotNull)
+  def description = column[String]("description", O.Nullable)
+  def keywords = column[String]("keywords", O.Nullable)
+
+  def * = (id.?, title, status, slug, content, description.?, keywords.?) <>(Page.tupled, Page.unapply _)
+}
+
+object PagesTable {
+
+  val page = TableQuery[PagesTable]
+
+  def findBySlug(slug: String)(implicit s: Session): Option[Page] = {
+    page.where(_.slug === slug).firstOption
   }
 
-  implicit val pagesWrites = new Writes[Seq[Page]] {
-    def writes(pages: Seq[Page]) = {
-      Json.obj(
-        "pages" -> pages.map { page =>
-          Json.obj(
-            "id" -> page.id.get,
-            "title" -> page.title,
-            "status" -> page.status,
-            "slug" -> page.slug,
-            "content" -> page.content,
-            "description" -> page.description,
-            "keywords" -> page.keywords
-          )
-        }
-      )
-    }
+  def findById(id: Long)(implicit s: Session): Option[Page] = {
+    page.where(_.id === id).firstOption
   }
 
-  //List pages
-  def list(): Seq[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from page").as(Page.simple *)
-    }
+  def list()(implicit s: Session): Seq[Page] = page.list;
+
+  def saveNew(newPage: Page)(implicit s: Session) = {
+    page.insert(newPage)
   }
 
-// Save a new page or edited page
-  def create(page: Page) = {
- // Save a new page
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          insert into page values(
-            null, {title}, {status}, {slug}, {content}, {description}, {keywords}
-          )
-        """
-      ).on(
-        'title -> page.title,
-        'status -> page.status,
-        'slug -> page.slug,
-        'content -> page.content,
-        'description -> page.description,
-        'keywords -> page.keywords
-      ).executeUpdate()
-    }
- }
-
-  def update(page: Page, id: Long) = {
-//Update an existing page
-    
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          update page
-          set title = {title}, status = {status}, slug = {slug}, content = {content}, description = {description}, keywords = {keywords}
-          where page.id = {id}
-        """
-      ).on(
-        'id -> id,
-        'title -> page.title,
-        'status -> page.status,
-        'slug -> page.slug,
-        'content -> page.content,
-        'description -> page.description,
-        'keywords -> page.keywords
-      ).executeUpdate()
-    }
-  }
-  
-// Retrieve a single page by its slug
-  def findBySlug(slug: String): Option[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from page where page.slug = {slug}").on(
-        'slug -> slug
-      ).as(Page.simple.singleOpt)
-    }
+  def saveEdits(editedPage: Page, id: Long)(implicit s: Session) = {
+    page.where(_.id === id).update(editedPage)
   }
 
-// Retrieve a single page by its DB ID
-  def findById(id: Long): Option[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from page where page.id = {id}").on(
-        'id -> id
-      ).as(Page.simple.singleOpt)
-    }
+  def delete(id: Long)(implicit s: Session) = {
+    page.where(_.id === id).delete
   }
 
-  def findNewestSaved(slug: String): Option[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          select * from page
-          where page.slug = {slug}
-          limit 1
-        """
-      ).on(
-        'slug -> slug
-      ).as(Page.simple.singleOpt)
-    }
-  }
-  def delete(id: Long) = {
-    DB.withConnection { implicit connection =>
-      SQL("delete from page where id = {id}").on('id -> id).executeUpdate()
-    }
-  }
 }

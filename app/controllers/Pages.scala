@@ -1,23 +1,27 @@
 package controllers
 
+import play.api.Play.current
 import play.api._
 import play.api.mvc._
+import play.api.db.slick._
+//import play.api.db.slick.DB
+import play.api.db.slick.Config.driver.simple._
 import play.api.data._
 import play.api.data.Forms._
-import play.api.data.validation.Constraints._
-import play.api.libs.functional.syntax._
-import play.api.libs.json._
+import play.api.mvc._
+//import play.api.mvc.BodyParsers._
+import play.api.libs.json.Json
+//import play.api.libs.json.Json._
 
-import anorm._
-
-import views._
 import models._
 
 object Pages extends Controller with Secured {
 
+  val pages = TableQuery[PagesTable]
+
   def newPageForm() = Form(
     mapping(
-      "id" -> ignored(NotAssigned: Pk[Long]),
+      "id" -> optional(longNumber),
       "title" -> nonEmptyText,
       "status" -> ignored("published"),
       "slug" -> nonEmptyText,
@@ -27,83 +31,96 @@ object Pages extends Controller with Secured {
     )(Page.apply)(Page.unapply)
   )
 
-  def display(path: String) = Action { implicit request =>
-    Page.findBySlug(path).map { page =>
-      Ok(html.pages.single(request.domain + request.uri, page))
+  implicit val pageFormat = Json.format[Page]
+
+  def display(path: String) = DBAction { implicit request =>
+    PagesTable.findBySlug(path).map { page =>
+      Ok(views.html.pages.single(request.domain + request.uri, page))
     }.getOrElse(NotFound("Four-Oh-Four!"))
   }
 
-  def list() = AuthenticatedUser { user => implicit request =>
-    Ok(html.manage.pages.list(Page.list()))
+  def list() = AuthenticatedUser { user => implicit request => 
+    DB.withSession { implicit session =>
+      Ok(views.html.manage.pages.list(PagesTable.list()))
+    }
   }
 
   def listJson() = AuthenticatedUser { user => implicit request =>
-    Ok(Json.toJson(Page.list()))
+    DB.withSession { implicit session => 
+      Ok(Json.toJson(PagesTable.list()))
+    }
   }
-/*
-  def singleJson(id: Long) = AuthenticatedUser { User => implicit request =>
-    Ok(Json.toJson(Seq(Page.findById(id))))
-  }
-*/
+
   def create = AuthenticatedUser { user => implicit request =>
-    Ok(
-      html.manage.pages.newPage(
-        user,
-        newPageForm(),
-        Page.list()
+    DB.withSession { implicit session =>
+      Ok(
+        views.html.manage.pages.newPage(
+          User.findById(1).get,
+          newPageForm(),
+          PagesTable.list()
+        )
       )
-    )
+    }
   }
 
   def edit(id: Long) = AuthenticatedUser { user => implicit request =>
-    Page.findById(id).map { page =>
-      Ok(
-        html.manage.pages.editPage(
-          user,
-          newPageForm().fill(page),
-          Page.list(),
-          page
+    DB.withSession { implicit session =>
+      PagesTable.findById(id).map { page =>
+        Ok(
+          views.html.manage.pages.editPage(
+            User.findById(1).get,
+            newPageForm().fill(page),
+            PagesTable.list(),
+            page
+          )
         )
-      )
-    }.getOrElse(NotFound)
+      }.getOrElse(NotFound("Four-Oh-Four!"))
+    }
   }
 
   def saveNew = AuthenticatedUser { user => implicit request =>
-    newPageForm().bindFromRequest.fold(
-      formWithErrors => BadRequest,
-      page => {
-        Page.create(page)
-        val savedPage = Page.findNewestSaved(page.slug).get
-        Ok(
-          html.manage.pages.newPage(
-            user,
-            newPageForm().fill(savedPage),
-            Page.list()
+    DB.withSession { implicit session =>
+      newPageForm().bindFromRequest.fold(
+        formWithErrors => BadRequest,
+        page => {
+          PagesTable.saveNew(page)
+          val savedPage = PagesTable.findBySlug(page.slug).get
+          Ok(
+            views.html.manage.pages.newPage(
+              User.findById(1).get,
+              newPageForm().fill(savedPage),
+              PagesTable.list()
+            )
           )
-        )
-      }
-    )
+        }
+      )
+    }
   }
 
   def saveUpdate(id: Long) = AuthenticatedUser { user => implicit request =>
-    newPageForm().bindFromRequest.fold(
-      errors => BadRequest,
-      page => {
-        Page.update(page, id)
-        Ok(
-          html.manage.pages.editPage(
-            user,
-            newPageForm().fill(page),
-            Page.list(),
-            Page.findById(id).get
+    DB.withSession { implicit session =>
+      newPageForm().bindFromRequest.fold(
+        errors => BadRequest,
+        page => {
+          PagesTable.saveEdits(page, id)
+          Ok(
+            views.html.manage.pages.editPage(
+              User.findById(1).get,
+              newPageForm().fill(page),
+              PagesTable.list(),
+              PagesTable.findById(id).get
+            )
           )
-        )
-      }
-    )
+        }
+      )
+    }
   }
 
   def delete(id: Long) = AuthenticatedUser { user => implicit request =>
-    Page.delete(id)
-    Redirect(routes.Pages.create())
+    DB.withSession { implicit session =>
+      PagesTable.delete(id)
+      Redirect(routes.Pages.create())
+    }
   }
+
 }
