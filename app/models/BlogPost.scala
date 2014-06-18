@@ -12,11 +12,11 @@ import anorm.SqlParser._
 import scala.language.postfixOps
 
 case class BlogPost (
-  id: Pk[Long],
+  id: Option[Long] = None,
   title: String,
   status: String,
   style: String,
-  author: Pk[Long],
+  author: Option[Long],
   published: Date,
   slug: String,
   content: String,
@@ -31,11 +31,11 @@ case class BlogPostsPage[A](items: Seq[A], BlogPostsPage: Int, offset: Long, tot
 
 object BlogPost {
   val simple = {
-    get[Pk[Long]]("blogPost.id") ~
+    get[Option[Long]]("blogPost.id") ~
     get[String]("blogPost.title") ~
     get[String]("blogPost.status") ~
     get[String]("blogPost.style") ~
-    get[Pk[Long]]("blogPost.author") ~
+    get[Option[Long]]("blogPost.author") ~
     get[Date]("blogPost.published") ~
     get[String]("blogPost.slug") ~
     get[String]("blogPost.content") ~
@@ -179,7 +179,7 @@ object BlogPost {
   }
 
 // Retrieve a new post immediately after a user has saved it
-  def findNewestSaved(authorId: Pk[Long], slug: String): Option[BlogPost] = {
+  def findNewestSaved(authorId: Option[Long], slug: String): Option[BlogPost] = {
     DB.withConnection { implicit connection =>
       SQL(
         """

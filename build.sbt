@@ -1,23 +1,25 @@
-import net.litola.SassPlugin
+name := """GrndCtrl2MajTom"""
 
-name := "GrndCtrl2MajTom"
+version := "1.0-SNAPSHOT"
 
-version := "0.1-SNAPSHOT"
+lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb)
+
+scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   jdbc,
   anorm,
   cache,
   "mysql" % "mysql-connector-java" % "5.1.27",
-  "org.webjars" %% "webjars-play" % "2.2.2", 
-  "org.webjars" % "jquery" % "1.11.0",
-  "org.webjars" % "modernizr" % "2.6.2-1",
-  "com.typesafe.play" %% "play-slick" % "0.6.0.1"
+  "org.webjars" %% "webjars-play" % "2.3.0", 
+  "org.webjars" % "jquery" % "2.1.1",
+  "org.webjars" % "modernizr" % "2.6.2-1"
 )
 
-// enable improved (experimental) incremental compilation algorithm called "name hashing"
-//incOptions := incOptions.value.withNameHashing(true)
+seq(sassSettings : _*)
 
-scalacOptions ++= Seq("-feature")
+includeFilter in (Assets, LessKeys.less) := "*.less"
 
-play.Project.playScalaSettings ++ SassPlugin.sassSettings
+excludeFilter in (Assets, LessKeys.less) := "_*.less"
+
+LessKeys.compress in Assets := true

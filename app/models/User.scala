@@ -8,11 +8,11 @@ import anorm.SqlParser._
 
 import scala.language.postfixOps
 
-case class User(id: Pk[Long] = NotAssigned, email: String, firstName: String, lastName: String, password: String )
+case class User(id: Option[Long] = None, email: String, firstName: String, lastName: String, password: String )
 
 object User {
   val simple = {
-    get[Pk[Long]]("user.id") ~
+    get[Option[Long]]("user.id") ~
     get[String]("user.email") ~
     get[String]("user.firstName") ~
     get[String]("user.lastName") ~
@@ -74,7 +74,7 @@ object User {
     }
   }
 
-  def update(user: User) = {
+  def update(id: Long, user: User) = {
     DB.withConnection { implicit connection =>
       SQL(
         """
@@ -82,7 +82,7 @@ object User {
           where id = {id}
         """
       ).on(
-        'id -> user.id,
+        'id -> id,
         'email -> user.email,
         'firstName -> user.firstName,
         'lastName -> user.lastName,

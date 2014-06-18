@@ -19,11 +19,11 @@ object BlogPosts extends Controller with Secured {
 
   def newBlogPostForm(user: User) = Form(
     mapping(
-      "id" -> ignored(NotAssigned: Pk[Long]),
+      "id" -> optional(longNumber),
       "title" -> nonEmptyText,
       "status" -> ignored("public"),
       "style" -> nonEmptyText,
-      "author" -> ignored(user.id),
+      "author" -> optional(longNumber),
       "published" -> date("MM/dd/yyyy"),
       "slug" -> nonEmptyText,
       "content" -> nonEmptyText,

@@ -14,7 +14,7 @@
         contentType: false,
         beforeSend: gcmt.preSubmitPost()
       }).done(function(html) {
-        gcmt.postSuccess(0, html)
+        gcmt.postSuccess(0, html);
       }).fail(function( jqXHR, textStatus, error ) {
         alert( "Request failed: " + textStatus + ": " + error );
       });
@@ -37,11 +37,11 @@
 // Submit the blog post
   gcmt.preSubmitPost = function(){
     $("#gcmtMainWorkspace, #gcmtMainSidebarNav").queue(function() {
-      $(this).addClass("gcmtMainWorkspaceWait")
+      $(this).addClass("gcmtMainWorkspaceWait");
       $(this).delay(250);
       $(this).dequeue();
     });
-  }
+  };
 
   gcmt.postSuccess = function(navPage, html) {
 //    console.log(html);
@@ -51,8 +51,9 @@
       $(this).empty();
       $(this).append(html);
       $(".gcmtMainWorkspace").addClass("gcmtUiInit");
-      $(this).dequeue
-      var enableNewEditor = new gcmt.enableBlogpostSubmit;
+      $(this).dequeue();
+
+      var enableNewEditor = new gcmt.enableBlogpostSubmit();
       enableNewEditor(postId);
     });
 
@@ -61,14 +62,14 @@
       gcmt.loadNavBar(navPage);
       $(this).dequeue();
     });
-  }
+  };
 
 // Load Nav Bar
   gcmt.loadNavBar = function(page) {
     $("#gcmtMainSidebarNav").load("/manage/blogPosts/list/" + page, function(response, status, xhr) {
       if (status == "error") {
         var msg = "Oops, there was an error: ";
-        alert(msg + xhr.status + " " + xhr.statusText)
+        alert(msg + xhr.status + " " + xhr.statusText);
       } else {
         gcmt.enableLeftNav("blogPosts");
       }
@@ -90,7 +91,7 @@
             editor = $.parseHTML(response);
             console.log(editor);
             gcmt.enableBlogpostSubmit(contentId, editor);
-          };
+          }
         });
         $(this).dequeue();
       });
@@ -105,7 +106,7 @@
     $("#gcmtMainSidebarNav").load("/manage/pages/list", function(response, status, xhr) {
       if (status == "error") {
         var msg = "Oops, there was an error: ";
-        alert(msg + xhr.status + " " + xhr.statusText)
+        alert(msg + xhr.status + " " + xhr.statusText);
       } else {
         gcmt.enableLeftNav("pages");
       }
@@ -131,11 +132,11 @@
         beforeSend: gcmt.preSubmitPost()
       })
       .done(function(html) {
-        gcmt.postSuccess(0, html)
+        gcmt.postSuccess(0, html);
       })
       .fail(function( jqXHR, textStatus, error ) {
         alert( "Request failed: " + textStatus + ": " + error );
-      })
+      });
     });
 
   };

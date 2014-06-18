@@ -12,11 +12,11 @@ import anorm.SqlParser._
 import scala.language.postfixOps
 
 case class project (
-  id: Pk[Long],
+  id: Option[Long],
   title: String,
   status: String,
   style: String,
-  author: Pk[Long],
+  author: Option[Long],
   published: Date,
   slug: String,
   content: String,
