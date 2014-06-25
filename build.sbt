@@ -16,8 +16,6 @@ libraryDependencies ++= Seq(
   "org.webjars" % "modernizr" % "2.6.2-1"
 )
 
-seq(sassSettings : _*)
-
 includeFilter in (Assets, LessKeys.less) := "*.less"
 
 excludeFilter in (Assets, LessKeys.less) := "_*.less"

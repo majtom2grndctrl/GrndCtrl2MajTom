@@ -16,6 +16,7 @@ a:hover {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: Abel;
+  font-weight: normal;
   color: @electricBlue;
 }
 
@@ -60,4 +61,20 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 /*div*/.dy7-main-container {
+}
+/*div*/.dy7-main-container.dy7-blog {
+  > .dy7-ext-micropost {
+    margin: 1.3em 0;
+    > blockquote {
+      font-size: 1.3em;
+      margin: 0;
+    }
+  }
+  > .dy7-ext-quotation {
+    margin: 1.3em 0;
+    > blockquote {
+      font-size: 1.3em;
+      margin: 0;
+    }
+  }
 }

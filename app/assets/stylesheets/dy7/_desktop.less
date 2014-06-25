@@ -67,42 +67,58 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
-/*div*/.dy7-main-container.dy7-blog > article > header {
-  &:extend(.dy7-blog-class);
-}
-/*div*/.dy7-main-container.dy7-blog > article > h2 {
-  &:extend(.dy7-blog-class);
-  position: relative;
-}
-/*div*/.dy7-main-container.dy7-blog > article > h2:before {
-  background-color: rgba(0,186,219,0.5);
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 100%;
-  margin-left: 15px;
-  width: 500%;
-}
-/*div*/.dy7-main-container.dy7-blog > article > h2:after {
-  background-color: rgba(0,186,219,0.5);
-  border-right: 30px solid #c0c0c0;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 30px;
-  right: 100%;
-  margin-right: 15px;
-  width: 500%;
-}
-/*div*/.dy7-main-container.dy7-blog > article > time {
-  &:extend(.dy7-blog-class);
-}
-/*div*/.dy7-main-container.dy7-blog > article > p {
-  &:extend(.dy7-blog-class);
+/*div*/.dy7-main-container.dy7-blog {
+  > h1 {
+    &:extend(.dy7-blog-class);
+  }
+  > article {
+
+    > header {
+      &:extend(.dy7-blog-class);
+    }
+    > h2 {
+      &:extend(.dy7-blog-class);
+      position: relative;
+    }
+    h2:before {
+      background-color: rgba(0,186,219,0.5);
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      margin-left: 15px;
+      width: 500%;
+    }
+    > h2:after {
+      background-color: rgba(0,186,219,0.5);
+      border-right: 30px solid #c0c0c0;
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 100%;
+      margin-right: 15px;
+      width: 500%;
+    }
+    > time {
+      &:extend(.dy7-blog-class);
+    }
+    > p {
+      &:extend(.dy7-blog-class);
+    }
+    > .dy7-blog-excerpt {
+      &:extend(.dy7-blog-class);
+    }
+  }
+  > .dy7-ext-micropost {
+    &:extend(.dy7-blog-class);
+  }
+  > .dy7-ext-quotation {
+    &:extend(.dy7-blog-class);
+  }
 }
 /*footer*/.dy7-footer {
   margin: 0 auto;

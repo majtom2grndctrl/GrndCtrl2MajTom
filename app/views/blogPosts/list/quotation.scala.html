@@ -1,5 +1,5 @@
 @(post: BlogPost, author: User)
-    <article class="dy7-ext-quotation">
+    <article class="dy7-ext-micropost">
       <time datetime="@post.published.format("yyyy-MM-dd")">@post.published.format("MM/dd/yyy")</time>    
       <blockquote>
         @Html(post.description.getOrElse(post.content))
