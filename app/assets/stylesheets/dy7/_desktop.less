@@ -1,3 +1,4 @@
+@import '_vars-mixins.less';
 /* Default HTML Elements ------------------ */
 
 html { overflow-x: hidden; }
@@ -17,11 +18,24 @@ body, html {
 }
 /*main*/.dy7-main {
   min-height: 100%;
-  margin: 0 0 -40px 0;
+  height: auto !important;
+  height: 100%;
+  margin: 0 0 -@footer-height 0;
+  padding: 160px 0 @footer-height 0
 }
 /*div*/.dy7-main-container {
   margin: 0 auto;
-  padding: 160px 0 0 0;
+  width: 550px;
+}
+/*footer*/.dy7-footer {
+  background: #333339;
+  border-top: 10px solid #1f3746;
+  color: #fff;
+  height: @footer-height;
+  margin: 0 auto;
+}
+.dy7-footer-content {
+  margin: 0 auto;
   width: 550px;
 }
 
@@ -118,9 +132,6 @@ body, html {
   }
   > .dy7-ext-quotation {
     &:extend(.dy7-blog-class);
+    width: 600px;
   }
-}
-/*footer*/.dy7-footer {
-  margin: 0 auto;
-  width: 550px;
 }

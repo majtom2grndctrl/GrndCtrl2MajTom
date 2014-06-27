@@ -34,13 +34,6 @@ object BlogPosts extends Controller with Secured {
 
   val dateHelper =  new java.text.SimpleDateFormat("mm/dd/yyyy")
 
-/*
-  //Helpers for getting today's date as a string
-  val dateToday = new Date()
-  val dateStringHelper = new java.text.SimpleDateFormat("MM/dd/yyyy")
-  val todayString: String = dateStringHelper.format(dateToday)
-*/
-
   def index(page: Int) = Action { implicit request =>
     Some(BlogPost.findPageOfPosts(page).items).map { posts =>
       Ok(
