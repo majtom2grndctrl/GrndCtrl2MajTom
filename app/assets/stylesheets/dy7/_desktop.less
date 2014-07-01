@@ -12,6 +12,9 @@ body, html {
   top: 0;
   z-index: 0;
 }
+/*div*/.dy7-header-wrap {
+  padding-right: 30px
+}
 /*div*/.dy7-nav1-wrap {
   width: 550px;
   margin: 0 auto;
@@ -24,15 +27,17 @@ body, html {
   padding: 160px 0 @footer-height 0
 }
 /*div*/.dy7-main-container {
-  margin: 0 auto;
+  margin: 0 auto 30px;
   width: 550px;
 }
 /*footer*/.dy7-footer {
-  background: #333339;
-  border-top: 10px solid #1f3746;
-  color: #fff;
   height: @footer-height;
-  margin: 0 auto;
+  > .dy7-footer-content {
+    height: (@footer-height)-35px;
+  }
+  > .dy7-footer-bottom {
+      height: 35px;
+  }
 }
 .dy7-footer-content {
   margin: 0 auto;
@@ -61,11 +66,7 @@ body, html {
 /*header*/.dy7-blog-header {
   position: relative;
 }
-/*h1*/.dy7-blog-title {
-  font-size: 30px;
-  margin: 0;
-}
-/*h1*/.dy7-blog-header:before {
+/*header*/.dy7-blog-header:before {
   background: url('/assets/images/dy7-heading-stripes.png');
   content: "";
   display: block;
@@ -74,6 +75,10 @@ body, html {
   top: 0;
   bottom: 0;
   width: 30px;
+}
+/*h1*/.dy7-blog-title {
+  font-size: 30px;
+  margin: 0;
 }
 .dy7-blog-class {
   display: block;
@@ -90,11 +95,13 @@ body, html {
     > header {
       &:extend(.dy7-blog-class);
     }
-    > h2 {
+    > h2,
+    > header > h2 {
       &:extend(.dy7-blog-class);
       position: relative;
     }
-    h2:before {
+    h2:before,
+    > header > h2:before {
       background-color: rgba(0,186,219,0.5);
       content: "";
       display: block;
@@ -105,7 +112,8 @@ body, html {
       margin-left: 15px;
       width: 500%;
     }
-    > h2:after {
+    > h2:after,
+    > header > h2:after {
       background-color: rgba(0,186,219,0.5);
       border-right: 30px solid #c0c0c0;
       content: "";
@@ -132,6 +140,7 @@ body, html {
   }
   > .dy7-ext-quotation {
     &:extend(.dy7-blog-class);
+    margin: 3em auto;
     width: 600px;
   }
 }

@@ -1,3 +1,4 @@
+@import '_vars-mixins.less';
 * {
     box-sizing: border-box;
 }
@@ -28,14 +29,15 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 10px solid #1f3746;
 }
 /*div*/.dy7-header-wrap {
-  height: 80px;
+  height: 90px;
+  overflow: hidden;
 }
 /*a*/.dy7-top-logo {
   width: 314px;
   height: 53px;
   background: url('/assets/images/dy7-logo.png') no-repeat 0 0;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto 0;
   overflow: hidden;
   text-indent: -500px;
 }
@@ -47,15 +49,23 @@ h1, h2, h3, h4, h5, h6 {
   height: 50px;
   vertical-align: middle;
 }
-/*nav*/.dy7-nav1-wrap > a {
-  color: #fff;
-  display: inline-block;
-  font-size: 20px;
-  line-height: 28px;
-  margin: 0 45px 0 0;
-  padding: 11px;
-  text-decoration: none;
-  vertical-align: middle;
+/*div*/.dy7-nav1-wrap {
+  text-align: center;
+
+  > a {
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 28px;
+    margin: 0 45px 0 0;
+    padding: 11px;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+  
+  > a:last-child {
+    margin-right: 0;
+  }
 }
 /*nav*/.dy7-nav1-wrap > a:hover {
   background: #1b7c97;
@@ -67,17 +77,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 /*div*/.dy7-main-container.dy7-blog {
   > .dy7-ext-micropost {
-    margin: 1.3em 0;
+    margin: 2em 0;
     > blockquote {
       font-size: 1.3em;
       margin: 0;
     }
   }
   > .dy7-ext-quotation {
-    margin: 1.3em 0;
+    margin: 2em 0;
     > blockquote {
       font-size: 1.3em;
       margin: 0;
     }
+  }
+}
+
+/*footer*/.dy7-footer {
+  background: @footer-gray;
+  border-top: 10px solid #1f3746;
+  color: #2d5269;
+  margin: 0 auto;
+
+  > .dy7-footer-content {
+  }
+  > .dy7-footer-bottom {
+    background: #1f3746;
+    color: #b2d0e2;
   }
 }
