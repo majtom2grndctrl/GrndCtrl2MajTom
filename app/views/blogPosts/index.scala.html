@@ -1,6 +1,6 @@
 @(url: String, blogPosts: Seq[(BlogPost, User)])
 @body(url, "Blog - " + SitePrefs.name, SitePrefs.description, SitePrefs.keywords) {
-<div class="dy7-main-container dy7-blog">
+<div class="dy7-main-container dy7-blog dy7-index">
   <h1>Blog</h1>
   @blogPosts.map { case (post, author) =>
   	@post.style match {

@@ -76,8 +76,17 @@ h1, h2, h3, h4, h5, h6 {
 /*div*/.dy7-main-container {
 }
 /*div*/.dy7-main-container.dy7-blog {
+  > article {
+    > h2,
+    > header > h2 {
+      font-size: 1.4rem;
+      margin-top: 1.5em;
+      margin-bottom: 1em;
+    }
+  }
   > .dy7-ext-micropost {
     margin: 2em 0;
+
     > blockquote {
       font-size: 1.3em;
       margin: 0;
@@ -85,9 +94,24 @@ h1, h2, h3, h4, h5, h6 {
   }
   > .dy7-ext-quotation {
     margin: 2em 0;
+
     > blockquote {
       font-size: 1.3em;
       margin: 0;
+    }
+  }
+  &.dy7-index {
+    > h1 { /* margin-left and margin-right declared as part of a base class that also selects this element */
+        margin-top: .66em;
+        margin-bottom: .25em;
+    }
+    article:nth-child(2) {
+      > header {
+        h2 {
+          margin-top: 0;
+                  
+        }
+      }
     }
   }
 }
