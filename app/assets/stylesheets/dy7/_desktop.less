@@ -1,9 +1,18 @@
 @import '_vars-mixins.less';
+@import '../_elements.less';
 /* Default HTML Elements ------------------ */
 
 html { overflow-x: hidden; }
 body, html {
   height: 100%;
+}
+.dy7-1col {
+    float: left;
+    margin: 0 20px 0 0;
+    width: 200px;
+}
+.dy7-1col:last-child {
+    margin: 0;
 }
 /*header*/.dy7-header {
   position: absolute;
@@ -37,7 +46,9 @@ body, html {
     margin-bottom: 0;
   }
   > .dy7-footer-bottom {
+      font-size: (14/16rem);
       height: 35px;
+      padding: .6em 0 0 0;
   }
 }
 .dy7-footer-content {
@@ -60,7 +71,7 @@ body, html {
 }
 
 /* Blog post --------------------------------- */
-/*div*/.dy7-main-container.dy7-blog {
+/*div*/.dy7-main-container.dy7-ext-blog {
   width: auto;
   margin: inherit 0;
 }
@@ -88,7 +99,7 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
-/*div*/.dy7-main-container.dy7-blog {
+/*div*/.dy7-main-container.dy7-ext-blog {
   > h1 {
     &:extend(.dy7-blog-class);
   }

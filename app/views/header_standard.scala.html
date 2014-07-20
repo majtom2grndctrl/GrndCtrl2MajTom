@@ -1,13 +1,17 @@
 @()
+    <nav class="dy7-accessible-hide">
+        <a href="#content">Skip to content</a>
+    </nav>
     <header class="dy7-header">
       <div class="dy7-header-wrap">
         <a href="@routes.Pages.display("/")" class="dy7-top-logo">@SitePrefs.name &mdash; @SitePrefs.tagline</a>
       </div>
       <nav class="dy7-nav1">
-        <div class="dy7-nav1-wrap">
-          <a href="@routes.Pages.display("/")">About</a>
-          <a href="@routes.BlogPosts.index(0)">Blog</a>
-          <a href="@routes.Pages.display("contact")">Contact</a>
-        </div>
+        <dl class="dy7-header-nav">
+          <dt>Navigation</dt>
+          <dd class="dy7-ext-about"><a href="@routes.Pages.display("/")">About</a></dd>
+          <dd class="dy7-ext-blog"><a href="@routes.BlogPosts.index(0)">Blog</a></dd>
+          <dd class="dy7-ext-contact"><a href="@routes.Pages.display("contact")">Contact</a></dd>          
+        </dl>
       </nav>
     </header>
