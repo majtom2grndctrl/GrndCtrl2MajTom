@@ -6,10 +6,18 @@ html { overflow-x: hidden; }
 body, html {
   height: 100%;
 }
-.dy7-1col {
+.dy7-columns {
     float: left;
-    margin: 0 20px 0 0;
-    width: 200px;
+    padding: 0 40px 0 0;    
+}
+@dy7-column-width: (550px/3);
+.dy7-1col {
+    &:extend(.dy7-columns);
+    width: @dy7-column-width;
+}
+.dy7-2col {
+    &:extend(.dy7-columns);
+    width: (@dy7-column-width * 2);
 }
 .dy7-1col:last-child {
     margin: 0;
@@ -143,6 +151,13 @@ body, html {
     }
     > p {
       &:extend(.dy7-blog-class);
+    }
+    > aside {
+      margin: 0 0 0 290px;
+      position: absolute;
+        left: 50%;
+      width: @dy7-column-width;
+
     }
     > .dy7-blog-excerpt {
       &:extend(.dy7-blog-class);
