@@ -63,7 +63,19 @@ body, html {
   margin: 0 auto;
   width: 550px;
 }
-
+.dy7-footer-greeting {
+  &:before {
+    content: url('/assets/images/dy7-footer-bio-photo.jpg');
+    display: block;
+    float: left;
+    height: 79px;
+    width: 79px;
+  }
+  > p { margin: 0 0 0 100px; }
+  > .dy7-ext-hi {
+    font-size: (24/16em);
+  }
+}
 /* Blog body --------------------------------- */
 /*body*/.dy7-blog-body:before {
   content: "";
@@ -71,7 +83,7 @@ body, html {
   top: 0;
   bottom: 0;
   right: 50%;
-  margin-right: 340px;
+  margin-right: 349px;
   width: 64px;
   background-color: #00badb;
   opacity: .4;
