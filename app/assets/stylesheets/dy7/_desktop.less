@@ -64,16 +64,50 @@ body, html {
   width: 550px;
 }
 .dy7-footer-greeting {
+  position: relative;
   &:before {
     content: url('/assets/images/dy7-footer-bio-photo.jpg');
     display: block;
-    float: left;
     height: 79px;
+    position: absolute;
+      top: 50px;
+      left: 0;
     width: 79px;
   }
-  > p { margin: 0 0 0 100px; }
+  &:after {
+    content: '';
+    background: url('/assets/images/dy7-heading-stripes.png');
+    display: block;
+    height: 10px;
+    position: absolute;
+      top: 30px;
+      left: 30px;
+      right: 30px;
+  }
   > .dy7-ext-hi {
-    font-size: (24/16em);
+    font-size: (32/16em);
+    font-weight: 300;
+    position: absolute;
+      top: 24px;
+      left: 90px;
+
+    > strong {
+      font-weight: 500;
+    }
+  }
+  > .dy7-ext-occupation {
+    position: absolute;
+      top: 80px;
+      left: 92px;
+  }
+  > .dy7-ext-process {
+    font-size: (14/16em);
+    position: absolute;
+      top: 120px;
+      right: 30px;
+      left: 30px;
+    text-align: justify;
+    > strong { font-weight: 500; }
   }
 }
 /* Blog body --------------------------------- */
