@@ -205,6 +205,32 @@ body, html {
       width: @dy7-column-width;
 
     }
+    > blockquote {
+/*      &:before {
+        content: '';
+        display: block;
+        height: 100%;
+        float: right;
+        width: (@dy7-column-width * 1.5);
+      }*/
+      display: block;
+      height: 1px;
+      margin: 0 auto;
+      overflow: visible;
+      width: (@dy7-column-width * 3);
+      > p {
+        background: url('/assets/images/dy7-blog-blockquote-bg.png') no-repeat 20px 0;
+        color: @electricBlue;
+        font-family: @font-heading;
+        font-size: (30/16em);
+        font-style: italic;
+        float: right;
+        line-height: 1.2em;
+        margin-right: -(@dy7-column-width * 1.5);
+        padding-left: 85px;
+        width: 100%;
+      }
+    }
     > .dy7-blog-excerpt {
       &:extend(.dy7-blog-class);
     }
