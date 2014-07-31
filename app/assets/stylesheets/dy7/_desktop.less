@@ -197,6 +197,8 @@ body, html {
     }
     > p {
       &:extend(.dy7-blog-class);
+//      font-size: (15/16em);
+      line-height: 1.5em;
     }
     > aside {
       margin: 0 0 0 290px;
@@ -205,17 +207,10 @@ body, html {
       width: @dy7-column-width;
 
     }
-    > blockquote {
-/*      &:before {
-        content: '';
-        display: block;
-        height: 100%;
-        float: right;
-        width: (@dy7-column-width * 1.5);
-      }*/
+    > .dy-pullquote {
       display: block;
       height: 1px;
-      margin: 4em auto -4em;
+      margin: 4.75em auto -4.75em;
       overflow: visible;
       width: (@dy7-column-width * 3);
       > p {
