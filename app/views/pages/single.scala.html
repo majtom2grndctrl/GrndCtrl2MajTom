@@ -1,5 +1,7 @@
 @(url: String, page: Page)
 @body(url, page.title, page.description, page.keywords) {
-  <h2>@page.title</h2>
-  @Html(page.content)
+  <div class="dy7-main-container">
+    <h2>@page.title</h2>
+@Html(page.content)
+  </div>
 }

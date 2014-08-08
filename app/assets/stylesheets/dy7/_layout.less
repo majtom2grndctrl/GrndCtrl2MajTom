@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 /*a*/.dy7-top-logo {
   width: 314px;
   height: 53px;
-  background: url('/assets/images/dy7-logo.png') no-repeat 0 0;
+  background: url('/assets/images/header-image@1x.png') no-repeat 0 0;
   display: block;
   margin: 20px auto 0;
   overflow: hidden;
@@ -182,5 +182,13 @@ h1, h2, h3, h4, h5, h6 {
       a:hover {
         text-decoration: none;
       }
+  }
+}
+
+
+@media screen and (min-resolution: 190dpi) {
+  /*a*/.dy7-top-logo {
+    background: url('/assets/images/header-image@2x.png') no-repeat 0 0;
+    background-size: 315px 53px;
   }
 }
