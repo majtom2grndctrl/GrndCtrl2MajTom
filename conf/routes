@@ -3,8 +3,9 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Pages.display(path: String = "/")
+GET     /                           controllers.Pages.index()
 GET     /contact                    controllers.Pages.display(path: String = "contact")
+GET     /foo                        controllers.Pages.display(path: String = "foo")
 GET     /blog                       controllers.BlogPosts.index(page: Int = 0)
 GET     /blog/archive/:page         controllers.BlogPosts.index(page: Int)
 GET     /blog/:slug                 controllers.BlogPosts.single(slug: String)

@@ -113,7 +113,8 @@ body, html {
   }
 }
 /* Blog body --------------------------------- */
-body:before {
+/*body*/.dy7-blog-body:before,
+/*body*/.dy7-home-body:before {
   content: "";
   position: fixed;
   top: 0;
@@ -155,19 +156,18 @@ body:before {
   font-size: 30px;
   margin: 0;
 }
-/*div*/.dy7-main-container {
+/*div*/.dy7-main-container.dy7-ext-blog {
   > h1 {
     &:extend(.dy7-blog-class);
   }
   > article {
-    &:extend(.dy7-blog-class);
 
     > header {
-//      &:extend(.dy7-blog-class);
+      &:extend(.dy7-blog-class);
     }
     > h2,
     > header > h2 {
-//      &:extend(.dy7-blog-class);
+      &:extend(.dy7-blog-class);
       position: relative;
     }
     h2:before,
@@ -196,10 +196,10 @@ body:before {
       width: 500%;
     }
     > time {
-//      &:extend(.dy7-blog-class);
+      &:extend(.dy7-blog-class);
     }
     > p {
-//      &:extend(.dy7-blog-class);
+      &:extend(.dy7-blog-class);
       font-size: (15/16em);
       line-height: (24/15em);
     }
@@ -230,15 +230,55 @@ body:before {
       }
     }
     > .dy7-blog-excerpt {
-//      &:extend(.dy7-blog-class);
+      &:extend(.dy7-blog-class);
     }
   }
   > .dy7-ext-micropost {
-//    &:extend(.dy7-blog-class);
+    &:extend(.dy7-blog-class);
   }
   > .dy7-ext-quotation {
-//    &:extend(.dy7-blog-class);
+    &:extend(.dy7-blog-class);
     margin: 3em auto;
     width: 600px;
   }
+}
+
+/* Home --------------------------------- */
+.dy7-hero:before {
+    background: url('/assets/images/dy7-home-photo@1x.jpg') no-repeat 50% 0;
+    content: '';
+    height: 392px;
+    position: absolute;
+        top: 166px;
+        left: 0;
+        right: 0;
+}
+.dy7-hero {
+    height: 392px;
+    text-align: center;
+
+    .dy7-ext-cta {
+        display: block;
+    }
+}
+.dy7-home-samples {
+    float: left;
+    min-height: 18em;
+    width: (@dy7-column-width * 2);
+}
+.dy7-home-technologies {
+    position: absolute;
+    left: 50%;
+    margin-left: (@dy7-column-width * .5);
+    width: (@dy7-column-width * 2);
+
+    > .dy7-ext-images {
+      text-align: center;
+
+      > img {
+//          width: 30%;
+          height: 35px;
+          margin: 0 10px 0 0;
+      }
+    }
 }

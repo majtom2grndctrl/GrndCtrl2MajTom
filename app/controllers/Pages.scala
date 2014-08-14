@@ -27,6 +27,10 @@ object Pages extends Controller with Secured {
     )(Page.apply)(Page.unapply)
   )
 
+  def index() = Action { implicit request =>
+    Ok(html.index(request.domain + request.uri, SitePrefs.name, Some(null), Some(null)))
+  }
+
   def display(path: String) = Action { implicit request =>
     Page.findBySlug(path).map { page =>
       Ok(html.pages.single(request.domain + request.uri, page))
