@@ -1,0 +1,31 @@
+@(url: String, title: String, description: Option[String], keywords: Option[String])
+@main(url, title, description, keywords){
+  <body class="dy7-home-body">
+  @header_standard()
+    <main class="dy7-main">
+      <div class="dy7-main-container">
+        <div class="dy7-hero">
+            A passion for web design since 2000
+            <a href="#">View Portfolio</a>
+        </div>
+        <div class="dy7-home-samples">
+            <h1>A designer&hellip;</h1>
+            <p>I&rsquo;ve had a lot of fun designing not just websites, but newspapers and magazines, as well. Here are some samples of my work:</p>
+        </div>
+        <div class="dy7-home-technologies">
+            <h1>&hellip;who writes code</h1>
+            <p>I&rsquo;m always curious to try different ways to build different types of projects. Here are some technologies I've worked with:</p>
+	            <div class="dy7-ext-images">
+	            <img src="/assets/images/wordpress-logo.svg" class="dy7-home-wp" alt="WordPress" />
+	            <img src="/assets/images/jQuery-Logo.svg" class="dy7-home-jq" alt="jQuery: Write Less, Do More" />
+	            <img src="/assets/images/play-framework.svg" class="dy7-home-play" alt="Play Framework" />
+	            <img src="/assets/images/php-logo.svg" class="dy7-home-php" alt="PHP" />
+	            <img src="/assets/images/python-logo.svg" class="dy7-home-python" alt="Python" />
+	            <img src="/assets/images/nodejs-logo.svg" class="dy7-home-node" alt="Node.js" />
+            </div>
+        </div>
+      </div>
+    </main>
+  @footer_standard()
+}
+</body>
