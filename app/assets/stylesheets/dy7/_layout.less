@@ -1,6 +1,15 @@
 @import '_vars-mixins.less';
 @import '../_elements.less';
 
+
+
+/* Utility classes */
+.dy7-desktop() {
+    display: none;
+}
+
+
+/* Default HTML elements */
 * {
     box-sizing: border-box;
 }
@@ -53,41 +62,10 @@ h1, h2, h3, h4, h5, h6 {
   text-indent: -500px;
 }
 
-
 /*nav*/.dy7-nav1 {
-  background: #2d5269;
-  display: block;
-  height: 50px;
-  vertical-align: middle;
+  .dy7-desktop();
 }
-/*dl*/.dy7-header-nav {
-  text-align: center;
-  > dt {
-    .dy7-accessible-hide;
-  }
-  > dd {
-    display: inline-block;
-    margin: 0 45px 0 0;
-    
-    > a {
-      display: inline-block;
-      color: #fff;
-      font-size: 20px;
-      font-weight: 300;
-      line-height: 28px;
-      margin: 0;
-      padding: 11px;
-      text-decoration: none;
-      vertical-align: middle;
-    }
-    > a:hover {
-      background: #1b7c97;
-    }
-  }
-  > dd:last-child {
-   margin-right: 0;
-  }
-}
+
 /*main*/.dy7-main {
   display: block;
 }
@@ -162,7 +140,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 /*dl*/.dy7-footer-nav {
-  margin: 20px 0 0 0;
+    .dy7-desktop();
+
+/*  margin: 20px 0 0 0;
   > dt {
     color: #162c63;
     font-family: @font-heading;
@@ -182,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
       a:hover {
         text-decoration: none;
       }
-  }
+  }*/
 }
 
 
@@ -192,3 +172,4 @@ h1, h2, h3, h4, h5, h6 {
     background-size: 315px 53px;
   }
 }
+

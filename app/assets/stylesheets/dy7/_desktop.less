@@ -1,5 +1,11 @@
 @import '_vars-mixins.less';
 @import '../_elements.less';
+
+/* Utility mixins ------------------ */
+.dy7-desktop() {
+    display: inherit;
+}
+
 /* Default HTML Elements ------------------ */
 
 html { overflow-x: hidden; }
@@ -32,10 +38,41 @@ body, html {
 /*div*/.dy7-header-wrap {
   padding-right: 30px
 }
-/*div*/.dy7-nav1-wrap {
-  width: 550px;
-  margin: 0 auto;
+/*nav*/.dy7-nav1 {
+  background: #2d5269;
+  display: block;
+  height: 50px;
+  vertical-align: middle;
 }
+/*dl*/.dy7-header-nav {
+  text-align: center;
+  > dt {
+    .dy7-accessible-hide;
+  }
+  > dd {
+    display: inline-block;
+    margin: 0 45px 0 0;
+    
+    > a {
+      display: inline-block;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 28px;
+      margin: 0;
+      padding: 11px;
+      text-decoration: none;
+      vertical-align: middle;
+    }
+    > a:hover {
+      background: #1b7c97;
+    }
+  }
+  > dd:last-child {
+   margin-right: 0;
+  }
+}
+
 /*main*/.dy7-main {
   min-height: 100%;
   height: auto !important;
@@ -65,6 +102,32 @@ body, html {
   margin: 0 auto;
   width: 550px;
 }
+/*dl*/.dy7-footer-nav {
+  .dy7-desktop();
+  margin: 20px 0 0 0;
+
+  > dt {
+    color: #162c63;
+    font-family: @font-heading;
+    font-size: (30/16em);
+    font-style: italic;
+    margin: 0 0 .5em 0;
+  }
+  > dd {
+    margin: 0 0 5px 0;
+      a {
+        border-left: 15px solid;
+        border-bottom: 1px solid;
+        color: @footer-dark-green;
+        display: block;
+        padding: 3px 3px 3px 5px;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+  }
+}
+
 .dy7-footer-greeting {
   position: relative;
   &:before {
@@ -255,6 +318,7 @@ body, html {
 }
 .dy7-hero {
     height: 392px;
+    margin: 0 0 30px 0;
     text-align: center;
 
     .dy7-ext-cta {
@@ -263,22 +327,25 @@ body, html {
 }
 .dy7-home-samples {
     float: left;
-    min-height: 18em;
+    min-height: 20em;
     width: (@dy7-column-width * 2);
+
+    > h1 { text-align: center; }
 }
 .dy7-home-technologies {
     position: absolute;
     left: 50%;
-    margin-left: (@dy7-column-width * .5);
+    margin-left: (@dy7-column-width * .65);
     width: (@dy7-column-width * 2);
 
+    > h1 { text-align: center; }
     > .dy7-ext-images {
       text-align: center;
 
       > img {
 //          width: 30%;
           height: 35px;
-          margin: 0 10px 0 0;
+          margin: 0 10px 10px 0;
       }
     }
 }
