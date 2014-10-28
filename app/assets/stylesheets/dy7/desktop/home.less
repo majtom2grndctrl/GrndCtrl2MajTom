@@ -1,6 +1,32 @@
 @import '../vars-mixins.less';
 
 .dy7 {
+
+    &-hero {
+        height: 392px;
+        margin: 0 0 30px 0;
+        text-align: center;
+    
+        &:before {
+            background: url('/assets/images/dy7-home-image@1x.jpg') no-repeat 50% 0;
+            content: '';
+            height: 392px;
+            position: absolute;
+                top: 166px;
+                left: 0;
+                right: 0;
+        }
+    
+        .dy7-ext-cta {
+            display: block;
+        }
+        
+        &-imagetext {
+            .dy7-accessible-hide();
+        }
+    }
+
+
     &-home {
         &-samples {
             float: left;
@@ -8,6 +34,12 @@
             width: (@dy7-column-width * 2);
         
             > h1 { text-align: center; }
+            > .looper.xfade {
+                height: 366px;
+                img {
+                    border: 1px solid #666;
+                }
+            }
         }
         &-technologies {
             position: absolute;
@@ -20,7 +52,6 @@
               text-align: center;
         
               > img {
-        //          width: 30%;
                   height: 35px;
                   margin: 0 10px 10px 0;
               }
@@ -35,7 +66,42 @@
             margin: 0 auto;
             padding: 0 0 0 (@dy7-column-width * .5);
             width: (@dy7-column-width * 4);
+
+
+            > h2 {
+              &:extend(.dy7-blog-class);
+              font-size: 2.5em;
+              position: relative;
+            }
+            h2:before {
+              background-color: rgba(0,186,219,0.5);
+              content: "";
+              display: block;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 100%;
+              margin-left: 15px;
+              width: 500%;
+            }
+            > h2:after {
+              background-color: rgba(0,186,219,0.5);
+              border-right: 30px solid #c0c0c0;
+              content: "";
+              display: block;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              right: 100%;
+              margin-right: 15px;
+              width: 500%;
+            }
+
+
         }
+
 
     }
 }
+
+

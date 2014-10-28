@@ -1,6 +1,8 @@
 @(url: String, title: String, description: Option[String], keywords: Option[String])
 @main(url, title, description, keywords){
+
   <body class="dy7-home-body">
+  <link rel="stylesheet" href="@routes.Assets.at("javascripts/looper.css")" />
   @header_standard()
     <main class="dy7-main">
       <div class="dy7-main-container">
@@ -11,25 +13,49 @@
         <div class="dy7-home-samples">
             <h1>A designer&hellip;</h1>
             <p>I&rsquo;ve had a lot of fun designing not just websites, but newspapers and magazines, as well. Here are some samples of my work:</p>
+
+
+            <div data-looper="go" data-interval="2500" class="looper xfade">
+              <div class="looper-inner">
+                <div class="item">
+                  <img src="@routes.Assets.at("images/moderatePaleo-364.jpg")" alt="Moderate Paleo" />
+                </div>
+                <div class="item">
+                  <img src="@routes.Assets.at("images/venterra-364.jpg")" alt="Venterra Realty" />
+                </div>
+                <div class="item">
+                  <img src="@routes.Assets.at("images/rpsDiningGuide-364.jpg")" alt="Indiana University Residential Programs and Services Dining Guide" />
+                </div>
+                <div class="item">
+                  <img src="@routes.Assets.at("images/stAndrewsApts-364.jpg")" alt="St Andrews Apartments" />
+                </div>
+              </div>
+            </div>
         </div>
         <div class="dy7-home-technologies">
             <h1>&hellip;who writes code</h1>
             <p>I&rsquo;m always curious to try different ways to build different types of projects. Here are some technologies I've worked with:</p>
 	            <div class="dy7-ext-images">
-	            <img src="/assets/images/wordpress-logo.svg" class="dy7-home-wp" alt="WordPress" />
-	            <img src="/assets/images/jQuery-Logo.svg" class="dy7-home-jq" alt="jQuery: Write Less, Do More" />
-	            <img src="/assets/images/play-framework.svg" class="dy7-home-play" alt="Play Framework" />
-	            <img src="/assets/images/php-logo.svg" class="dy7-home-php" alt="PHP" />
-	            <img src="/assets/images/python-logo.svg" class="dy7-home-python" alt="Python" />
-	            <img src="/assets/images/nodejs-logo.svg" class="dy7-home-node" alt="Node.js" />
+	            <img src="@routes.Assets.at("images/wordpress-logo.svg")" class="dy7-home-wp" alt="WordPress" />
+	            <img src="@routes.Assets.at("images/jQuery-Logo.svg")" class="dy7-home-jq" alt="jQuery: Write Less, Do More" />
+	            <img src="@routes.Assets.at("images/play-framework.svg")" class="dy7-home-play" alt="Play Framework" />
+	            <img src="@routes.Assets.at("images/php-logo.svg")" class="dy7-home-php" alt="PHP" />
+	            <img src="@routes.Assets.at("images/python-logo.svg")" class="dy7-home-python" alt="Python" />
+	            <img src="@routes.Assets.at("images/nodejs-logo.svg")" class="dy7-home-node" alt="Node.js" />
             </div>
         </div>
       </div>
       <div class="dy7-home-video">
-        <h1>What design has taught me about life</h1>
+        <h2>What design teaches me about life</h2>
         <iframe width="560" height="315" src="//www.youtube.com/embed/TjweB8pWTnU" frameborder="0" allowfullscreen></iframe>
       </div>
     </main>
+
   @footer_standard()
-}
+<script type="text/javascript" src="@routes.Assets.at("javascripts/looper.js")"></script>
+<script type="text/javascript">
+</script>
+
+
 </body>
+}
