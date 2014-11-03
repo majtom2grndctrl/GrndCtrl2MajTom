@@ -1,0 +1,225 @@
+@import '../_vars-mixins';
+
+/* Utility mixins ------------------ */
+/* Some things shouldn't be shown on the mobile version of the site, and are set to display: none by default.
+This overrides that for desktop users */
+
+.dy7-desktop() {
+    display: inherit;
+}
+
+/*footer*/.dy7-footer {
+  height: @footer-height;
+  > .dy7-footer-content {
+    height: (@footer-height)-45px;
+    margin-bottom: 0;
+  }
+  > .dy7-footer-bottom {
+      font-size: (14/16rem);
+      height: 35px;
+      padding: .6em 0 0 0;
+  }
+}
+.dy7-footer-content {
+  margin: 0 auto;
+  width: 550px;
+}
+
+
+
+.dy7-footer-greeting {
+  position: relative;
+  &:before {
+    content: url('/assets/images/dy7-footer-bio-photo.jpg');
+    display: block;
+    height: 79px;
+    position: absolute;
+      top: 55px;
+      left: 0;
+    width: 79px;
+  }
+  &:after {
+    content: '';
+    background: url('/assets/images/dy7-diagonal-lines-transparent.png');
+    display: block;
+    height: 10px;
+    position: absolute;
+      top: 30px;
+      left: 30px;
+      right: 30px;
+  }
+  > .dy7-ext-hi {
+    font-size: (32/16em);
+    font-weight: 300;
+    position: absolute;
+      top: 29px;
+      left: 90px;
+
+    > strong {
+      font-weight: 500;
+    }
+  }
+  > .dy7-ext-occupation {
+    position: absolute;
+      top: 85px;
+      left: 92px;
+  }
+  > .dy7-ext-process {
+    font-size: (14/16em);
+    position: absolute;
+      top: 130px;
+      right: 30px;
+      left: 30px;
+    text-align: justify;
+    > strong { font-weight: 500; }
+  }
+}
+.dy7-footer-right.dy7-1col {
+   position: absolute;
+   left: 50%;
+   margin-left: (@dy7-column-width * 1.7);
+   width: (@dy7-column-width * 1);
+}
+/*dl*/.dy7-footer-social {
+  margin: 20px 0 0 0;
+
+  > dt {
+    color: #162c63;
+    font-family: @font-heading;
+    font-size: (26/16em);
+    font-style: italic;
+    margin: 0 0 .25em 0;
+  }
+  > dd {
+    margin: 0;
+
+    > a {
+      color: @footer-dark-green;
+      display: block;
+      font-size: (14em/16);
+      margin: .5em 0;
+      padding: 0 0 0 (24em/14);
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  > .dy7-ext-twitter {
+    > a {
+      background: url('/assets/images/twitter.svg') no-repeat;
+      background-size: (19em/14) (19em/14);
+    }
+  }
+  > .dy7-ext-gplus {
+    > a {
+      background: url('/assets/images/Google_plus.svg') no-repeat;
+      background-size: (19em/14) (19em/14);
+    }
+  }
+  > .dy7-ext-dribbble {
+    > a {
+      background: url('/assets/images/dribbble-ball.svg') no-repeat;
+      background-size: (19em/14) (19em/14);
+    }
+  }
+  > .dy7-ext-github {
+    > a {
+      background: url('/assets/images/GitHub-Mark.svg') no-repeat;
+      background-size: (19em/14) (19em/14);
+    }
+  }
+
+}
+/*footer*/.dy7-footer {
+  height: @footer-height;
+  > .dy7-footer-content {
+    height: (@footer-height)-45px;
+    margin-bottom: 0;
+  }
+  > .dy7-footer-bottom {
+      font-size: (14/16rem);
+      height: 35px;
+      padding: .6em 0 0 0;
+  }
+}
+.dy7-footer-content {
+  margin: 0 auto;
+  width: 550px;
+}
+/*dl*/.dy7-footer-nav {
+  .dy7-desktop();
+  margin: 20px 0 0 0;
+
+  > dt {
+    color: #162c63;
+    font-family: @font-heading;
+    font-size: (26/16em);
+    font-style: italic;
+    margin: 0 0 .25em 0;
+  }
+  > dd {
+    margin: 0 0 5px 0;
+    > a {
+      border-left: 15px solid;
+      border-bottom: 1px solid;
+      color: @footer-dark-green;
+      display: block;
+      padding: 3px 3px 3px 5px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+.dy7-footer-greeting {
+  position: relative;
+  &:before {
+    content: url('/assets/images/dy7-footer-bio-photo.jpg');
+    display: block;
+    height: 79px;
+    position: absolute;
+      top: 55px;
+      left: 0;
+    width: 79px;
+  }
+  &:after {
+    content: '';
+    background: url('/assets/images/dy7-diagonal-lines-transparent.png');
+    display: block;
+    height: 10px;
+    position: absolute;
+      top: 30px;
+      left: 30px;
+      right: 30px;
+  }
+  > .dy7-ext-hi {
+    font-size: (32/16em);
+    font-weight: 300;
+    position: absolute;
+      top: 29px;
+      left: 90px;
+
+    > strong {
+      font-weight: 500;
+    }
+  }
+  > .dy7-ext-occupation {
+    position: absolute;
+      top: 85px;
+      left: 92px;
+  }
+  > .dy7-ext-process {
+    font-size: (14/16em);
+    position: absolute;
+      top: 130px;
+      right: 30px;
+      left: 30px;
+    text-align: justify;
+    > strong { font-weight: 500; }
+  }
+}
