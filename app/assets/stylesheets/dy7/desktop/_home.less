@@ -1,4 +1,4 @@
-@import '../vars-mixins.less';
+@import '../_vars-mixins';
 
 .dy7 {
 
@@ -30,8 +30,9 @@
     &-home {
         &-samples {
             float: left;
+            font-size: (15em/16);
             min-height: 20em;
-            width: (@dy7-column-width * 2);
+            width: (@dy7-column-width * 1.9);
         
             > h1 { text-align: center; }
             > .looper.xfade {
@@ -42,10 +43,11 @@
             }
         }
         &-technologies {
+            font-size: (15em/16);
             position: absolute;
             left: 50%;
             margin-left: (@dy7-column-width * .65);
-            width: (@dy7-column-width * 2);
+            width: (@dy7-column-width * 1.75);
         
             > h1 { text-align: center; }
             > .dy7-ext-images {
