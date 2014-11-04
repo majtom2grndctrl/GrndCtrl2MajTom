@@ -11,17 +11,40 @@ import anorm.SqlParser._
 
 import scala.language.postfixOps
 
-case class project (
+case class Project (
   id: Option[Long],
   title: String,
+  filename: String,
   status: String,
-  style: String,
-  author: Option[Long],
-  published: Date,
-  slug: String,
-  content: String,
-  description: Option[String],
-  keywords: Option[String],
-  url: Option[String],
-  roles: String
+  roles: String,
+  tools: String,
+  techStack: String,
+  about: String
 )
+
+object Project {
+  val simple = {
+    get[Option[Long]]("project.id") ~
+    get[String]("project.title") ~
+    get[String]("project.filename") ~
+    get[String]("project.status") ~
+    get[String]("project.roles") ~
+    get[String]("project.tools") ~
+    get[String]("project.techStack") ~
+    get[String]("project.about") map {
+      case id ~ title ~ filename ~ status ~ roles ~ tools ~ techStack ~ about => Project(
+        id, title, filename, status, roles, tools, techStack, about
+      )
+    }
+  }
+
+  def list():Seq[Project] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from project").as(Project.simple *)
+    }
+  }
+
+
+
+}
+
