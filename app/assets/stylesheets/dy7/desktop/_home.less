@@ -28,11 +28,22 @@
 
 
     &-home {
+        @dy7-column-width: (780px / 3);
+        &-body {
+          > .dy7-main {
+            > .dy7-main-container {
+              width: 780px;
+            }
+          }
+          &:before {
+            margin-right: 470px;
+          }
+        }
         &-samples {
             float: left;
             font-size: (15em/16);
             min-height: 20em;
-            width: (@dy7-column-width * 1.9);
+            width: (@dy7-column-width * 1.4);
         
             > h1 { text-align: center; }
             > .looper.xfade {
@@ -47,7 +58,7 @@
             position: absolute;
             left: 50%;
             margin-left: (@dy7-column-width * .65);
-            width: (@dy7-column-width * 1.75);
+            width: (@dy7-column-width * 1.4);
         
             > h1 { text-align: center; }
             > .dy7-ext-images {

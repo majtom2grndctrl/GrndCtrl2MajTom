@@ -7,24 +7,29 @@
                 <h2>Portfolio</h2>
 
                 @projects.map { case(project)  =>
-                    <img src="@routes.Assets.at("/images/" + project.filename)" alt="@project.title" class="dy7-portfolio-image" />
-                    <h3>@project.title</h3>
-                    <dl class="dy7-portfolio-meta">
-                        <dt>Role</dt>
-                        <dd>@project.roles</dd>
-                    </dl>
-                    <dl class="dy7-portfolio-meta">
-                        <dt>Tools used</dt>
-                        <dd>@project.tools</dd>
-                    </dl>
-                    <dl class="dy7-portfolio-meta">
-                        <dt>Technology stack</dt>
-                        <dd>@project.techStack</dd>
-                    </dl>
-                    <dl class="dy7-portfolio-about">
-                        <dt>About this project</dt>
-                        <dd>@project.about</dd>
-                    </dl>
+                    <article class="dy7-portfolio-article">
+                        <img src="@routes.Assets.at("/images/" + project.filename)" alt="@project.title" class="dy7-portfolio-image" />
+                        <h3 class="dy7-portfolio-title">@project.title</h3>
+
+                        <div class="dy7-clearfix">
+                            <dl class="dy7-portfolio-meta">
+                                <dt>Role</dt>
+                                <dd>@project.roles</dd>
+                            </dl>
+                            <dl class="dy7-portfolio-meta">
+                                <dt>Tools used</dt>
+                                <dd>@project.tools</dd>
+                            </dl>
+                            <dl class="dy7-portfolio-meta">
+                                <dt>Technology stack</dt>
+                                <dd>@project.techStack</dd>
+                            </dl>
+                        </div>
+                        <dl class="dy7-portfolio-about">
+                            <dt>About this project</dt>
+                            <dd>@project.about</dd>
+                        </dl>
+                    </article>
                 }
             </div>
         </main>
