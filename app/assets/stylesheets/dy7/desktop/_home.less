@@ -38,6 +38,11 @@
           &:before {
             margin-right: 470px;
           }
+          > .dy7-footer {
+            .dy7-footer-content {
+              width: 780px;
+            }
+          }
         }
         &-samples {
             float: left;
@@ -54,10 +59,9 @@
             }
         }
         &-technologies {
+            float: left;
             font-size: (15em/16);
-            position: absolute;
-            left: 50%;
-            margin-left: (@dy7-column-width * .65);
+            margin: 0 0 0 3em;
             width: (@dy7-column-width * 1.4);
         
             > h1 { text-align: center; }
@@ -82,9 +86,10 @@
 
 
             > h2 {
-              &:extend(.dy7-blog-class);
+              margin: 0 auto 1em 60px;
               font-size: 2.5em;
               position: relative;
+              width: 13.5em;
             }
             h2:before {
               background-color: rgba(0,186,219,0.5);
@@ -110,7 +115,7 @@
               width: 500%;
             }
             > iframe {
-              margin: 0 0 3em 43px;
+              margin: 0 0 3em 53px;
             }
 
 

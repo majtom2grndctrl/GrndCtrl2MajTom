@@ -10,7 +10,7 @@
         }
       }
       > .dy7-footer {
-        > .dy7-footer-content {
+        .dy7-footer-content {
           width: 780px;
         }
       }
@@ -18,6 +18,26 @@
     &body:before {
       margin-right: 470px;
     }
+    &header {
+      font-size: (30em/16);
+      margin: 1.5em 0 1em 0;
+      position: relative;
+    }
+    &header:before {
+      background: url('/assets/images/dy7-diagonal-lines-transparent.png');
+      content: "";
+      display: block;
+      position: absolute;
+      left: -45px;
+      top: -.25em;
+      bottom: -.25em;
+      width: 30px;
+    }
+
+    &intro {
+      margin: 1em 0 3em 0;
+    }
+
     &article {
       display: block;
 

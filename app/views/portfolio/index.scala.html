@@ -4,8 +4,8 @@
         @header_standard()
         <main class="dy7-main">
             <div class="dy7-main-container">
-                <h2>Portfolio</h2>
-
+                <h1 class="dy7-portfolio-header">Portfolio</h1>
+                <p class="dy7-portfolio-intro">I've had a lot of fun making not just websites, but newspapers and magazines, as well.</p>
                 @projects.map { case(project)  =>
                     <article class="dy7-portfolio-article">
                         <img src="@routes.Assets.at("/images/" + project.filename)" alt="@project.title" class="dy7-portfolio-image" />
