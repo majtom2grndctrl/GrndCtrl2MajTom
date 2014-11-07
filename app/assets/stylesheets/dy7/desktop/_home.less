@@ -17,9 +17,26 @@
                 right: 0;
         }
     
-        .dy7-ext-cta {
-            display: block;
+        &-cta {
+          @width: 10em;
+          background: @footer-dark-green;
+          color: #fff;
+          display: block;
+          font-size: (20em/16);
+          margin-left: -(@width / 2);
+          opacity: .8;
+          padding: .75em 0;
+          position: absolute;
+            left: 50%;
+            top: 460px;
+          text-align: center;
+          width: @width;
+          z-index: 4;
         }
+      &-cta:hover {
+        opacity: 1;
+        text-decoration: none;
+      }
         
         &-imagetext {
             .dy7-accessible-hide();
@@ -57,6 +74,24 @@
                     border: 1px solid #666;
                 }
             }
+        }
+        &-cta {
+          @width: 10em;
+          background: @footer-dark-green;
+          clear: both;
+          color: #fff;
+          display: block;
+          font-size: (20em/16);
+          margin: 0 auto 3em;
+          opacity: .8;
+          padding: .75em 0;
+          text-align: center;
+          width: @width;
+          z-index: 4;
+        }
+        &-cta:hover {
+          opacity: 1;
+          text-decoration: none;
         }
         &-technologies {
             float: left;
