@@ -4,6 +4,7 @@
 
 create table project (
   id		  				bigint not null primary key auto_increment,
+  `index`          integer not null,
   title						varchar(255) not null,
   filename        varchar(255),
   status					varchar(32) default 'public',

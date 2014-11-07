@@ -13,6 +13,7 @@ import scala.language.postfixOps
 
 case class Project (
   id: Option[Long],
+  index: Int,
   title: String,
   filename: String,
   status: String,
@@ -25,6 +26,7 @@ case class Project (
 object Project {
   val simple = {
     get[Option[Long]]("project.id") ~
+    get[Int]("project.index") ~
     get[String]("project.title") ~
     get[String]("project.filename") ~
     get[String]("project.status") ~
@@ -32,15 +34,15 @@ object Project {
     get[String]("project.tools") ~
     get[String]("project.techStack") ~
     get[String]("project.about") map {
-      case id ~ title ~ filename ~ status ~ roles ~ tools ~ techStack ~ about => Project(
-        id, title, filename, status, roles, tools, techStack, about
+      case id ~ index ~ title ~ filename ~ status ~ roles ~ tools ~ techStack ~ about => Project(
+        id, index, title, filename, status, roles, tools, techStack, about
       )
     }
   }
 
   def list():Seq[Project] = {
     DB.withConnection { implicit connection =>
-      SQL("select * from project").as(Project.simple *)
+      SQL("select * from project order by `index` desc").as(Project.simple *)
     }
   }
 
