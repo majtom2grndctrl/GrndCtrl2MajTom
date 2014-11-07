@@ -2,7 +2,7 @@
     <article class="dy7-ext-blog">
       <header>
         <h2><a href="@routes.BlogPosts.single(post.slug)">@post.title</a></h2>
-        <time datetime="@post.published.format("yyyy-MM-dd")">@post.published.format("MM/dd/yyy")</time>
+@*        <time datetime="@post.published.format("yyyy-MM-dd")">@post.published.format("MM/dd/yyy")</time>*@
       </header>
       <div class="dy7-blog-excerpt">
 @Html(post.description.getOrElse(post.content))
