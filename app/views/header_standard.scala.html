@@ -4,13 +4,13 @@
     </nav>
     <header class="dy7-header">
       <a href="@routes.Pages.index()" class="dy7-top-logo">@SitePrefs.name &mdash; @SitePrefs.tagline</a>
-      <nav class="dy7-nav1">
-        <dl class="dy7-header-nav">
-          <dt>Navigation</dt>
-          <dd class="dy7-ext-about"><a href="@routes.Pages.index()">About</a></dd>
-          <dd class="dy7-ext-portfolio"><a href="@routes.Projects.index()">Portfolio</a></dd>
-          <dd class="dy7-ext-blog"><a href="@routes.BlogPosts.index(0)">Blog</a></dd>
-@*          <dd class="dy7-ext-contact"><a href="@routes.Pages.display("contact")">Contact</a></dd>*@
-        </dl>
+      <nav class="dy7-nav1" role="navigation">
+        <span class="dy7-nav1-toggle" role="button" aria-controls="dy7-nav1-list" aria-expanded="false" tabindex="0">Navigation</span>
+        <ul class="dy7-nav1-list">
+          <li class="dy7-ext-about"><a href="@routes.Pages.index()">About</a></li>
+          <li class="dy7-ext-portfolio"><a href="@routes.Projects.index()">Portfolio</a></li>
+          <li class="dy7-ext-blog"><a href="@routes.BlogPosts.index(0)">Blog</a></li>@*
+          <li class="dy7-ext-contact"><a href="@routes.Pages.display("contact")">Contact</a></li>*@
+        </ul>
       </nav>
     </header>
