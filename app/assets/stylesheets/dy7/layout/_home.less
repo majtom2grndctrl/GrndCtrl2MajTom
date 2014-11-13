@@ -1,18 +1,37 @@
-.dy7-{
-  &home-{
-    &technologies {
+.dy7{
+  &-home{
+    @dy7-section-margin: 0 2em;
+
+    &-samples {
+      margin: @dy7-section-margin;
+
+      > .looper.xfade {
+        height: 366px;
+
+        div {
+          text-align: center;
+        }
+
+        img {
+          border: 1px solid #666;
+          margin: 0 auto;
+        }
+      }
+
+    }
+    &-technologies {
+      margin: @dy7-section-margin;
       > .dy7-ext-images {
         > img {
-          display: block;
-          margin: 1em auto;
-          width: 8em;
+          margin: 1em 5%;
+          width: 35%;
         }
       }
     }
-    &video {
+    &-video {
+      text-align: center;
       > iframe {
-        margin: 0 auto;
-        text-align: center;
+        width: 100%;
       }
     }
   }

@@ -1,0 +1,35 @@
+@import '../_vars-mixins';
+
+.dy7{
+  &-header {
+    display: block;
+    border-top: 10px solid #1f3746;
+  }
+  &-nav1{
+    &-toggle {
+      background: @electricBlue;
+      color: #fff;
+      cursor: pointer;
+      display: block;
+      padding: 1em 2em;
+      position: fixed;
+        top: 0;
+        left: 0;
+      z-index: 1000;
+    }
+    &-list {
+      display: none;
+    }
+  }
+}
+/*header*/.dy7-header {
+}
+/*a*/.dy7-top-logo {
+  width: 314px;
+  height: 53px;
+  background: url('/assets/images/header-image@1x.png') no-repeat 0 0;
+  display: block;
+  margin: 30px auto 0;
+  overflow: hidden;
+  text-indent: -500px;
+}
