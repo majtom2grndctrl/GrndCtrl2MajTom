@@ -1,35 +1,67 @@
 @import '../_vars-mixins';
 
-.dy7{
+.dy7 {
   &-header {
-    display: block;
     border-top: 10px solid #1f3746;
-  }
-  &-nav1{
-    &-toggle {
-      background: @electricBlue;
-      color: #fff;
-      cursor: pointer;
+    position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+    z-index: 0;
+    &-wrap {
+      padding-right: 30px;
+    }
+    &-logo {
+      width: 314px;
+      height: 53px;
+      background: url('/assets/images/header-image@1x.png') no-repeat 0 0;
       display: block;
-      padding: 1em 2em;
-      position: fixed;
-        top: 0;
-        left: 0;
-      z-index: 1000;
+      margin: 30px auto 0;
+      overflow: hidden;
+      text-indent: -500px;
+    }
+
+  }
+  &-nav1 {
+    background: #2d5269;
+    display: block;
+    height: 50px;
+    margin: 23px 0 0 0;
+    text-align: center;
+    vertical-align: middle;
+    &-toggle {
+      .dy7-accessible-hide();
     }
     &-list {
-      display: none;
+      display: block;
+      padding: 0;
+      margin: 0;
+
+      > li {
+        display: inline-block;
+        margin: 0 45px 0 0;
+
+        > a {
+          display: inline-block;
+          color: #fff;
+          font-size: 20px;
+          font-weight: 300;
+          line-height: 28px;
+          margin: 0;
+          padding: 11px;
+          text-decoration: none;
+          vertical-align: middle;
+        }
+        > a:hover {
+          background: #1b7c97;
+        }
+      }
+      > li:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
-/*header*/.dy7-header {
-}
-/*a*/.dy7-top-logo {
-  width: 314px;
-  height: 53px;
-  background: url('/assets/images/header-image@1x.png') no-repeat 0 0;
-  display: block;
-  margin: 30px auto 0;
-  overflow: hidden;
-  text-indent: -500px;
-}
+
+
+

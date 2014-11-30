@@ -39,6 +39,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   color: @electricBlue;
 }
+h1 {
+  font-size: 2em;
+}
 .dy7-skiplinks {
     .dy7-accessible-hide();
 }
@@ -47,16 +50,27 @@ h1, h2, h3, h4, h5, h6 {
 
 /*main*/.dy7-main {
   display: block;
+  padding-top: 160px;
 }
 /*div*/.dy7-main-container {
 }
 /*div*/.dy7-main-container.dy7-ext-blog {
+  > h1 { margin: 0 .5em; }
   > article {
+    > header {
+      margin: 0 1em;
+    }
     > h2,
     > header > h2 {
       font-size: 1.4rem;
-      margin-top: 1.5em;
-      margin-bottom: 1em;
+      margin: 1.5em 1em 1em;
+    }
+    > p {
+      font-size: (15/16em);
+      margin: 1em;
+    }
+    .dy7-blog-excerpt {
+      margin: 0 1em;
     }
     > aside {
       border-top: 10px solid @footer-dark-green;
@@ -66,10 +80,6 @@ h1, h2, h3, h4, h5, h6 {
         color: @electricBlue;
         font-family: @font-heading;
         font-size: (24/16em);
-      }
-      > p {
-          font-size: (13/16em);
-          margin-top: .25em;
       }
     }
   }
@@ -82,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
   > .dy7-ext-quotation {
-    margin: 2em 0;
+    margin: 2em 1em;
 
     > blockquote {
       font-size: 1.3em;
