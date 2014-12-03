@@ -1,5 +1,3 @@
-@import '../_vars-mixins';
-
 .dy7 {
   &-header {
     border-top: 10px solid #1f3746;
@@ -19,8 +17,12 @@
       margin: 30px auto 0;
       overflow: hidden;
       text-indent: -500px;
-    }
 
+      @media screen and (min-resolution: 180dppx) {
+        background-image: url('/assets/images/header-image@2x.png');
+        background-image-size: 100% 100%;
+      }
+    }
   }
   &-nav1 {
     background: #2d5269;
@@ -39,7 +41,7 @@
 
       > li {
         display: inline-block;
-        margin: 0 45px 0 0;
+        margin: 0 20px 0 0;
 
         > a {
           display: inline-block;
