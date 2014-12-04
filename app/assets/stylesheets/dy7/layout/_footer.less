@@ -1,5 +1,21 @@
-.dy7-{
-  &footer-{
+.dy7{
+  &-footer {
+    background: @footer-gray;
+    border-top: 10px solid @footer-dark-green;
+    color: #2d5269;
+    margin: 0 auto;
+  
+    &-content {
+      margin: 0 1em;
+    }
+    &-bottom {
+      background: #1f3746;
+      color: #b2d0e2;
+    }
+    &-nav {
+        .dy7-desktop();
+   }
+
     &social {
       display: none;
     }
