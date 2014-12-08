@@ -16,8 +16,48 @@
         .dy7-desktop();
    }
 
-    &social {
-      display: none;
+    &-social {
+      > dt {
+      }
+      > dd {
+        margin: 0;
+        > a {
+          color: @footer-dark-green;
+          display: block;
+          font-size: (14em/16);
+          margin: .5em 0;
+          padding: 0 0 0 (24em/14);
+          text-decoration: underline;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        &.dy7-ext-twitter {
+          > a {
+            background: url('/assets/images/twitter.svg') no-repeat;
+            background-size: (19em/14) (19em/14);
+          }
+        }
+        &.dy7-ext-gplus {
+          > a {
+            background: url('/assets/images/Google_plus.svg') no-repeat;
+            background-size: (19em/14) (19em/14);
+          }
+        }
+        &.dy7-ext-dribbble {
+          > a {
+            background: url('/assets/images/dribbble-ball.svg') no-repeat;
+            background-size: (19em/14) (19em/14);
+          }
+        }
+        &.dy7-ext-github {
+          > a {
+            background: url('/assets/images/GitHub-Mark.svg') no-repeat;
+            background-size: (19em/14) (19em/14);
+          }
+        }
+      }
     }
   }
 }

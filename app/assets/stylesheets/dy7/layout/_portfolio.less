@@ -7,7 +7,9 @@
       margin: 1em 1em 3em;
     }
     &article {
-      padding: 0 1em;
+      border-top: 1px solid #ccc;
+      margin: 0 1em 3em;
+      padding: 3em 0 0;
     }
     &image {
 
@@ -17,8 +19,28 @@
     }
     &meta {
       > dt {
-        margin: 0;
+        color: #006cc2;
+        font-size: (12em/16);
+        font-weight: 800;
+        line-height: 1em;
+        margin: 0 0 0 0;
         text-transform: uppercase;
+      }
+      > dd {
+        margin: 0;
+      }
+    }
+    &about {
+      > dt {
+        color: #006cc2;
+        font-size: (12em/16);
+        font-weight: 800;
+        padding: .5em 0;
+        text-transform: uppercase;
+      }
+      > dd {
+        margin: 0;
+        padding: 0;
       }
     }
   }
