@@ -1,12 +1,17 @@
 .dy7{
   &-hero {
     &:before {
-      background: url('/assets/images/header-image-mobile@1x.jpg') no-repeat;
+      background: url('/assets/images/header-image-mobile@1x.jpg') no-repeat 50% 50%;
       background-size: 100% auto;
       content: '';
       display: block;
       height: 180px;
       width: 100%;
+
+      @media screen and (max-width: 400px) {
+        background-position: 50% 0;
+        height: 130px;
+      }
     }
     &-imagetext {
       .dy7-accessible-hide();
@@ -21,6 +26,7 @@
 
     &-samples {
       margin: @dy7-section-margin;
+      > h1 { margin-left: auto; margin-right: auto; }
 
       > .looper.xfade {
         height: 366px;
@@ -61,6 +67,8 @@
     &-technologies {
       margin: @dy7-section-margin;
       > .dy7-ext-images {
+        margin-bottom: 2em;
+
         > img {
           margin: 1em 5%;
           width: 35%;
