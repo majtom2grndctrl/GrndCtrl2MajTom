@@ -20,10 +20,13 @@
       text-align: center;
 
       &:before {
-        content: url('/assets/images/dy7-footer-bio-photo@2x.jpg');
-        height: 6em;
+        background: url('/assets/images/dy7-footer-bio-photo@2x.jpg') no-repeat 0 0;
+        background-size: 100% 100%;
+        content: '';
+        display: block;
+        height: 8em;
         margin: 0 auto;
-        width: 6em;
+        width: 8em;
 
         @media screen and (max-device-pixel-ratio: 150dppx) {
           content: url('/assets/images/dy7-footer-bio-photo.jpg');
