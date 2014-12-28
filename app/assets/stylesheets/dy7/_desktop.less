@@ -139,14 +139,23 @@ body, html {
                &:extend(.dy7-blog-class);
                line-height: (24/15em);
              }
-             > .dy-aside {
+             // Aside style
+             > aside {
+               font-size: (14em/16);
                margin: 0 0 0 290px;
                position: absolute;
                left: 50%;
                width: @dy7-column-width;
 
+               > h3 {
+                 color: @electricBlue;
+                 font-family: @font-heading;
+                 font-size: (22em/14);
+                 margin: 0 0 .2em 0;
+               }
              }
-             > .dy-pullquote {
+             // Pull quote style
+             > blockquote {
                display: block;
                height: 1px;
                margin: 4.75em auto -4.75em;
