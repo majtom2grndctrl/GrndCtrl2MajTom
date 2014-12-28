@@ -9,6 +9,8 @@ import play.api.libs.json._
 import anorm._
 import anorm.SqlParser._
 
+import org.pegdown.PegDownProcessor
+
 import scala.language.postfixOps
 
 case class BlogPost (
@@ -30,6 +32,7 @@ case class BlogPostsPage[A](items: Seq[A], BlogPostsPage: Int, offset: Long, tot
 }
 
 object BlogPost {
+  val pegdown = new PegDownProcessor
   val simple = {
     get[Option[Long]]("blogPost.id") ~
     get[String]("blogPost.title") ~
@@ -47,7 +50,24 @@ object BlogPost {
     }
   }
 
-  val withAuthor = BlogPost.simple ~ (User.simple) map {
+  val processed = {
+    get[Option[Long]]("blogPost.id") ~
+    get[String]("blogPost.title") ~
+    get[String]("blogPost.status") ~
+    get[String]("blogPost.style") ~
+    get[Option[Long]]("blogPost.author") ~
+    get[Date]("blogPost.published") ~
+    get[String]("blogPost.slug") ~
+    get[String]("blogPost.content") ~
+    get[Option[String]]("blogPost.description") ~
+    get[Option[String]]("blogPost.keywords") map {
+      case id~title~status~style~author~published~slug~content~description~keywords => BlogPost(
+        id, title, status, style, author, published, slug, pegdown.markdownToHtml(content), description, keywords
+      )
+    }
+  }
+
+  val withAuthor = BlogPost.processed ~ (User.simple) map {
     case post~user => (post, user)
   }
 
@@ -209,12 +229,13 @@ object BlogPost {
         'offset -> offset
       ).as(BlogPost.withAuthor *)
 
+
       val totalRows = SQL(
         """
           select count(*) from blogpost
         """
       ).as(scalar[Long].single)
-      
+
       BlogPostsPage(blogPosts, page, offset, totalRows)
     }
   }

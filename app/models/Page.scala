@@ -56,89 +56,72 @@ object Page {
   }
 
   //List pages
-  def list(): Seq[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from page").as(Page.simple *)
-    }
+  def list(): Seq[Page] = DB.withConnection { implicit connection =>
+    SQL("select * from page").as(Page.simple *)
   }
 
 // Save a new page or edited page
-  def create(page: Page) = {
- // Save a new page
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          insert into page values(
-            null, {title}, {status}, {slug}, {content}, {description}, {keywords}
-          )
-        """
-      ).on(
-        'title -> page.title,
-        'status -> page.status,
-        'slug -> page.slug,
-        'content -> page.content,
-        'description -> page.description,
-        'keywords -> page.keywords
-      ).executeUpdate()
-    }
- }
+  def create(page: Page) = DB.withConnection { implicit connection =>
+    SQL(
+      """
+        insert into page values(
+          null, {title}, {status}, {slug}, {content}, {description}, {keywords}
+        )
+      """
+    ).on(
+      'title -> page.title,
+      'status -> page.status,
+      'slug -> page.slug,
+      'content -> page.content,
+      'description -> page.description,
+      'keywords -> page.keywords
+    ).executeUpdate()
+  }
 
-  def update(page: Page, id: Long) = {
-//Update an existing page
-    
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          update page
-          set title = {title}, status = {status}, slug = {slug}, content = {content}, description = {description}, keywords = {keywords}
-          where page.id = {id}
-        """
-      ).on(
-        'id -> id,
-        'title -> page.title,
-        'status -> page.status,
-        'slug -> page.slug,
-        'content -> page.content,
-        'description -> page.description,
-        'keywords -> page.keywords
-      ).executeUpdate()
-    }
+  def update(page: Page, id: Long) = DB.withConnection { implicit connection =>
+    SQL(
+      """
+        update page
+        set title = {title}, status = {status}, slug = {slug}, content = {content}, description = {description}, keywords = {keywords}
+        where page.id = {id}
+      """
+    ).on(
+      'id -> id,
+      'title -> page.title,
+      'status -> page.status,
+      'slug -> page.slug,
+      'content -> page.content,
+      'description -> page.description,
+      'keywords -> page.keywords
+    ).executeUpdate()
   }
   
 // Retrieve a single page by its slug
-  def findBySlug(slug: String): Option[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from page where page.slug = {slug}").on(
-        'slug -> slug
-      ).as(Page.simple.singleOpt)
-    }
+  def findBySlug(slug: String): Option[Page] = DB.withConnection { implicit connection =>
+    SQL("select * from page where page.slug = {slug}").on(
+      'slug -> slug
+    ).as(Page.simple.singleOpt)
   }
 
 // Retrieve a single page by its DB ID
-  def findById(id: Long): Option[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from page where page.id = {id}").on(
-        'id -> id
-      ).as(Page.simple.singleOpt)
-    }
+  def findById(id: Long): Option[Page] = DB.withConnection { implicit connection =>
+    SQL("select * from page where page.id = {id}").on(
+      'id -> id
+    ).as(Page.simple.singleOpt)
   }
 
-  def findNewestSaved(slug: String): Option[Page] = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          select * from page
-          where page.slug = {slug}
-          limit 1
-        """
-      ).on(
-        'slug -> slug
-      ).as(Page.simple.singleOpt)
-    }
+  def findNewestSaved(slug: String): Option[Page] = DB.withConnection { implicit connection =>
+    SQL(
+      """
+        select * from page
+        where page.slug = {slug}
+        limit 1
+      """
+    ).on(
+      'slug -> slug
+    ).as(Page.simple.singleOpt)
   }
-  def delete(id: Long) = {
-    DB.withConnection { implicit connection =>
-      SQL("delete from page where id = {id}").on('id -> id).executeUpdate()
-    }
+  def delete(id: Long) = DB.withConnection { implicit connection =>
+    SQL("delete from page where id = {id}").on('id -> id).executeUpdate()
   }
 }

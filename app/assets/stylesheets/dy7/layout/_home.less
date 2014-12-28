@@ -17,8 +17,18 @@
       .dy7-accessible-hide();
     }
     &-cta {
+      @width: 10em;
+      background: @footer-dark-green;
+      color: #fff;
       display: block;
-      // TODO: Flesh this out
+      font-size: (20em/16);
+      margin: 1em auto 2em auto;
+      opacity: .8;
+      padding: .75em 0;
+      left: 50%;
+      top: 460px;
+      text-align: center;
+      width: @width;
     }
   }
   &-home{
@@ -78,6 +88,7 @@
     &-video {
       text-align: center;
       > iframe {
+        margin: 0 0 3em 0;
         width: 100%;
       }
     }

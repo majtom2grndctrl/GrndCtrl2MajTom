@@ -3,7 +3,7 @@
 <div class="dy7-main-container dy7-ext-blog dy7-ext-index">
   <h1>Blog</h1>
   @blogPosts.map { case (post, author) =>
-  	@post.style match {
+    @post.style match {
       case "blogpost" => {
         @list.blogpost(post, author)
       }
