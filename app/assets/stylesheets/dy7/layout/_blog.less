@@ -1,0 +1,61 @@
+/*div*/.dy7-main-container.dy7-ext-blog {
+  > h1 { margin: 0 .5em; }
+  > article {
+    > header {
+      margin: 0 1em;
+      > h2 {
+        font-size: 1.6rem;
+        margin: 1.5em 0 1em;
+      }
+    }
+    > h2 {
+      font-size: 1.6rem;
+      margin: 1.5em (1em/1.4) 1em;
+    }
+    > p {
+      font-size: (15/16rem);
+      margin: 1em;
+      line-height: (24/15em);
+    }
+    .dy7-blog-excerpt {
+      margin: 0 1em;
+      line-height: (24/15em);
+    }
+    > aside {
+      display: none;
+    }
+    > blockquote {
+      display: none;
+    }
+  }
+  > .dy7-ext-micropost {
+    margin: 2em 0;
+
+    > blockquote {
+      font-size: 1.3em;
+      margin: 0;
+    }
+  }
+  > .dy7-ext-quotation {
+    margin: 2em 1em;
+
+    > blockquote {
+      font-size: 1.3em;
+      margin: 0;
+    }
+  }
+  &.dy7-ext-index {
+    > h1 { /* margin-left and margin-right declared as part of a base class that also selects this element */
+      margin-top: .66em;
+      margin-bottom: .25em;
+    }
+    article:nth-child(2) {
+      > header {
+        h2 {
+          margin-top: 0;
+
+        }
+      }
+    }
+  }
+}

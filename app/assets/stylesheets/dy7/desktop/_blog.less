@@ -1,0 +1,85 @@
+/* Blog body --------------------------------- */
+/*body*/.dy7-blog-body:before,
+/*body*/.dy7-home-body:before,
+/*body*/.dy7-portfolio-body:before {
+  content: "";
+  position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 50%;
+  margin-right: 349px;
+  width: 64px;
+  background-color: #00badb;
+  opacity: .4;
+  z-index: 10;
+}
+
+/*div*/.dy7-main-container.dy7-ext-blog {
+  > article {
+    h2:before,
+    > header > h2:before {
+      background-color: rgba(0, 186, 219, 0.5);
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      margin-left: 15px;
+      width: 500%;
+    }
+    > h2:after,
+    > header > h2:after {
+      background-color: rgba(0, 186, 219, 0.5);
+      border-right: 30px solid #c0c0c0;
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 100%;
+      margin-right: 15px;
+      width: 500%;
+    }
+
+    // Aside style
+    > aside {
+      border-top: 10px solid @footer-dark-green;
+      display: block;
+      font-size: (14em/16);
+      margin: 0 0 0 290px;
+      padding-top: .6em;
+      position: absolute;
+      left: 50%;
+      width: @dy7-column-width;
+
+      > h3 {
+        color: @electricBlue;
+        font-family: @font-heading;
+        font-size: (22em/14);
+        margin: 0 0 .2em 0;
+      }
+    }
+    // Pull quote style
+    > blockquote {
+      display: block;
+      height: 1px;
+      margin: 4.75em auto -4.75em;
+      overflow: visible;
+      width: (@dy7-column-width * 3);
+
+      > p {
+        background: url('/assets/images/dy7-blog-blockquote-bg.png') no-repeat 20px 0;
+        color: @electricBlue;
+        font-family: @font-heading;
+        font-size: (30/16em);
+        font-style: italic;
+        float: right;
+        line-height: 1.2em;
+        margin: .5em -(@dy7-column-width * 1) 0 0;
+        padding-left: 85px;
+        width: 100%;
+      }
+    }
+  }
+}
