@@ -81,5 +81,28 @@
         width: 100%;
       }
     }
+
+    &.dy7-ext-quotation {
+      > h2 {
+        margin-bottom: .2em;
+        &:before, &:after {
+          display: none;
+        }
+      }
+      > blockquote {
+        height: auto;
+        > p {
+          background: none;
+          color: inherit;
+          font-family: inherit;
+          font-size: (20em/16);
+          font-style: normal;
+          font-weight: 300;
+          float: none;
+          padding-left: 0;
+          width: auto;
+        }
+      }
+    }
   }
 }

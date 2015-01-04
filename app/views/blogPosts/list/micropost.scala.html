@@ -1,5 +1,6 @@
 @(post: BlogPost, author: User)
     <article class="dy7-ext-quotation">
+      <h2>A quick observation:</h2>
       <blockquote>
         @Html(post.description.getOrElse(post.content))
       </blockquote>
