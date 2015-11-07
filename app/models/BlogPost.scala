@@ -151,7 +151,7 @@ object BlogPost {
 
   def update(post: BlogPost, id: Long) = {
 //Update an existing blog post
-    
+
     DB.withConnection { implicit connection =>
       SQL(
         """
@@ -245,4 +245,3 @@ object BlogPost {
     }
   }
 }
-
