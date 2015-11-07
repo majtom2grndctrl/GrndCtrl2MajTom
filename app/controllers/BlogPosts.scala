@@ -3,6 +3,7 @@ package controllers
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import play.api.i18n._
 import play.api.libs.json._
 
 import java.util.{Date}
@@ -10,22 +11,7 @@ import java.util.{Date}
 import views._
 import models._
 
-object BlogPosts extends Controller with Secured {
-
-  def newBlogPostForm(user: User) = Form(
-    mapping(
-      "id" -> optional(longNumber),
-      "title" -> nonEmptyText,
-      "status" -> ignored("public"),
-      "style" -> nonEmptyText,
-      "author" -> ignored(user.id),
-      "published" -> date("MM/dd/yyyy"),
-      "slug" -> nonEmptyText,
-      "content" -> nonEmptyText,
-      "description" -> optional(text),
-      "keywords" -> optional(text)
-    )(BlogPost.apply)(BlogPost.unapply)
-  )
+object BlogPosts extends Controller {
 
   val dateHelper =  new java.text.SimpleDateFormat("mm/dd/yyyy")
 
@@ -45,86 +31,6 @@ object BlogPosts extends Controller with Secured {
     }.getOrElse(
       NotFound(html.NotFound(request.domain + request.uri))
     )
-  }
-
-  def singleJson(slug: String) = AuthenticatedUser { user => implicit request =>
-    Ok(Json.toJson(Option(BlogPost.findBySlug(slug)).get))
-  }
-
-  def list(page: Int) = AuthenticatedUser { user => implicit request =>
-    Some(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
-      Ok(
-        html.manage.blogPosts.list(
-          blogPosts
-        )
-      )
-    }.getOrElse(NotFound)
-  }
-
-  def listJson(page: Int) = AuthenticatedUser { user => implicit request =>
-    Option(BlogPost.findPageOfPosts(page).items).map { blogPosts =>
-      Ok(Json.toJson(blogPosts))
-    }.getOrElse(NotFound)
-  }
-/* Deprecated async method
-  def create = AuthenticatedUser { user => implicit request =>
-    Ok(
-      html.manage.blogPosts.newForm(
-        newBlogPostForm(user)
-      )
-    )
-  }
-*/
-  def edit(id: Long) = AuthenticatedUser { user => implicit request =>
-    BlogPost.findById(id).map { post =>
-      Ok(
-        html.manage.blogPosts.editBlogPost(
-          user,
-          newBlogPostForm(user).fill(post),
-          BlogPost.findPageOfPosts(0).items,
-          post
-        )
-      )
-    }.getOrElse(NotFound)
-  }
-
-  def saveNew = AuthenticatedUser { user => implicit request =>
-    newBlogPostForm(user).bindFromRequest.fold(
-      formWithErrors => BadRequest,
-      post => {
-        BlogPost.create(post)
-        val savedPost = BlogPost.findNewestSaved(post.author, post.slug).get
-        Ok(
-          html.manage.dashboard(
-            user,
-            newBlogPostForm(user).fill(savedPost),
-            BlogPost.findPageOfPosts(0).items
-          )
-        )
-      }
-    )
-  }
-
-  def saveUpdate(id: Long) = AuthenticatedUser { user => implicit request =>
-    newBlogPostForm(user).bindFromRequest.fold(
-      errors => BadRequest,
-      post => {
-        BlogPost.update(post, id)
-        Ok(
-          html.manage.blogPosts.editBlogPost(
-            user,
-            newBlogPostForm(user).fill(post),
-            BlogPost.findPageOfPosts(0).items,
-            BlogPost.findById(id).get
-          )
-        )
-      }
-    )
-  }
-
-  def delete(id: Long) = AuthenticatedUser { user => implicit request =>
-    BlogPost.delete(id)
-    Redirect(routes.Application.dashboard())
   }
 
 }
