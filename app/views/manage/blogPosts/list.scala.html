@@ -1,7 +1,0 @@
-@(posts: Seq[(BlogPost, User)])
-  @posts.map { case (post, author) =>
-      <a href="@routes.BlogPosts.edit(post.id.get)" data-content-id="@post.id">@post.title
-        <div class="gt2mtMainSidebarPublished">@post.published.format("MM/dd/yyyy")</div>
-        <div>@author.firstName @author.lastName</div>
-      </a>
-  }

@@ -1,5 +1,0 @@
-@(pages: Seq[Page])
-
-@pages.map { page =>
-  <a href="@routes.Pages.edit(page.id.get)" data-content-id="@page.id">@page.title</a>
-}
