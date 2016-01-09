@@ -42,11 +42,10 @@ object Project {
 
   def list():Seq[Project] = {
     DB.withConnection { implicit connection =>
-      SQL("select * from project order by `index` desc").as(Project.simple *)
+      SQL("select * from project where `status`='public' order by `index` desc").as(Project.simple *)
     }
   }
 
 
 
 }
-
