@@ -1,7 +1,7 @@
-.dy7-{
-  &portfolio- {
+.dy7 {
+  &-portfolio {
     @dy7-column-width: (780px / 3);
-    &body {
+    &-body {
       > .dy7-main {
         > .dy7-main-container{
           width: 780px;
@@ -13,15 +13,15 @@
         }
       }
     }
-    &body:before {
+    &-body:before {
       margin-right: 470px;
     }
-    &header {
+    &-header {
       font-size: (30em/16);
       margin: 1.5em 0 1em 0;
       position: relative;
     }
-    &header:before {
+    &-header:before {
       background: url('@{img-server}/dy7-diagonal-lines-transparent.png');
       content: "";
       display: block;
@@ -32,11 +32,13 @@
       width: 30px;
     }
 
-    &intro {
+    &-intro {
+      font-size: (20rem/16);
+      line-height: 1.6em;
       margin: 1em 0 3em 0;
     }
 
-    &article {
+    &-article {
       border-top: none;
       display: block;
       margin: 0 0 10em 0;
@@ -54,12 +56,12 @@
         z-index: 2;
       }
     }
-    &image {
+    &-image {
       border: 1px solid #d9d9d9;
       position: relative;
       z-index: 3;
     }
-    &title {
+    &-title {
       font-size: (36em/16);
       position: relative;
 
@@ -75,7 +77,7 @@
         width: 30px;
       }
     }
-    &meta {
+    &-meta {
       display: block;
       float: left;
       margin: 0;
@@ -113,7 +115,7 @@
         padding-right: 0;
       }
     }
-    &about {
+    &-about {
       clear: both;
       content: "";
       display: table;
