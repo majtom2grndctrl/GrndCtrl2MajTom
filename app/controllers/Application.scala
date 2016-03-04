@@ -5,7 +5,7 @@ import play.api.mvc._
 import models._
 import views._
 
-object Application extends Controller {
+class Application extends Controller {
 
   def dateHelper(str: String): java.util.Date = new java.text.SimpleDateFormat("MM/dd/yyyy").parse(str)
 /*

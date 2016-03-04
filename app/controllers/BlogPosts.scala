@@ -7,7 +7,7 @@ import java.util.{Date}
 import views._
 import models._
 
-object BlogPosts extends Controller {
+class BlogPosts extends Controller {
 
   val dateHelper =  new java.text.SimpleDateFormat("mm/dd/yyyy")
 

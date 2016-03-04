@@ -2,14 +2,12 @@ package models
 
 import java.util.{Date}
 
-import play.api.db._
+import play.api.db.DB
 import play.api.Play.current
 import play.api.libs.json._
 
 import anorm._
 import anorm.SqlParser._
-
-import scala.language.postfixOps
 
 case class Project (
   id: Option[Long],
@@ -45,7 +43,5 @@ object Project {
       SQL("select * from project where `status`='public' order by `index` desc").as(Project.simple *)
     }
   }
-
-
 
 }

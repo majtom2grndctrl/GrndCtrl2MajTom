@@ -6,7 +6,7 @@ import play.api.libs.functional.syntax._
 import views._
 import models._
 
-object Pages extends Controller {
+class Pages extends Controller {
 
   def index() = Action { implicit request =>
     Ok(html.index(request.domain + request.uri, SitePrefs.name, Some(null), Some(null)))

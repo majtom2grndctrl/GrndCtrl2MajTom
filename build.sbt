@@ -14,7 +14,6 @@ libraryDependencies ++= Seq(
   evolutions,
   "org.webjars" %% "webjars-play" % "2.4.0-1",
   "org.webjars" % "jquery" % "2.1.4",
-  "org.webjars.npm" % "modernizr" % "3.2.0",
   "org.pegdown" % "pegdown" % "1.5.0"
 )
 
