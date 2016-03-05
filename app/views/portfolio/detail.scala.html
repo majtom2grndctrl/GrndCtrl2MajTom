@@ -1,0 +1,46 @@
+@(url: String, title: String, description: Option[String], keywords: Option[String], project: Project)
+@main(url, title, description, keywords){
+    <body class="dy7-portfolio-body">
+        @header_standard()
+        <main class="dy7-main" id="content">
+            <div class="dy7-main-container">
+                <h1 class="dy7-portfolio-header">@project.title</h1>
+                <p class="dy7-portfolio-intro">@project.about</p>
+                <article class="dy7-portfolio-article">
+                    <img src="//img.distantlyyours.com/@project.filename" alt="@project.title" class="dy7-portfolio-image" />
+
+                    <div class="dy7-clearfix">
+                        <dl class="dy7-portfolio-meta">
+                            <dt>Role</dt>
+                            <dd>@project.roles</dd>
+                        </dl>
+                        <dl class="dy7-portfolio-meta">
+                            <dt>Tools used</dt>
+                            <dd>@project.tools</dd>
+                        </dl>
+                        <dl class="dy7-portfolio-meta">
+                            <dt>Technology stack</dt>
+                            <dd>@project.techStack</dd>
+                        </dl>
+                    </div>
+                    <dl class="dy7-portfolio-about">
+                        <dt>
+                            @if(project.indepth.isEmpty) {
+                                About this project
+                            } else {
+                                Project summary
+                            }
+                        </dt>
+                        <dd>@project.about</dd>
+                    </dl>
+                    <div class="dy7-portfolio-detail">
+                        @project.indepth.map { case indepth =>
+                            @Html(indepth)
+                        }
+                    </div>
+                </article>
+            </div>
+        </main>
+        @footer_standard()
+    </body>
+}

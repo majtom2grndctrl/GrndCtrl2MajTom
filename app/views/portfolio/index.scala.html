@@ -26,9 +26,18 @@
                             </dl>
                         </div>
                         <dl class="dy7-portfolio-about">
-                            <dt>About this project</dt>
+                            <dt>
+                                @if(project.indepth.isEmpty) {
+                                    About this project
+                                } else {
+                                    Project summary
+                                }
+                            </dt>
                             <dd>@project.about</dd>
                         </dl>
+                        @project.slug.map { case slug =>
+                            <a href="@routes.Projects.detail(slug)">Go in-depth</a>
+                        }
                     </article>
                 }
             </div>
