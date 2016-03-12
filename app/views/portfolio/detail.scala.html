@@ -5,10 +5,7 @@
         <main class="dy7-main" id="content">
             <div class="dy7-main-container">
                 <h1 class="dy7-portfolio-header">@project.title</h1>
-                <p class="dy7-portfolio-intro">@project.about</p>
-                <article class="dy7-portfolio-article">
-                    <img src="//img.distantlyyours.com/@project.filename" alt="@project.title" class="dy7-portfolio-image" />
-
+                <article class="dy7-portfolio-detail">
                     <div class="dy7-clearfix">
                         <dl class="dy7-portfolio-meta">
                             <dt>Role</dt>
@@ -23,21 +20,13 @@
                             <dd>@project.techStack</dd>
                         </dl>
                     </div>
-                    <dl class="dy7-portfolio-about">
-                        <dt>
-                            @if(project.indepth.isEmpty) {
-                                About this project
-                            } else {
-                                Project summary
-                            }
-                        </dt>
-                        <dd>@project.about</dd>
-                    </dl>
-                    <div class="dy7-portfolio-detail">
+
+                    <div class="dy7-portfolio-content">
                         @project.indepth.map { case indepth =>
                             @Html(indepth)
                         }
                     </div>
+                    <img src="//img.distantlyyours.com/@project.filename" alt="@project.title" class="dy7-portfolio-image" />
                 </article>
             </div>
         </main>

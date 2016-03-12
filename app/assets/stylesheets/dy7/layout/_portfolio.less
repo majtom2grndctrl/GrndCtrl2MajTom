@@ -3,6 +3,11 @@
     &-header {
       margin: 1.5em .5em .5em;
     }
+    &-title {
+        font-size: (24rem/16);
+        line-height: 1.4em;
+        margin: 1em 0 .25em;
+    }
     &-intro {
       margin: 1em 1em 3em;
     }
@@ -18,6 +23,13 @@
       }
     }
     &-meta {
+      &-container {
+        &:before, &:after {
+          clear: both;
+          content: '';
+          display: table;
+        }
+      }
       > dt {
         color: #006cc2;
         font-size: (12em/16);
@@ -41,6 +53,16 @@
       > dd {
         margin: 0;
         padding: 0;
+      }
+    }
+    &-detail {
+      margin: 1rem;
+    }
+    &-content {
+      > p {
+        font-size: (15rem/16);
+        line-height: (24em/15);
+        margin: 1em 0 1em 0;
       }
     }
   }

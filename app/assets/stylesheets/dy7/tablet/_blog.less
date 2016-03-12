@@ -1,7 +1,7 @@
 .dy7-blog-class {
   display: block;
-  width: 550px;
-  max-width: 550px;
+  width: (550rem/16);
+  max-width: (550rem/16);
   margin-left: auto;
   margin-right: auto;
 }
@@ -20,13 +20,13 @@
   content: "";
   display: block;
   position: absolute;
-  left: -45px;
+  left: (-45rem/16);
   top: 0;
   bottom: 0;
-  width: 30px;
+  width: (30rem/16);
 }
 /*h1*/.dy7-blog-title {
-  font-size: 30px;
+  font-size: (30rem/16);
   margin: 0;
 }
 /*div*/.dy7-main-container.dy7-ext-blog {
@@ -48,6 +48,7 @@
     }
     > p {
       &:extend(.dy7-blog-class);
+      font-size: (16rem/16);
     }
     > .dy7-blog-excerpt {
       &:extend(.dy7-blog-class);
