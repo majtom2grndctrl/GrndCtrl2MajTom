@@ -36,7 +36,7 @@
                             <dd>@project.about</dd>
                         </dl>
                         @project.slug.map { case slug =>
-                            <a href="@routes.Projects.detail(slug)">Go in-depth</a>
+                            <a href="@routes.Projects.detail(slug)" class="dy7-cta">Get the full story</a>
                         }
                     </article>
                 }
