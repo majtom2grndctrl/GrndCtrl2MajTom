@@ -2,7 +2,7 @@ package models
 
 import java.util.{Date}
 
-import play.api.db._
+import play.api.db.DB
 import play.api.Play.current
 import play.api.libs.json._
 
@@ -95,7 +95,7 @@ object Page {
       'keywords -> page.keywords
     ).executeUpdate()
   }
-  
+
 // Retrieve a single page by its slug
   def findBySlug(slug: String): Option[Page] = DB.withConnection { implicit connection =>
     SQL("select * from page where page.slug = {slug}").on(
