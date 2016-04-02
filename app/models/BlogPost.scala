@@ -2,7 +2,7 @@ package models
 
 import java.util.{Date}
 
-import play.api.db._
+import play.api.db.DB
 import play.api.Play.current
 import play.api.libs.json._
 
@@ -73,116 +73,6 @@ object BlogPost {
 
   val styles = List("blogpost", "micropost", "link")
 
-  implicit val blogPostWrites = new Writes[Seq[(BlogPost, User)]] {
-    def writes(posts: Seq[(BlogPost, User)]): JsValue = {
-      Json.obj(
-        "blogposts" -> posts.map { case (post, user) =>
-          Json.obj(
-            "post"-> Json.obj(
-              "id" -> post.id.get,
-              "title" -> post.title,
-              "status" -> post.status,
-              "style" -> post.style,
-              "published" -> post.published,
-              "slug" -> post.slug,
-              "content" -> post.content,
-              "description" -> post.description,
-              "keywords" -> post.keywords
-            ),
-            "author" -> Json.obj(
-              "first name" -> user.firstName,
-              "last name" -> user.lastName
-            )
-          )
-        }
-      )
-    }
-  }
-
-  implicit val singleWrites = new Writes[Option[(BlogPost, User)]] {
-    def writes(p: Option[(BlogPost, User)]): JsValue = {
-      Json.obj(
-        "blogpost" -> p.map { case (post, user) =>
-          Json.obj(
-            "post" -> Json.obj(
-              "id" -> post.id.get,
-              "title" -> post.title,
-              "status" -> post.status,
-              "style" -> post.style,
-              "published" -> post.published,
-              "slug" -> post.slug,
-              "content" -> post.content,
-              "description" -> post.description,
-              "keywords" -> post.keywords
-            ),
-            "author" -> Json.obj(
-              "first name" -> user.firstName,
-              "last name" -> user.lastName
-            )
-          )
-        }
-      )
-    }
-  }
-
-// Save a new post or edited post
-  def create(post: BlogPost) = {
- // Save a new blog post
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          insert into blogpost values(
-            null, {title}, {status}, {style}, {author}, {published}, {slug}, {content}, {description}, {keywords}
-          )
-        """
-      ).on(
-        'title -> post.title,
-        'status -> post.status,
-        'style -> post.style,
-        'author -> post.author,
-        'published -> post.published,
-        'slug -> post.slug,
-        'content -> post.content,
-        'description -> post.description,
-        'keywords -> post.keywords
-      ).executeUpdate()
-    }
-  }
-
-  def update(post: BlogPost, id: Long) = {
-//Update an existing blog post
-
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          update blogpost
-          set title = {title}, status = {status}, style = {style}, author = {author}, published = {published}, slug = {slug}, content = {content}, description = {description}, keywords = {keywords}
-          where blogpost.id = {id}
-        """
-      ).on(
-        'id -> id,
-        'title -> post.title,
-        'status -> post.status,
-        'style -> post.style,
-        'author -> post.author,
-        'published -> post.published,
-        'slug -> post.slug,
-        'content -> post.content,
-        'description -> post.description,
-        'keywords -> post.keywords
-      ).executeUpdate()
-    }
-  }
-
-// Retrieve a single post by ID
-  def findById(postId: Long): Option[BlogPost] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from blogpost where blogpost.id = {postId}").on(
-        'postId -> postId
-      ).as(BlogPost.simple.singleOpt)
-    }
-  }
-
 // Retrieve a single post by its slug
   def findBySlug(slug: String): Option[(BlogPost, User)] = {
     DB.withConnection { implicit connection =>
@@ -195,21 +85,6 @@ object BlogPost {
       ).on(
         'slug -> slug
       ).as(BlogPost.withAuthor.singleOpt)
-    }
-  }
-
-// Retrieve a new post immediately after a user has saved it
-  def findNewestSaved(authorId: Option[Long], slug: String): Option[BlogPost] = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          select * from blogpost
-          where blogpost.slug = {slug}
-          limit 1
-        """
-      ).on(
-        'slug -> slug
-      ).as(BlogPost.simple.singleOpt)
     }
   }
 
@@ -237,11 +112,6 @@ object BlogPost {
       ).as(scalar[Long].single)
 
       BlogPostsPage(blogPosts, page, offset, totalRows)
-    }
-  }
-  def delete(value: Long) = {
-    DB.withConnection { implicit connection =>
-      SQL("delete from blogpost where id = {value}").on('value -> value).executeUpdate()
     }
   }
 }
