@@ -27,17 +27,10 @@
                         </div>
                         <dl class="dy7-portfolio-about">
                             <dt>
-                                @if(project.indepth.isEmpty) {
-                                    About this project
-                                } else {
-                                    Project summary
-                                }
+                              About this project
                             </dt>
-                            <dd>@project.about</dd>
+                            <dd>@Html(project.about)</dd>
                         </dl>
-                        @project.slug.map { case slug =>
-                            <a href="@routes.Projects.detail(slug)" class="dy7-cta">Get the full story</a>
-                        }
                     </article>
                 }
             </div>
