@@ -40,7 +40,7 @@ object Project {
     get[Option[String]]("project.slug") ~
     get[Option[String]]("project.indepth") map {
       case id ~ index ~ title ~ filename ~ status ~ roles ~ tools ~ techStack ~ about ~ slug ~ indepth => Project(
-        id, index, title, filename, status, roles, tools, techStack, about, slug, Some(pegdown.markdownToHtml(indepth.getOrElse("")))
+        id, index, title, filename, status, roles, tools, techStack, pegdown.markdownToHtml(about), slug, Some(pegdown.markdownToHtml(indepth.getOrElse("")))
       )
     }
   }
