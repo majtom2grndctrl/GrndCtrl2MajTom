@@ -36,7 +36,7 @@
                             <dd>@Html(project.about)</dd>
                         </dl>
                         @project.slug.map { case slug =>
-                            <a href="@routes.Projects.detail(slug)" class="dy7-cta">Get the full story</a>
+                            <a href="@routes.Projects.detail(slug)" class="dy7-cta">Case study<span class="dy7-portfolio-caseStudyLink"> on @project.title</span></a>
                         }
                     </article>
                 }
