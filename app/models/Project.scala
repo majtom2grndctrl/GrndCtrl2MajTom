@@ -1,8 +1,10 @@
 package models
 
+import javax.inject.Inject
+
 import java.util.{Date}
 
-import play.api.db.DB
+import play.api.db.Database
 import play.api.Play.current
 import play.api.libs.json._
 
@@ -25,7 +27,8 @@ case class Project (
   indepth: Option[String]
 )
 
-object Project {
+@javax.inject.Singleton
+class ProjectService @Inject() (db: Database) {
   val pegdown = new PegDownProcessor
   val simple = {
     get[Option[Long]]("project.id") ~
@@ -46,16 +49,16 @@ object Project {
   }
 
   def list():Seq[Project] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from project where `status`='public' order by `index` desc").as(Project.simple *)
+    db.withConnection { implicit connection =>
+      SQL("select * from project where `status`='public' order by `index` desc").as(simple *)
     }
   }
 
   def findBySlug(slug: String): Option[Project] = {
-    DB.withConnection { implicit connection =>
+    db.withConnection { implicit connection =>
       SQL("select * from project where project.slug = {slug}")
         .on( 'slug -> slug )
-        .as(Project.simple.singleOpt)
+        .as(simple.singleOpt)
     }
   }
 

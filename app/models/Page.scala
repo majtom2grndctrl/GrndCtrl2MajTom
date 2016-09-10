@@ -1,8 +1,10 @@
 package models
 
+import javax.inject.Inject
+
 import java.util.{Date}
 
-import play.api.db.DB
+import play.api.db.Database
 import play.api.Play.current
 import play.api.libs.json._
 
@@ -22,7 +24,8 @@ case class Page (
   keywords: Option[String]
 )
 
-object Page {
+@javax.inject.Singleton
+class PageService @Inject() (db: Database) {
   val simple = {
     get[Option[Long]]("page.id") ~
     get[String]("page.title") ~
@@ -38,14 +41,14 @@ object Page {
   }
 
   //List pages
-  def list(): Seq[Page] = DB.withConnection { implicit connection =>
-    SQL("select * from page").as(Page.simple *)
+  def list(): Seq[Page] = db.withConnection { implicit connection =>
+    SQL("select * from page").as(simple *)
   }
 
 // Retrieve a single page by its slug
-  def findBySlug(slug: String): Option[Page] = DB.withConnection { implicit connection =>
+  def findBySlug(slug: String): Option[Page] = db.withConnection { implicit connection =>
     SQL("select * from page where page.slug = {slug}").on(
       'slug -> slug
-    ).as(Page.simple.singleOpt)
+    ).as(simple.singleOpt)
   }
 }

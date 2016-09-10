@@ -1,8 +1,10 @@
 package models
 
+import javax.inject.Inject
+
 import java.util.{Date}
 
-import play.api.db.DB
+import play.api.db.Database
 import play.api.Play.current
 import play.api.libs.json._
 
@@ -31,7 +33,7 @@ case class BlogPostsPage[A](items: Seq[A], BlogPostsPage: Int, offset: Long, tot
   lazy val next = Option(BlogPostsPage +1).filter(_ => (offset + items.size) < total)
 }
 
-object BlogPost {
+class BlogPostService @Inject() (db: Database) {
   val pegdown = new PegDownProcessor
   val simple = {
     get[Option[Long]]("blogPost.id") ~
@@ -67,7 +69,7 @@ object BlogPost {
     }
   }
 
-  val withAuthor = BlogPost.processed ~ (User.simple) map {
+  val withAuthor = processed ~ (User.simple) map {
     case post~user => (post, user)
   }
 
@@ -75,7 +77,7 @@ object BlogPost {
 
 // Retrieve a single post by its slug
   def findBySlug(slug: String): Option[(BlogPost, User)] = {
-    DB.withConnection { implicit connection =>
+    db.withConnection { implicit connection =>
       SQL(
         """
           select * from blogpost
@@ -84,14 +86,14 @@ object BlogPost {
         """
       ).on(
         'slug -> slug
-      ).as(BlogPost.withAuthor.singleOpt)
+      ).as(withAuthor.singleOpt)
     }
   }
 
   // Retrieve a BlogPostsPage of posts
   def findPageOfPosts(page: Int = 0, pageSize: Int = 10): BlogPostsPage[(BlogPost, User)] = {
     val offset = pageSize * page
-    DB.withConnection { implicit connection =>
+    db.withConnection { implicit connection =>
       val blogPosts = SQL(
         """
           select * from blogpost
@@ -102,7 +104,7 @@ object BlogPost {
       ).on(
         'pageSize -> pageSize,
         'offset -> offset
-      ).as(BlogPost.withAuthor *)
+      ).as(withAuthor *)
 
 
       val totalRows = SQL(
