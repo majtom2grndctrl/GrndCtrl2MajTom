@@ -5,13 +5,13 @@ import javax.inject.Inject
 import java.util.{Date}
 
 import play.api.db.Database
-import play.api.Play.current
-import play.api.libs.json._
 
 import anorm._
 import anorm.SqlParser._
 
 import org.pegdown.PegDownProcessor
+
+import scala.language.postfixOps
 
 case class Project (
   id: Option[Long],

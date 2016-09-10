@@ -6,7 +6,6 @@ import java.util.{Date}
 
 import play.api.db.Database
 import play.api.Play.current
-import play.api.libs.json._
 
 import anorm._
 import anorm.SqlParser._
