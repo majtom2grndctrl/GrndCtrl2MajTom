@@ -4,16 +4,14 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
   jdbc,
   "com.typesafe.play" %% "anorm" % "2.5.2",
   cache,
-  "mysql" % "mysql-connector-java" % "5.1.37",
+  "mysql" % "mysql-connector-java" % "5.1.39",
   evolutions,
-  "org.webjars" %% "webjars-play" % "2.4.0-1",
-  "org.webjars" % "jquery" % "2.2.1",
   "org.pegdown" % "pegdown" % "1.5.0"
 )
 
