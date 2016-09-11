@@ -24,6 +24,32 @@ This overrides that for desktop users */
   width: 550px;
 }
 
+/*dl*/.dy7-footer-nav {
+  .dy7-desktop();
+  margin: 20px 0 0 0;
+
+  > dt {
+    color: #162c63;
+    font-family: @font-heading;
+    font-size: (26/16em);
+    font-style: italic;
+    margin: 0 0 .25em 0;
+  }
+  > dd {
+    margin: 0 0 5px 0;
+    > a {
+      border-left: 15px solid;
+      border-bottom: 1px solid;
+      color: @footer-dark-green;
+      display: block;
+      padding: 3px 3px 3px 5px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
 
 .dy7-footer-greeting {
   display: block;
