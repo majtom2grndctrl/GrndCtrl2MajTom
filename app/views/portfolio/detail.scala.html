@@ -5,8 +5,13 @@
         <main class="dy7-main" id="content">
             <div class="dy7-main-container">
                 <h1 class="dy7-portfolio-header">@project.title</h1>
+                @project.intro.map { case intro =>
+                    <blockquote class="dy7-portfolio-intro">@Html(intro)</blockquote>
+                }
+                @project.dates.map { case dates =>
+                    <div class="dy7-portfolio-dates">@project.dates</div>
+                }
                 <article class="dy7-portfolio-detail">
-
                     <div class="dy7-portfolio-content">
                         @project.indepth.map { case indepth =>
                             @Html(indepth)

@@ -24,7 +24,9 @@ case class Project (
   techStack: String,
   about: String,
   slug: Option[String],
-  indepth: Option[String]
+  indepth: Option[String],
+  intro: Option[String],
+  dates: Option[String]
 )
 
 @javax.inject.Singleton
@@ -41,9 +43,11 @@ class ProjectService @Inject() (db: Database) {
     get[String]("project.techStack") ~
     get[String]("project.about") ~
     get[Option[String]]("project.slug") ~
-    get[Option[String]]("project.indepth") map {
-      case id ~ index ~ title ~ filename ~ status ~ roles ~ tools ~ techStack ~ about ~ slug ~ indepth => Project(
-        id, index, title, filename, status, roles, tools, techStack, pegdown.markdownToHtml(about), slug, Some(pegdown.markdownToHtml(indepth.getOrElse("")))
+    get[Option[String]]("project.indepth") ~
+    get[Option[String]]("project.intro") ~
+    get[Option[String]]("project.dates") map {
+      case id ~ index ~ title ~ filename ~ status ~ roles ~ tools ~ techStack ~ about ~ slug ~ indepth ~ intro ~ dates => Project(
+        id, index, title, filename, status, roles, tools, techStack, pegdown.markdownToHtml(about), slug, Some(pegdown.markdownToHtml(indepth.getOrElse(""))), Some(pegdown.markdownToHtml(intro.getOrElse(""))), dates
       )
     }
   }
