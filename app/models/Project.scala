@@ -31,7 +31,7 @@ case class Project (
 
 @javax.inject.Singleton
 class ProjectService @Inject() (db: Database) {
-  val pegdown = new PegDownProcessor
+  val pegdown = new PegDownProcessor(3)
   val simple = {
     get[Option[Long]]("project.id") ~
     get[Int]("project.index") ~

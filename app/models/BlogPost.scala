@@ -33,7 +33,7 @@ case class BlogPostsPage[A](items: Seq[A], BlogPostsPage: Int, offset: Long, tot
 }
 
 class BlogPostService @Inject() (db: Database) {
-  val pegdown = new PegDownProcessor
+  val pegdown = new PegDownProcessor(3)
   val simple = {
     get[Option[Long]]("blogPost.id") ~
     get[String]("blogPost.title") ~
