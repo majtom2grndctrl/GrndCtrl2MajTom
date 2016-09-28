@@ -12,7 +12,9 @@ libraryDependencies ++= Seq(
   cache,
   "mysql" % "mysql-connector-java" % "5.1.39",
   evolutions,
-  "org.pegdown" % "pegdown" % "1.5.0"
+  "org.pegdown" % "pegdown" % "1.5.0",
+  "org.webjars" %% "webjars-play" % "2.5.0",
+  "org.webjars" % "jquery" % "3.1.1"
 )
 
 includeFilter in (Assets, LessKeys.less) := "*.less"
