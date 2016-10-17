@@ -28,6 +28,30 @@
       @media screen and (max-width: 800px) {
         width: 100%;
       }
+      &Link {
+        display: block;
+        position: relative;
+        text-align: right;
+        &:hover, &:focus {
+          &:after {
+            color: #fff;
+            content: 'Read case study';
+            display: block;
+            font-size: (26rem/16);
+            padding: 0 1em 1em 0;
+            position: absolute;
+              top: auto;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            z-index: 4;
+          }
+        }
+        > img {
+          position: relative;
+          z-index: 3;
+        }
+      }
     }
     &-meta {
       &-container {

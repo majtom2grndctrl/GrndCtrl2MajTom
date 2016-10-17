@@ -1,4 +1,7 @@
 @(url: String, title: String, description: Option[String], keywords: Option[String], projects: Seq[Project])
+@image(filename: String, title: String) = {
+  <img src="//img.distantlyyours.com/@filename" alt="@title" class="dy7-portfolio-image" />
+}
 @main(url, title, description, keywords){
     <body class="dy7-portfolio-body">
         @header_standard()
@@ -8,8 +11,13 @@
                 <p class="dy7-portfolio-intro">Because I&rsquo;ve worked on a wide variety of websites and applications, I tailor my design process to the needs of each project. Writing code for solo projects, and for collaborations with other designers, helps me keep up with the constantly shifting constraints of the medium. You can see this reflected in my work samples below.</p>
                 @projects.map { case(project)  =>
                     <article class="dy7-portfolio-article">
-                        <img src="//img.distantlyyours.com/@project.filename" alt="@project.title" class="dy7-portfolio-image" />
-                        <h2 class="dy7-portfolio-title">@project.title</h2>
+                        @if(project.slug) {
+                            <a href="@routes.Projects.detail(project.slug.get)" class="dy7-portfolio-imageLink">@image(project.filename, project.title)</a>
+                            <h2 class="dy7-portfolio-title"><a href="@routes.Projects.detail(project.slug.get)" title="Read case study" class="dy7-portfolio-titleLink">@project.title</a></h2>
+                        } else {
+                            @image(project.filename, project.title)
+                            <h2 class="dy7-portfolio-title">@project.title</h2>
+                        }
 
                         <div class="dy7-clearfix">
                             <dl class="dy7-portfolio-meta">
