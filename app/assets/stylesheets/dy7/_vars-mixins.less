@@ -1,3 +1,4 @@
+// Colors
 @electricBlue: #0074b7;
 @gray: #515151;
 
@@ -5,13 +6,21 @@
 @footer-dark-green: #1f3746;
 @footer-height: 260px;
 
+
+// Fonts
 @font-heading: "Abel";
 
+// Grid
 @dy7-column-width: (550px/3);
 
+// Breakpoints
+@viewport-medium: 35em;
+@viewport-large: 56em;
+
+// Utilities
 @img-server: "//img.distantlyyours.com";
 
-.dy7-accessible-hide() {
+.accessible-hide() {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -20,4 +29,13 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.clearfix() {
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+    width: 100%;
+  }
 }

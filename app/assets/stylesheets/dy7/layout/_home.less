@@ -1,58 +1,83 @@
 .dy7{
   &-hero {
-    &:before {
-      background: url('@{img-server}/dy7-home-image@1x.jpg') no-repeat 50% 0;
-      background-size: 700px auto;
-      content: '';
-      display: block;
-      height: 180px;
-      width: 100%;
-
-      @media screen and (max-width: 400px) {
-        background-position: 50% 0;
-      }
-    }
-    &-imagetext {
-      .dy7-accessible-hide();
-    }
-  }
-  &-home{
-    @dy7-section-margin: 0 2em;
-
-    &-samples {
-      margin: @dy7-section-margin;
-      > h1 { margin-left: auto; margin-right: auto; }
-      > p { line-height: 1.5em; }
-      > .looper.xfade {
-        height: 366px;
-
-        div {
-          text-align: center;
-          width: 100%;
+    @hero-height: 305px;
+    @dy7-section-margin: 1px 1em 0;
+    .dy7-design {
+      background: url('@{img-server}/homepage/design-photo.jpg') no-repeat 70% 50%  #224c51; // Color sampled from photo
+      background-size: cover;
+      &-container {
+        background-color: rgba(0, 0, 0, .4);
+        padding: 1em;
+        > h1 {
+          color: #fff;
+          margin: .25em auto;
         }
+        > p {
+          color: #fff;
+          line-height: 1.5em;
+          margin: .25em 0 1em 0;
+        }
+        > .looper.xfade {
+          height: @hero-height;
 
-        img {
-          border: 1px solid #666;
-          margin: 0 auto;
-          @media screen and (max-width: 400px) {
+          div {
+            text-align: center;
             width: 100%;
+          }
+
+          img {
+            border: 1px solid #666;
+            margin: 0 auto;
+            @media screen and (max-width: 400px) {
+              width: 100%;
+            }
+            @media screen and (min-width: @viewport-medium) and (max-width: 800px) {
+              width: 100%;
+            }
           }
         }
       }
-
     }
-    &-technologies {
-      margin: @dy7-section-margin;
-      > p { line-height: 1.5em; }
-      > .dy7-ext-images {
-        margin-bottom: 2em;
-
-        > img {
-          margin: 1em 5%;
-          width: 35%;
+    .dy7-code {
+      @this-padding: 1em;
+      background: url('@{img-server}/homepage/code-scala.jpg') 50% 50% no-repeat;
+      background-size: cover;
+      &-container {
+        padding: @this-padding;
+        > h1 {
+          color: #fff;
+          margin: .25em 0;
+        }
+        > p {
+          color: #fff;
+          line-height: 1.5em;
+          margin: .25em 0 1em;
+        }
+      }
+      &-techList {
+        background: rgba(255, 255, 255, .8);
+        padding: 0;
+        margin: (@this-padding * -.5) (@this-padding * -.5) (@this-padding * .5) (@this-padding * -.5);
+        overflow: hidden;
+        text-align: center;
+        > li {
+          box-sizing: border-box;
+          display: inline-block;
+          padding: 1em 5%;
+          position: relative;
+          text-align: center;
+          vertical-align: middle;
+        }
+        img {
+          height: 1.75em;
+          position: relative;
+          vertical-align: middle;
+          z-index: 2;
         }
       }
     }
+  }
+  &-home{
     &-video {
       text-align: center;
       > iframe {
