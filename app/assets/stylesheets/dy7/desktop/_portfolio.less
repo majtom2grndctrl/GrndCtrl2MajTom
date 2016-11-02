@@ -16,20 +16,20 @@
     &-body:before {
       margin-right: 470px;
     }
-    &-header {
+    &-pageTitle {
       font-size: (30em/16);
       margin: 1.5em 0 1em 0;
       position: relative;
-    }
-    &-header:before {
-      background: url('@{img-server}/dy7-diagonal-lines-transparent.png');
-      content: "";
-      display: block;
-      position: absolute;
-      left: (-45rem/16);
-      top: -.25em;
-      bottom: -.25em;
-      width: 30px;
+      &:before {
+        background: url('@{img-server}/dy7-diagonal-lines-transparent.png');
+        content: "";
+        display: block;
+        position: absolute;
+        left: (-45rem/16);
+        top: -.25em;
+        bottom: -.25em;
+        width: 30px;
+      }
     }
     &-intro {
       font-size: (20rem/16);
@@ -39,7 +39,8 @@
     &-csIntro {
       font-size: (22rem/16);
       line-height: 1.6em;
-      margin: 1em 0 3em 0;
+      margin-right: 0;
+      margin-left: 0;
     }
 
     &-article {
@@ -65,11 +66,9 @@
       position: relative;
       z-index: 3;
     }
-    &-title {
-      font-size: (36em/16);
-      margin: 1em 0;
+    &-header {
+      margin: (36rem/16) 0;
       position: relative;
-
       &:before {
         background: #c0c0c0;
         content: '';
@@ -81,6 +80,18 @@
           bottom: -.2em;
         width: 30px;
       }
+      > .dy7-dateline {
+        display: inline-block;
+        margin: -.05em 0 0 1em;
+        &:before {
+          content: '// ';
+        }
+      }
+    }
+    &-title {
+      display: inline;
+      font-size: (36em/16);
+      margin: 1em 0 0;
     }
     &-meta {
       display: block;
