@@ -1,12 +1,11 @@
 // Apologies in advance for the Beatles references
 (() => {
   'use strict';
-  function obladi(el: Element) {
+  function obladi(el: Element): string {
     let da = el.getAttribute('data-1'),
         la = el.getAttribute('data-2'),
-        ob = el.getAttribute('data-3'),
-        oblada = ob + la + da;
-    return oblada;
+        ob = el.getAttribute('data-3');
+    return ob + la + da;
     // Life goes on
   }
 
