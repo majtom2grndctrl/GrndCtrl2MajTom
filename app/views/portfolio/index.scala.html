@@ -62,5 +62,36 @@
             </div>
         </main>
         @footer_standard()
+        <script type="text/javascript">
+          var imgLinks = document.querySelectorAll('.dy7-portfolio-imageLink'),
+              titleLinks = document.querySelectorAll('.dy7-portfolio-titleLink'),
+              ctaLinks = document.querySelectorAll('.dy7-cta');
+
+          for (var i = 0, len = imgLinks.length; i < len; i++) {
+            imgLinks[i].addEventListener(
+              'click',
+              function() {
+                ga('send', 'event', 'Case Study Clicks', 'Click', 'Image Link', {transport: 'beacon'});
+              }
+            );
+          };
+          for (var i = 0, len = titleLinks.length; i < len; i++) {
+            titleLinks[i].addEventListener(
+              'click',
+              function() {
+                ga('send', 'event', 'Case Study Clicks', 'Click', 'Title Link', {transport: 'beacon'});
+              }
+            );
+          };
+          for (var i = 0, len = ctaLinks.length; i < len; i++) {
+            ctaLinks[i].addEventListener(
+              'click',
+              function() {
+                ga('send', 'event', 'Case Study Clicks', 'Click', 'CTA Link', {transport: 'beacon'});
+              }
+            );
+          };
+
+        </script>
     </body>
 }
