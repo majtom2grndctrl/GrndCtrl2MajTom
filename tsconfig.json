@@ -12,6 +12,7 @@
     /* for reading your ts source while debugging from a browser */
     "sourceMap": true,
     "mapRoot": "/assets",
+    "removeComments": true,
     "sourceRoot": "/assets",
     "rootDirs": ["app/assets","test/assets"],
     "baseUrl": ".",

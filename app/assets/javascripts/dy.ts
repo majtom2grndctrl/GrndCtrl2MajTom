@@ -1,6 +1,11 @@
 // Apologies in advance for the Beatles references
 (() => {
   'use strict';
+/*
+  obladi() gets a scrambled series of strings from
+  data attributes on an element and assmbles them
+  into an email address.
+*/
   function obladi(el: Element): string {
     let da = el.getAttribute('data-1'),
         la = el.getAttribute('data-2'),
