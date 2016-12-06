@@ -14,7 +14,7 @@
     // Life goes on
   }
 
-  let emailSpans = document.querySelectorAll('[data-update="email"]');
+  const emailSpans = document.querySelectorAll('[data-update="email"]');
   for (let i = 0, len = emailSpans.length; i < len; i++) {
     let element = emailSpans[i],
         address = obladi(element);
@@ -22,7 +22,7 @@
     element.innerHTML = address;
   }
 
-  let emailLinks = document.querySelectorAll('[data-update="mailLink"]');
+  const emailLinks = document.querySelectorAll('[data-update="mailLink"]');
   for (let i = 0, len = emailLinks.length; i < len; i++) {
     let element = emailLinks[i],
         address = obladi(element);
