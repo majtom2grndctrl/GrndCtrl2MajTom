@@ -1,20 +1,23 @@
 @(url: String, title: String, description: Option[String], keywords: Option[String], project: Project)
+@dateline(dates: Option[String]) = {
+  @dates.map { case dates =>
+    <div class="dy7-portfolio-dates">@dates</div>
+  }
+}
 @main(url, title, description, keywords){
     <body class="dy7-portfolio-body">
         @header_standard()
         <main class="dy7-main" id="content">
             <div class="dy7-main-container">
-                <h1 class="dy7-portfolio-header">@project.title</h1>
+                <h1 class="dy7-portfolio-pageTitle">@project.title</h1>
                 @project.intro.map { case intro =>
                     <blockquote class="dy7-portfolio-csIntro">@Html(intro)</blockquote>
                 }
-                @project.dates.map { case dates =>
-                    <div class="dy7-portfolio-dates">@project.dates</div>
-                }
                 <article class="dy7-portfolio-detail">
+                    @dateline(project.dates)
                     <div class="dy7-portfolio-content">
-                        @project.indepth.map { case indepth =>
-                            @Html(indepth)
+                        @project.inDepth.map { case inDepth =>
+                            @Html(inDepth)
                         }
                     </div>
                     <img src="//img.distantlyyours.com/@project.filename" alt="@project.title" class="dy7-portfolio-image" />

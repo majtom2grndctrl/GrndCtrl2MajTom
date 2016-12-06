@@ -1,12 +1,15 @@
 .dy7 {
   &-portfolio {
-    &-header {
+    &-pageTitle {
       margin: 1.5em .5em .5em;
     }
+    &-header {
+      margin: 1em 0;
+    }
     &-title {
-        font-size: (24rem/16);
-        line-height: 1.4em;
-        margin: 1em 0 .25em;
+      font-size: (24rem/16);
+      line-height: 1.4em;
+      margin: 1em 0 .125em;
     }
     &-intro {
       margin: 1em 1em 3em;
@@ -16,17 +19,41 @@
       border-bottom: (1/16rem) solid @footer-gray;
       color: #1b7b97;
       line-height: 1.4em;
-      margin: 1em 1em 3em;
+      margin: 1em 1em 1em;
     }
     &-article {
       border-top: 1px solid #ccc;
-      margin: 0 1em 3em;
+      margin: 1em 1em 3em;
       padding: 3em 0 0;
     }
     &-image {
 
       @media screen and (max-width: 800px) {
         width: 100%;
+      }
+      &Link {
+        display: block;
+        position: relative;
+        text-align: right;
+        &:hover, &:focus {
+          &:after {
+            color: #fff;
+            content: 'Read case study';
+            display: block;
+            font-size: (26rem/16);
+            padding: 0 1em 1em 0;
+            position: absolute;
+              top: auto;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            z-index: 4;
+          }
+        }
+        > img {
+          position: relative;
+          z-index: 3;
+        }
       }
     }
     &-meta {
@@ -50,6 +77,7 @@
       }
     }
     &-about {
+      margin: 1em 0 2em;
       > dt {
         color: #006cc2;
         font-size: (12em/16);
