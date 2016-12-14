@@ -113,10 +113,23 @@
       > ul {
         font-size: (15rem/16); // Should match font size for p
         line-height: (24em/15);
+        list-style: none;
         margin: 1em 0;
         padding: 0 0 0 1.5em;
         > li {
+          display: block;
           margin: .5em 0;
+          position: relative;
+          &:before {
+            background: #006cc2;
+            border-radius: 100%;
+            content: '';
+            height: .4em;
+            position: absolute;
+              top: .55em;
+              left: -1em;
+            width: .4em;
+          }
         }
       }
       > blockquote:first-of-type {
