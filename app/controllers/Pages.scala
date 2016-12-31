@@ -12,10 +12,8 @@ import models.{ PageService, SitePrefs }
 class Pages @Inject() (pageService: PageService, cached: Cached) extends Controller {
 
   def index() =
-    cached("home") {
-      Action { implicit request =>
-      Ok(html.index(request.domain + request.uri, SitePrefs.name, Some(null), Some(null)))
-    }
+    Action { implicit request =>
+    Ok(html.index(request.domain + request.uri, SitePrefs.name, Some(null), Some(null)))
   }
 
   def display(path: String) = Action { implicit request =>
