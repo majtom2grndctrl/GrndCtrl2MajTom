@@ -4,7 +4,7 @@ import javax.inject.Inject
 import scala.concurrent.duration._
 
 import play.api.mvc._
-import play.api.cache._
+import play.api.cache.CacheApi
 
 import java.util.{Date}
 
