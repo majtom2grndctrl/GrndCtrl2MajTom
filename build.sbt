@@ -8,9 +8,9 @@ scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
   jdbc,
-  "com.typesafe.play" %% "anorm" % "2.5.2",
+  "com.typesafe.play" %% "anorm" % "2.5.3",
   cache,
-  "mysql" % "mysql-connector-java" % "6.0.5",
+  "mysql" % "mysql-connector-java" % "5.1.32",
   evolutions,
   "org.pegdown" % "pegdown" % "1.5.0",
   "org.webjars" %% "webjars-play" % "2.5.0",
