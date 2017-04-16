@@ -17,13 +17,13 @@
                 @projects.map { case(project)  =>
                     <article class="dy7-portfolio-article">
                         @if(project.slug) {
-                            <a href="@routes.Projects.detail(project.slug.get)" class="dy7-portfolio-imageLink">@image(project.filename, project.title)</a>
+                            <a href="@routes.Projects.detail(project.slug.get)" class="dy7-portfolio-imageLink" data-title="@project.title">@image(project.filename, project.title)</a>
                         } else {
                             @image(project.filename, project.title)
                         }
                         <header class="dy7-portfolio-header">
                             @if(project.slug) {
-                                <h2 class="dy7-portfolio-title"><a href="@routes.Projects.detail(project.slug.get)" title="Read case study" class="dy7-portfolio-titleLink">@project.title</a></h2>
+                                <h2 class="dy7-portfolio-title"><a href="@routes.Projects.detail(project.slug.get)" title="Read case study for @project.title" class="dy7-portfolio-titleLink">@project.title</a></h2>
                                 @dateline(project.dates)
                             } else {
                               <h2 class="dy7-portfolio-title">@project.title</h2>
@@ -55,7 +55,7 @@
                             <dd>@Html(project.about)</dd>
                         </dl>
                         @project.slug.map { case slug =>
-                            <a href="@routes.Projects.detail(slug)" class="dy7-cta">Case study<span class="dy7-portfolio-caseStudyLink"> on @project.title</span></a>
+                            <a href="@routes.Projects.detail(slug)" class="dy7-cta" data-title="@project.title">Case study<span class="dy7-portfolio-caseStudyLink"> on @project.title</span></a>
                         }
                     </article>
                 }
@@ -68,26 +68,36 @@
               ctaLinks = document.querySelectorAll('.dy7-cta');
 
           for (var i = 0, len = imgLinks.length; i < len; i++) {
+            console.log(imgLinks[i]);
             imgLinks[i].addEventListener(
               'click',
-              function() {
-                ga('send', 'event', 'Case Study Clicks', 'Click', 'Image Link', {transport: 'beacon'});
+              function(e) {
+                var target = e.target;
+                e.preventDefault();
+                ga('send', 'event', 'Case Study Clicks', 'Image Link', target.getAttribute('data-title'), {transport: 'beacon'});
+                window.location = target.getAttribute('href');
               }
             );
           };
           for (var i = 0, len = titleLinks.length; i < len; i++) {
             titleLinks[i].addEventListener(
               'click',
-              function() {
-                ga('send', 'event', 'Case Study Clicks', 'Click', 'Title Link', {transport: 'beacon'});
+              function(e) {
+                var target = e.target;
+                e.preventDefault();
+                ga('send', 'event', 'Case Study Clicks', 'Title Link', target.textContent, {transport: 'beacon'});
+                window.location = target.getAttribute('href');
               }
             );
           };
           for (var i = 0, len = ctaLinks.length; i < len; i++) {
             ctaLinks[i].addEventListener(
               'click',
-              function() {
-                ga('send', 'event', 'Case Study Clicks', 'Click', 'CTA Link', {transport: 'beacon'});
+              function(e) {
+                var target = e.target;
+                e.preventDefault();
+                ga('send', 'event', 'Case Study Clicks', 'CTA Link', target.getAttribute('data-title'), {transport: 'beacon'});
+                window.location = target.getAttribute('href');
               }
             );
           };
