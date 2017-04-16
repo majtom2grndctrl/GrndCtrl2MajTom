@@ -16,7 +16,7 @@ class Projects @Inject() (projectService: ProjectService, cache: CacheApi) exten
     val projectList = cache.getOrElse[Seq[Project]]("projects.list", 30.minutes) {
       projectService.list()
     }
-    Ok(html.portfolio.index(request.domain + request.uri, "Portfolio - " + SitePrefs.name, Some("The portfolio of Dan Hiester"), Some("portfolio, design, UX design"), projectList))
+    Ok(html.portfolio.index(request.domain + request.uri, "Portfolio - " + SitePrefs.name, Some("The portfolio of Dan Hiester"), Some("portfolio, design, UX design, web design, product design, Seattle"), projectList))
   }
 
   def detail(slug: String) = Action {

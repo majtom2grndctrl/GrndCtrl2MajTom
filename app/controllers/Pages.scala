@@ -12,7 +12,7 @@ class Pages @Inject() (pageService: PageService) extends Controller {
 
   def index() =
     Action { implicit request =>
-    Ok(html.index(request.domain + request.uri, SitePrefs.name, Some(null), Some(null)))
+    Ok(html.index(request.domain + request.uri, SitePrefs.name, SitePrefs.description, SitePrefs.keywords))
   }
 
   def display(path: String) = Action { implicit request =>

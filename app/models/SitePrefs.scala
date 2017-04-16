@@ -3,7 +3,7 @@ package models
 object SitePrefs {
   val name: String = "Distantly Yours"
   val tagline: String = "The creative studio of Dan Hiester"
-  val description = Some("The creative laboratory of Dan Hiester - web development, user experience design, creativity, and technology goodness from Bloomington, IN")
-  val keywords = Some("design, web design, user experience design, web development, html, css, creativity, technology, Bloomington, Indiana")
+  val description = Some("Distantly Yours • Push farther. Freelance UX Design and Web Development in Seattle, WA.")
+  val keywords = Some("design, user experience design, UX Design, freelance, web development, creativity, technology, Seattle, Washington")
   val copyrightOwner: String = "Dan Hiester"
 }
